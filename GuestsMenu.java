@@ -5,8 +5,9 @@
 //package hotelmanagement;
 import java.util.Scanner;
 /**
- *
- * @author Devon
+ *This is the GuestsMenu class a child class of Menu
+ * @author Devon Alonzo
+ * @date 11-8-2023
  */
 public class GuestsMenu extends Menu {
     private byte userSelection;
@@ -26,7 +27,10 @@ public class GuestsMenu extends Menu {
             System.out.println("=========================");
             this.userSelection = in.nextByte();
     }
-    
+    /**
+     * This is the checkInput method uses a switch case statement to determine what computations to perfor,
+     * has no parameters yet because we have not worked on the actual computations
+     */
     public void checkInput() {
         switch(this.userSelection){
             case 1:

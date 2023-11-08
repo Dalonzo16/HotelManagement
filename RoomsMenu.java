@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
- * @author Devon
+ *This is the RoomsMenu class another child class of Menu
+ * @author Devon Alonzo
+ * @date 11-8-2023
  */
 public class RoomsMenu extends Menu{
     private byte userSelection;
@@ -25,10 +26,10 @@ public class RoomsMenu extends Menu{
     }
     
     /**
-     *
-     * @param theHotel
+     *This is the checkInput method it recieves a list of rooms to show the available rooms and search a room
+     * @param rooms a list of rooms
      */
-    public void checkInput(ArrayList<Room> rooms){
+    public void checkInput(ArrayList<Room> rooms){ //this is just a list of all the rooms need to switch to the availrooms list
         
         switch(this.userSelection){
             
@@ -50,7 +51,7 @@ public class RoomsMenu extends Menu{
                 }
         }
     }
-
+    @Override
     public byte getUserSelection() {
         return userSelection;
     }

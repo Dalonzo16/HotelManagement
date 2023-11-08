@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
+ *This is the ManagerLogin class a child class of LoginMenu
  * @author Devon
  */
 public class ManagerLogin extends LoginMenu {
@@ -27,7 +27,9 @@ public class ManagerLogin extends LoginMenu {
         password = in.next();
         
     }
-    
+    /**
+     * This is the checkManagerCredentials method it checks employees list to see if the user input is of type Manager if not it will display a message and ask again
+     */
     public void checkManagerCredentials(ArrayList<Employee> employees){
         for(Employee anEmployee : employees){
             if(managerId == anEmployee.getEmployeeId() && password.equals(anEmployee.getPassword()) && anEmployee instanceof Manager){
