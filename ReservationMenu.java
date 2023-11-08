@@ -1,11 +1,13 @@
 import java.util.Scanner;
 
 /**
- *
- * @author Devon
+ *This is the ReservationsMenu class another child class of Menu
+ * @author Devon Alonzo
+ * @date 11-8-2023
  */
 public class ReservationMenu extends Menu {
     private byte userSelection;
+    @Override
     public void displayMenu(){
         Scanner in = new Scanner(System.in);
         System.out.println("=========================");
@@ -17,6 +19,9 @@ public class ReservationMenu extends Menu {
         System.out.println("=========================");
         this.userSelection = in.nextByte();
     }
+    /**
+     * This is eh checkInput method there is no computations yet
+     */
     public void checkInput(){
         switch(userSelection){
             case 1:
@@ -33,7 +38,8 @@ public class ReservationMenu extends Menu {
             break;
         }
     }
-
+    
+    @Override
     public byte getUserSelection() {
         return userSelection;
     }
