@@ -1,5 +1,3 @@
-package HotelManagmentSystem;
-
 /**
  * @author Ludwig Scherer
  * @date 10-30-2023

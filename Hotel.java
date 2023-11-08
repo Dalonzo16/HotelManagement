@@ -1,5 +1,3 @@
-package HotelManagmentSystem;
-
 import java.util.ArrayList;
 
 /**
