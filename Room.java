@@ -1,4 +1,4 @@
-package HotelManagmentSystem;
+//package HotelManagmentSystem;
 
 /**
  * @author Ludwig Scherer
