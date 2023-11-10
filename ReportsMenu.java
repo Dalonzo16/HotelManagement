@@ -2,8 +2,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
- * @author Devon
+ *This is the ReportsMenu another child class of Menu
+ * @author Devon Alonzo
+ * @date 11-8-2023
  */
 public class ReportsMenu extends Menu {
     private byte userSelection;
@@ -17,7 +18,9 @@ public class ReportsMenu extends Menu {
         System.out.println("=============================");
         this.userSelection = in.nextByte();
     }
-
+    /**
+     * This is the checkInput method there is only option so far
+     */
     public void checkInput() {
         if(userSelection == 1){
             System.out.println("print payments");

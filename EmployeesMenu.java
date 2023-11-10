@@ -2,11 +2,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
- * @author Devon
+ *This is the EmployeesMenu another child class of Menu
+ * @author Devon Alonzo
+ * @date 11-8-2023
  */
 public class EmployeesMenu extends Menu{
     private byte userSelection;
+
     @Override
     public void displayMenu() {
         Scanner in = new Scanner(System.in);
@@ -19,7 +21,9 @@ public class EmployeesMenu extends Menu{
         System.out.println("===================================");
         this.userSelection = in.nextByte();
     }
-
+    /**
+     * This is the checkInput method there is no computations yet
+     */
     public void checkInput() {
         switch(userSelection){
             case 1:
