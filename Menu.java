@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -6,18 +6,20 @@ import java.util.Scanner;
  * @author Devon Alonzo
  * @date 11-8-2023
  */
-public class Menu {
-    
+public class Menu 
+{
     private byte userSelection;
     private byte quitOption;
     
     public Menu(){
         this.quitOption = 4;
+
     }
     /**\
      * This is the displayMenu method it displays the menu options and recieves the user input
      */
-    public void displayMenu(){
+    public void displayMenu()
+    {
         Scanner in = new Scanner(System.in);
         System.out.println("=============================================================================");
         System.out.println("|   Welcome to Hotel Mangement. Please select one of the following options  |");
@@ -29,12 +31,14 @@ public class Menu {
         System.out.println("| 4. Exit           | ");
         System.out.println("=====================");
         this.userSelection = in.nextByte();
+        in.close();
     }
     /**
      * This is the checkInput method it creates a new object of whatever submenu is seleted. it recieves a list of rooms that is recieved in case 2 and it recieves a list of employees in case 4
      * @param rooms a list of rooms
-     * @param managers a list of employees
+     * @param rooms2 a list of employees
      */
+
     public void checkInput(Hotel hotel, Receptionist anEmployee){
         switch(userSelection){
             case 1:
@@ -76,23 +80,24 @@ public class Menu {
                     option3.displayMenu();
                     option3.checkInput(hotel, anEmployee);
                 }while(option3.getUserSelection() != 6);               
+
         }
     }
     /**
      * this method gets the user selection
      * @return the users selection
      */
-    public byte getUserSelection(){
+    public byte getUserSelection()
+    {
         return userSelection;
     }
     /**
      * This method gets the quit option
      * @return the quit option
      */
-    public byte getQuitOption() {
+    public byte getQuitOption() 
+    {
         return quitOption;
     }
-    
-    
 }
     

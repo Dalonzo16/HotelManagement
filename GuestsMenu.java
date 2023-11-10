@@ -5,10 +5,10 @@ import java.util.Scanner;
  * @author Devon Alonzo
  * @date 11-8-2023
  */
-public class GuestsMenu extends Menu {
+public class GuestsMenu extends Menu 
+{
     private byte userSelection;
     
-
     @Override
     public void displayMenu() {
             Scanner in = new Scanner(System.in);
@@ -22,6 +22,7 @@ public class GuestsMenu extends Menu {
             System.out.println("| 7. Back to main menu  |");
             System.out.println("=========================");
             this.userSelection = in.nextByte();
+            in.close();
     }
     /**
      * This is the checkInput method uses a switch case statement to determine what computations to perfor,
@@ -49,16 +50,11 @@ public class GuestsMenu extends Menu {
                 System.out.println("Guests");
             break;
         }
-       
     }
-
 
     @Override
-    public byte getUserSelection() {
+    public byte getUserSelection() 
+    {
         return userSelection;
     }
-
-
-    
-    
 }

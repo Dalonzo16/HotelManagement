@@ -1,7 +1,7 @@
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
+=======
 
 /**
  * @author Ludwig Scherer
@@ -11,21 +11,19 @@ import java.util.TreeMap;
 public class Hotel 
 {
     private String hotelName;
-    private ArrayList<Room> availableRooms;
-    private ArrayList<Room> occupiedRooms;
-    private ArrayList<Employee> employees;
-    private Map<String, Guest> allGuests;
+    private Map<Integer, Room> rooms;
+    private Map<Integer, Employee> employees;
+    private Map<Integer, Guest> allGuests;
     /**
      * Constructor for objects of class Hotel
      */
     public Hotel(String hotelName)
     {
         this.hotelName = hotelName;
-        availableRooms = new ArrayList<Room>();
-        occupiedRooms = new ArrayList<Room>();
-        employees = new ArrayList<Employee>();
-        allGuests = new TreeMap<>();
-    }
+        rooms = new HashMap<>();
+        employees = new HashMap<>();
+        allGuests = new HashMap<>();
+
     /**
      * gets hotel name
      * @return
@@ -35,26 +33,18 @@ public class Hotel
         return hotelName;
     }
     /**
-     * gets all available rooms
-     * @return
-     */
-    public ArrayList<Room> getAvailableRooms()
-    {
-        return availableRooms;
-    }
-    /**
      * gets all occupied rooms
      * @return
      */
-    public ArrayList<Room> getOccupiedRooms()
+    public Map<Integer, Room> getRooms()
     {
-        return occupiedRooms;
+        return rooms;
     }
     /**
-     * gets all employees ??????????????????????????????????????????
+     * gets all employees
      * @return
      */
-    public ArrayList<Employee> getEmployees()
+    public Map<Integer, Employee> getEmployees()
     {
         return employees;
     }
@@ -62,22 +52,12 @@ public class Hotel
         return allGuests;
     }
     /**
-     * adds available room to availableRooms and removes it from occupiedRooms
+     * adds room to list of rooms
      * @param room
      */
-    public void addAvailableRoom(Room room)
+    public void addRoom(Room room)
     {
-        availableRooms.add(room);
-        occupiedRooms.remove(room);
-    }
-    /**
-     * adds occupied room to occupiedRooms and removes it from availableRooms
-     * @param room
-     */
-    public void addOccupiedRoom(Room room)
-    {
-        occupiedRooms.add(room);
-        availableRooms.remove(room);
+        rooms.put(room.getRoomNumber(), room);
     }
     /**
      * adds guest to allGuests
@@ -85,18 +65,34 @@ public class Hotel
      */
     public void addGuest(String name, Guest guest)
     {
-        allGuests.put(name , guest);
+        allGuests.put(guest.getGuestID(), guest);
     }
+    public void addEmployee(Employee employee)
+    {
+        employees.put(employee.getEmployeeId(), employee);
+=======
+
     /**
      * removes guest from allGuests
      * @param guest
      */
     public void removeGuest(String name)
     {
+
+        allGuests.remove(guest.getGuestID());
+    }
+    public void removeRoom(Room room)
+    {
+        rooms.remove(room.getRoomNumber());
+    }
+    public void removeEmployee(Employee employee)
+    {
+        employees.remove(employee.getEmployeeId());
+=======
         allGuests.remove(name);
     }
     public void addEmployees(Employee anEmployee){
         employees.add(anEmployee);
-    }
 
+    }
 }
