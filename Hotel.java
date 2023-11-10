@@ -9,8 +9,7 @@ import java.util.ArrayList;
 public class Hotel 
 {
     private String hotelName;
-    private ArrayList<Room> availableRooms;
-    private ArrayList<Room> occupiedRooms;
+    private ArrayList<Room> rooms;
     private ArrayList<Employee> employees;
     private ArrayList<Guest> allGuests;
     
@@ -20,8 +19,7 @@ public class Hotel
     public Hotel(String hotelName)
     {
         this.hotelName = hotelName;
-        availableRooms = new ArrayList<Room>();
-        occupiedRooms = new ArrayList<Room>();
+        rooms = new ArrayList<Room>();
         employees = new ArrayList<Employee>();
         allGuests = new ArrayList<Guest>();
     }
@@ -34,23 +32,15 @@ public class Hotel
         return hotelName;
     }
     /**
-     * gets all available rooms
-     * @return
-     */
-    public ArrayList<Room> getAvailableRooms()
-    {
-        return availableRooms;
-    }
-    /**
      * gets all occupied rooms
      * @return
      */
-    public ArrayList<Room> getOccupiedRooms()
+    public ArrayList<Room> getRooms()
     {
-        return occupiedRooms;
+        return rooms;
     }
     /**
-     * gets all employees ??????????????????????????????????????????
+     * gets all employees
      * @return
      */
     public ArrayList<Employee> getEmployees()
@@ -58,22 +48,12 @@ public class Hotel
         return employees;
     }
     /**
-     * adds available room to availableRooms and removes it from occupiedRooms
+     * adds room to list of rooms
      * @param room
      */
-    public void addAvailableRoom(Room room)
+    public void addRoom(Room room)
     {
-        availableRooms.add(room);
-        occupiedRooms.remove(room);
-    }
-    /**
-     * adds occupied room to occupiedRooms and removes it from availableRooms
-     * @param room
-     */
-    public void addOccupiedRoom(Room room)
-    {
-        occupiedRooms.add(room);
-        availableRooms.remove(room);
+        rooms.add(room);
     }
     /**
      * adds guest to allGuests
@@ -83,6 +63,10 @@ public class Hotel
     {
         allGuests.add(guest);
     }
+    public void addEmployee(Employee employee)
+    {
+        employees.add(employee);
+    }
     /**
      * removes guest from allGuests
      * @param guest
@@ -91,5 +75,4 @@ public class Hotel
     {
         allGuests.remove(guest);
     }
-
 }

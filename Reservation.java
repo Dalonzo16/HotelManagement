@@ -1,5 +1,5 @@
 
-import java.util.ArrayList
+import java.util.ArrayList;
 /**
  * @author Ludwig Scherer
  * @date 10-30-2023
