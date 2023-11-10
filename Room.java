@@ -16,7 +16,7 @@ public class Room
      * @param roomNumber
      * @param pricePerNight
      */
-    public Room(int roomNumber, double pricePerNight)
+    public Room(int roomNumber,  double pricePerNight)
     {
         this.roomNumber = roomNumber;
         this.pricePerNight = pricePerNight;
@@ -54,4 +54,9 @@ public class Room
     {
         return isClean;
     }
+    /**
+     * This method gets the floor number
+     * @return the floor number
+     */
+
 }

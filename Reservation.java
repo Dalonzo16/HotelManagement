@@ -1,5 +1,5 @@
 
-import java.util.ArrayList
+import java.util.ArrayList;
 /**
  * @author Ludwig Scherer
  * @date 10-30-2023
@@ -11,6 +11,8 @@ public class Reservation
     private String guestName;
     private ArrayList<Room> rooms;
     private int duration;
+    public static int counter = 1;
+
 
     /**
      * Constructor for objects of class Reservation
@@ -19,11 +21,11 @@ public class Reservation
      * @param rooms
      * @param duration
      */
-    public Reservation(int reservationNumber, String guestName, ArrayList<Room> rooms, int duration)
+    public Reservation(String guestName,  int duration)
     {
-        this.reservationNumber = reservationNumber;
+        reservationNumber = counter++;
         this.guestName = guestName;
-        this.rooms = rooms;
+        rooms = new ArrayList<>();
         this.duration = duration;
     }
     /**

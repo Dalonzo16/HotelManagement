@@ -2,16 +2,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *This is the ManagerLogin class a child class of LoginMenu
+ *This is the ManagerLogin 
  * @author Devon
  */
-public class ManagerLogin extends LoginMenu {
+public class ManagerLogin {
     
     private int managerId;
     private String password;
     private boolean valid = false;
     
-    @Override
     public void displayLogin(){
         Scanner in = new Scanner(System.in);
         System.out.println("    Manager Credentials required   ");
@@ -41,7 +40,6 @@ public class ManagerLogin extends LoginMenu {
         }
     }
 
-    @Override
     public boolean isValid() {
         return valid;
     }

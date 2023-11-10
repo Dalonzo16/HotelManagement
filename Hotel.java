@@ -1,5 +1,7 @@
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author Ludwig Scherer
@@ -12,8 +14,7 @@ public class Hotel
     private ArrayList<Room> availableRooms;
     private ArrayList<Room> occupiedRooms;
     private ArrayList<Employee> employees;
-    private ArrayList<Guest> allGuests;
-    
+    private Map<String, Guest> allGuests;
     /**
      * Constructor for objects of class Hotel
      */
@@ -23,7 +24,7 @@ public class Hotel
         availableRooms = new ArrayList<Room>();
         occupiedRooms = new ArrayList<Room>();
         employees = new ArrayList<Employee>();
-        allGuests = new ArrayList<Guest>();
+        allGuests = new TreeMap<>();
     }
     /**
      * gets hotel name
@@ -57,6 +58,9 @@ public class Hotel
     {
         return employees;
     }
+    public Map<String, Guest> getGuests(){
+        return allGuests;
+    }
     /**
      * adds available room to availableRooms and removes it from occupiedRooms
      * @param room
@@ -79,17 +83,20 @@ public class Hotel
      * adds guest to allGuests
      * @param guest
      */
-    public void addGuest(Guest guest)
+    public void addGuest(String name, Guest guest)
     {
-        allGuests.add(guest);
+        allGuests.put(name , guest);
     }
     /**
      * removes guest from allGuests
      * @param guest
      */
-    public void removeGuest(Guest guest)
+    public void removeGuest(String name)
     {
-        allGuests.remove(guest);
+        allGuests.remove(name);
+    }
+    public void addEmployees(Employee anEmployee){
+        employees.add(anEmployee);
     }
 
 }

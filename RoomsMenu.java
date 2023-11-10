@@ -40,7 +40,7 @@ public class RoomsMenu extends Menu{
                 roomNumber = in.nextInt();
                 for(Room allRooms : rooms){
                     if(allRooms.getRoomNumber() == roomNumber){
-                        System.out.println("Floor: " + allRooms.getFloorNumber() + " | Room Number: " + allRooms.getRoomNumber() + " | $"+ allRooms.getPricePerNight() + " per night | ");
+                        System.out.println("Floor: " + allRooms.getRoomNumber() + " | Room Number: " + allRooms.getRoomNumber() + " | $"+ allRooms.getPricePerNight() + " per night | ");
                         break;
                     }
                 }
