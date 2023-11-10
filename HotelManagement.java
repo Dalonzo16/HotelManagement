@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Map;
 
 
 
@@ -26,15 +26,15 @@ public class HotelManagement
      * This method calls the main menu methods to display the menu options and take in the inputs
      * @param aMenu an object of Menu
      * @param option the quit option for the main menu
-     * @param rooms a list of rooms
-     * @param managers a list of employees
+     * @param map a list of rooms
+     * @param map2 a list of employees
      */
-    public static void menus(Menu aMenu, byte option, ArrayList<Room> rooms, ArrayList<Employee> managers)
+    public static void menus(Menu aMenu, byte option, Map<Integer, Room> map, Map<Integer, Employee> map2)
     {
         do
         {
             aMenu.displayMenu();
-            aMenu.checkInput(rooms, managers);
+            aMenu.checkInput(map, map2);
         }
         while(aMenu.getUserSelection() != option);
     }
