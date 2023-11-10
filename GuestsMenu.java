@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 /**
  *This is the GuestsMenu class a child class of Menu
@@ -27,10 +28,10 @@ public class GuestsMenu extends Menu
      * This is the checkInput method uses a switch case statement to determine what computations to perfor,
      * has no parameters yet because we have not worked on the actual computations
      */
-    public void checkInput() {
-        switch(this.userSelection){
-            case 1:
-                
+    public void checkInput(Hotel hotel, Receptionist receptionist) {
+        switch(userSelection){
+            case 1: 
+                receptionist.checkInGuest(hotel);
             break;
             case 2:
                 System.out.println("Guest Checked out");
@@ -50,6 +51,7 @@ public class GuestsMenu extends Menu
             break;
         }
     }
+
     @Override
     public byte getUserSelection() 
     {

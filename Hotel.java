@@ -1,5 +1,7 @@
+
 import java.util.HashMap;
 import java.util.Map;
+=======
 
 /**
  * @author Ludwig Scherer
@@ -12,7 +14,6 @@ public class Hotel
     private Map<Integer, Room> rooms;
     private Map<Integer, Employee> employees;
     private Map<Integer, Guest> allGuests;
-    
     /**
      * Constructor for objects of class Hotel
      */
@@ -22,7 +23,7 @@ public class Hotel
         rooms = new HashMap<>();
         employees = new HashMap<>();
         allGuests = new HashMap<>();
-    }
+
     /**
      * gets hotel name
      * @return
@@ -47,6 +48,9 @@ public class Hotel
     {
         return employees;
     }
+    public Map<String, Guest> getGuests(){
+        return allGuests;
+    }
     /**
      * adds room to list of rooms
      * @param room
@@ -59,20 +63,22 @@ public class Hotel
      * adds guest to allGuests
      * @param guest
      */
-    public void addGuest(Guest guest)
+    public void addGuest(String name, Guest guest)
     {
         allGuests.put(guest.getGuestID(), guest);
     }
     public void addEmployee(Employee employee)
     {
         employees.put(employee.getEmployeeId(), employee);
-    }
+=======
+
     /**
      * removes guest from allGuests
      * @param guest
      */
-    public void removeGuest(Guest guest)
+    public void removeGuest(String name)
     {
+
         allGuests.remove(guest.getGuestID());
     }
     public void removeRoom(Room room)
@@ -82,5 +88,11 @@ public class Hotel
     public void removeEmployee(Employee employee)
     {
         employees.remove(employee.getEmployeeId());
+=======
+        allGuests.remove(name);
+    }
+    public void addEmployees(Employee anEmployee){
+        employees.add(anEmployee);
+
     }
 }

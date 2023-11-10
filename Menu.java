@@ -11,9 +11,9 @@ public class Menu
     private byte userSelection;
     private byte quitOption;
     
-    public Menu()
-    {
-        this.quitOption = 6;
+    public Menu(){
+        this.quitOption = 4;
+
     }
     /**\
      * This is the displayMenu method it displays the menu options and recieves the user input
@@ -25,12 +25,10 @@ public class Menu
         System.out.println("|   Welcome to Hotel Mangement. Please select one of the following options  |");
         System.out.println("=============================================================================\n");
         System.out.println("=====================");
-        System.out.println("| 1. Guests         |");
-        System.out.println("| 2. Rooms          |");
-        System.out.println("| 3. Reservations   |");
-        System.out.println("| 4. Employees      |");
-        System.out.println("| 5. Reports        |");
-        System.out.println("| 6. Quit           |");
+        System.out.println("| 1. Receptionist   |");
+        System.out.println("| 2. Staff          |");
+        System.out.println("| 3. Manager        |");
+        System.out.println("| 4. Exit           | ");
         System.out.println("=====================");
         this.userSelection = in.nextByte();
         in.close();
@@ -40,60 +38,49 @@ public class Menu
      * @param rooms a list of rooms
      * @param rooms2 a list of employees
      */
-    public void checkInput(Map<Integer, Room> rooms, Map<Integer, Employee> employees)
-    {
-        switch(userSelection)
-        {
+
+    public void checkInput(Hotel hotel, Receptionist anEmployee){
+        switch(userSelection){
             case 1:
-                GuestsMenu option1 = new GuestsMenu(); //created object of type Guestsmenu it is a submenu
-                do
-                {
-                    option1.displayMenu(); // a do while loop that keeps showing the options unitl the quit option is selected
-                    option1.checkInput();
-                }
-                while(option1.getUserSelection() != 7);
+                Menu option1 = new ReceptionistMenu();
+                LoginMenu regLogin = new LoginMenu();
+                do{
+                    regLogin.displayLogin();
+                    regLogin.checkUserCredentials(hotel.getEmployees());
+                }while(!regLogin.isValid());
+
+                do{
+                    option1.displayMenu();
+                    option1.checkInput(hotel, anEmployee);
+                }while(option1.getUserSelection() != 4);
+
             break;
             case 2:
-                RoomsMenu option2 = new RoomsMenu();
-                do
-                {
+                Menu option2 = new StaffMenu();
+                LoginMenu regLogin1 = new LoginMenu();
+                do{
+                    regLogin1.displayLogin();
+                    regLogin1.checkUserCredentials(hotel.getEmployees());
+                }while(!regLogin1.isValid());
+                
+                do{
                     option2.displayMenu();
-                    option2.checkInput(rooms);
-                }
-                while(option2.getUserSelection() != 3);
+                    option2.checkInput(hotel, anEmployee);
+                }while(option2.getUserSelection() != 2);
             break;
             case 3:
-                ReservationMenu option3 = new ReservationMenu();
-                do
-                {
+                Menu option3 = new ManagerMenu();
+                ManagerLogin mangLogin = new ManagerLogin();
+                do{
+                    mangLogin.displayLogin();
+                    mangLogin.checkManagerCredentials(hotel.getEmployees());
+                }while(!mangLogin.isValid());
+
+                do{
                     option3.displayMenu();
-                    option3.checkInput();
-                }
-                while(option3.getUserSelection() != 5);
-            case 4:
-                EmployeesMenu option4= new EmployeesMenu();
-                ManagerLogin manager = new ManagerLogin();
-                do
-                {
-                    manager.displayLogin();
-                    manager.checkManagerCredentials(employees);
-                }
-                while(!manager.isValid());
-                do
-                {
-                    option4.displayMenu();
-                    option4.checkInput();
-                }
-                while(option4.getUserSelection() != 5);
-            break;
-            case 5:
-                ReportsMenu option5 = new ReportsMenu();
-                do
-                {
-                    option5.displayMenu();
-                    option5.checkInput();
-                }
-                while(option5.getUserSelection() != 2);
+                    option3.checkInput(hotel, anEmployee);
+                }while(option3.getUserSelection() != 6);               
+
         }
     }
     /**

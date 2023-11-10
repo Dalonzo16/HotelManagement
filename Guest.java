@@ -6,12 +6,15 @@
 
 public class Guest
 {
-    private String firstName;
-    private String lastName;
+    private String firstAndLastName;
     private String phoneNumber;
     private String email;
     private String creditCardNumber;
-    private int guestID;
+
+=======
+    public static int counter = 1;
+    private int guestId;
+
     Reservation reservation;
     private static int counter = 1;
 
@@ -23,31 +26,33 @@ public class Guest
      * @param email
      * @param reservation
      */
-    public Guest(String firstName, String lastName, String phoneNumber, String email, Reservation reservation) 
+    public Guest(String firstAndLastName, String phoneNumber, String email, Reservation reservation) 
     {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstAndLastName = firstAndLastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.reservation = reservation;
-        guestID = counter;
+
+        guestId = counter;
         counter++;
+
+        guestId = counter++;
+
+    }
+    public Guest(String firstAndLastName, String phoneNumber, String email) 
+    {
+        this.firstAndLastName = firstAndLastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        guestId = counter++;
     }
     /**
      * gets first name
      * @return
      */
-    public String getFirstName() 
+    public String getFirstAndLastName() 
     {
-        return firstName;
-    }
-    /**
-     * gets last name
-     * @return
-     */
-    public String getLastName()
-    {
-        return lastName;
+        return firstAndLastName;
     }
     /**
      * gets phone number
@@ -77,9 +82,10 @@ public class Guest
      * gets guest ID
      * @return
      */
-    public int getGuestID()
+    public int getGuestId()
     {
-        return guestID;
+
+        return guestId;
     }
     /**
      * gets reservation info
@@ -93,17 +99,9 @@ public class Guest
      * sets first name
      * @param firstName
      */
-    public void setFirstName(String firstName)
+    public void setFirstAndLastName(String firstAndLastName)
     {
-        this.firstName = firstName;
-    }
-    /**
-     * sets last name
-     * @param lastName
-     */
-    public void setLastName(String lastName)
-    {
-        this.lastName = lastName;
+        this.firstAndLastName = firstAndLastName;
     }
     /**
      * sets phone number
@@ -127,7 +125,8 @@ public class Guest
      */
     public void setGuestID(int guestID)
     {
-        this.guestID = guestID;
+
+        this.guestId = guestId;
     }
     /**
      * sets credit card number

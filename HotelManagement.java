@@ -1,4 +1,7 @@
+
+=======
 import java.util.Map;
+import java.util.HashMap;
 
 
 
@@ -6,22 +9,10 @@ import java.util.Map;
  *This program is a hotel management program
  * @author Devon
  */
-public class HotelManagement 
-{
-    /**
-     * This method calls the methods from login menu to execute and recieves a hotel and an object login
-     * @param login an object of LoginMenu
-     * @param hotel an object of Hotel
-     */
-    public static void Login(LoginMenu login, Hotel hotel)
-    {
-        do
-        {//do while loop to keep asking user for input until info is correct
-            login.displayLogin();
-            login.checkUserCredentials(hotel.getEmployees());
-        }
-        while(login.isValid() == false);
-    }
+`
+=======
+public class HotelManagement {
+
     /**
      * This method calls the main menu methods to display the menu options and take in the inputs
      * @param aMenu an object of Menu
@@ -35,20 +26,24 @@ public class HotelManagement
         {
             aMenu.displayMenu();
             aMenu.checkInput(map, map2);
-        }
-        while(aMenu.getUserSelection() != option);
     }
     /**
      * This is the main method
      * @param args a list of command line arguments
      */
+
     public static void main(String[] args) 
     {    
         Hotel mainHotel = new Hotel("Best Hotel Ever"); //created hotel object
         Employee employee1 = new Employee("hello", 15);//creating employees
+=======
+        
+        Receptionist employee1 = new Receptionist("hello", 12);//creating employees
+
         Employee employee2 = new Employee("hi", 15);
         Employee employee3 = new Employee("bye",15);
         Manager manager1 = new Manager("manager",20);//created one manager
+        
        
         mainHotel.addEmployee(employee1);//added employees
         mainHotel.addEmployee(employee2);
@@ -57,9 +52,15 @@ public class HotelManagement
         Room room1 = new Room(101, 50.00);//created room
         mainHotel.addRoom(room1);//added room to hotel
 
-        LoginMenu login = new LoginMenu();//created login object
-        Login(login,mainHotel); // calling methods created above to execute
+
+        Reservation reservation1 = new Reservation("Bob", 2);
+        reservation1.addRoom(room1);
+        Guest guest1 = new Guest("Bob Lashley", "5758462145", "bobLash@gmail.com", reservation1);
+        mainHotel.addGuest("Bob Lashley", guest1);
+
         Menu main = new Menu();
+
         menus(main, main.getQuitOption(), mainHotel.getRooms(), mainHotel.getEmployees());
-    }
+=======
+
 }
