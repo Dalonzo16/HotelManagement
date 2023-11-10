@@ -30,5 +30,4 @@ public class Manager extends Employee
     {
         super.shift = shift;
     }
-    
 }

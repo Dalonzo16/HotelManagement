@@ -31,6 +31,7 @@ public class Guest
         this.email = email;
         this.reservation = reservation;
         guestID = counter;
+        System.out.println("The guest " + firstName + " " + lastName + " was added with guest ID: " + guestID);
         counter++;
     }
     /**

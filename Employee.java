@@ -26,6 +26,8 @@ public class Employee
         this.password = password;
         employeeId = counter; // ID is automatically incremented by 1 by using the public variable counter everytime a new employee is created
         counter++;
+        System.out.println("The new employee was created with ID number: " + employeeId + "and password: " + password + 
+            " ; his pay rate per hour is: " + payRate);
     }
     /**
      * This is another constructor to initialize employee ID manually

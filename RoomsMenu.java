@@ -29,15 +29,20 @@ public class RoomsMenu extends Menu
     public void checkInput(Map<Integer, Room> rooms)//this is just a list of all the rooms need to switch to the availrooms list
     {
         Room currentRoom;
+        String availableRooms = "";
         switch(this.userSelection)
         {
-            
             case 1:
+                System.out.println("The following rooms are available:\n");
                 for(Integer key : rooms.keySet())
                 {
                     currentRoom = rooms.get(key);
-                    System.out.println("Room Number: "+ currentRoom.getRoomNumber());
+                    if(currentRoom.isAvailable())
+                    {
+                        availableRooms = availableRooms + Integer.toString(currentRoom.getRoomNumber()) + System.lineSeparator();
+                    }
                 }
+                System.out.println(availableRooms);
             break;
             case 2:
                 int roomNumber;

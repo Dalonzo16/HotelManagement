@@ -1,5 +1,6 @@
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  *This is the ManagerLogin class a child class of LoginMenu
@@ -21,32 +22,35 @@ public class ManagerLogin extends LoginMenu
         managerId = in.nextInt();
         System.out.print("Password:    ");
         password = in.next();
-        in.close();
     }
     /**
      * This is the checkManagerCredentials method it checks employees list to see if the user input is of type Manager if not it will display a message and ask again
      */
     public void checkManagerCredentials(Map<Integer, Employee> employees)
     {
-        Employee currentEmployee;
-        for(Integer key : employees.keySet())
+        Set<Integer> keySet = employees.keySet();
+        if(keySet.contains(managerId))
         {
-            currentEmployee = employees.get(key);
-            if(managerId == currentEmployee.getEmployeeId() && password.equals(currentEmployee.getPassword()) && currentEmployee instanceof Manager)
+            if(employees.get(managerId) instanceof Manager)
             {
-                valid = true;
-                break;
+                if(employees.get(managerId).getPassword() == password)
+                {
+                    valid = true;
+                }
+                else
+                {
+                    System.out.println("Incorrect password.");
+                }
             }
-            if(managerId == currentEmployee.getEmployeeId() && !(currentEmployee instanceof Manager))
+            else
             {
-                System.out.println("Invalid Authority. Please try again: ");
-                break;
+                System.out.println("ID not authorized for access.");
             }
-            else if(managerId == currentEmployee.getEmployeeId())
-            {
-                System.out.println("Manager ID or password incorrect");
-            }     
         }
+        else
+        {
+            System.out.println("ID does not exist.");
+        }   
     }
     @Override
     public boolean isValid()

@@ -33,7 +33,6 @@ public class Menu
         System.out.println("| 6. Quit           |");
         System.out.println("=====================");
         this.userSelection = in.nextByte();
-        in.close();
     }
     /**
      * This is the checkInput method it creates a new object of whatever submenu is seleted. it recieves a list of rooms that is recieved in case 2 and it recieves a list of employees in case 4

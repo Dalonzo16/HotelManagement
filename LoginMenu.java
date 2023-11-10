@@ -1,4 +1,5 @@
 import java.util.Map;
+import java.util.Set;
 import java.util.Scanner;
 /**
  *This is the LoginMenu class it is a parent class
@@ -21,7 +22,6 @@ public class LoginMenu
         employeeId = in.nextInt();
         System.out.print("Password:    ");
         password = in.next();
-        in.close();
     }
     /**
      * This is the checkUserCredentials method it checks the user input to make sure the ID exists and the password is correct recieves a list of employees
@@ -29,24 +29,21 @@ public class LoginMenu
      */
     public void checkUserCredentials(Map<Integer, Employee> employees)
     {
-        Employee currentEmployee;
-        for(Integer key : employees.keySet())//for each loop to check if credentials are valid
+        Set<Integer> keySet = employees.keySet();
+        if(keySet.contains(employeeId))
+        {  
+            if(employees.get(employeeId).getPassword() == password)
+            {
+                valid = true;
+            }
+            else
+            {
+                System.out.println("Incorrect password");
+            }
+        }
+        else
         {
-            currentEmployee = employees.get(key);
-            if(currentEmployee.getEmployeeId() == employeeId  && currentEmployee.getPassword().equals(password))
-            {
-                valid = true; //valid is true if ID matches and password matches
-                break;
-            }
-            if(currentEmployee.getPassword().equals(password))
-            {
-                System.out.println("Employee ID does not exist");
-                
-            }
-            if(currentEmployee.getEmployeeId() == employeeId)
-            {
-                System.out.println("Password incorrect");
-            }
+            System.out.println("User ID does not exist.");
         }
     }
     /**
