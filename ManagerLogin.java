@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -24,7 +25,7 @@ public class ManagerLogin extends LoginMenu {
     /**
      * This is the checkManagerCredentials method it checks employees list to see if the user input is of type Manager if not it will display a message and ask again
      */
-    public void checkManagerCredentials(ArrayList<Employee> employees){
+    public void checkManagerCredentials(Map<Integer, Employee> employees){
         for(Employee anEmployee : employees){
             if(managerId == anEmployee.getEmployeeId() && password.equals(anEmployee.getPassword()) && anEmployee instanceof Manager){
                 valid = true;

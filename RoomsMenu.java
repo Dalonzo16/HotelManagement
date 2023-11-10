@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -22,14 +23,14 @@ public class RoomsMenu extends Menu{
     
     /**
      *This is the checkInput method it recieves a list of rooms to show the available rooms and search a room
-     * @param rooms a list of rooms
+     * @param map a list of rooms
      */
-    public void checkInput(ArrayList<Room> rooms){ //this is just a list of all the rooms need to switch to the availrooms list
+    public void checkInput(Map<Integer, Room> map){ //this is just a list of all the rooms need to switch to the availrooms list
         
         switch(this.userSelection){
             
             case 1:
-                for(Room allRooms : rooms){
+                for(Room allRooms : map){
                     System.out.println("Room Number: "+ allRooms.getRoomNumber());
                 }
             break;
@@ -38,9 +39,9 @@ public class RoomsMenu extends Menu{
                 System.out.println("Enter the room number you want to search");
                 Scanner in = new Scanner(System.in);
                 roomNumber = in.nextInt();
-                for(Room allRooms : rooms){
+                for(Room allRooms : map){
                     if(allRooms.getRoomNumber() == roomNumber){
-                        System.out.println("Floor: " + allRooms.getFloorNumber() + " | Room Number: " + allRooms.getRoomNumber() + " | $"+ allRooms.getPricePerNight() + " per night | ");
+                        System.out.println("Floor: " + (int) allRooms.getRoomNumber()/100 + " | Room Number: " + allRooms.getRoomNumber() + " | $"+ allRooms.getPricePerNight() + " per night | ");
                         break;
                     }
                 }
@@ -50,7 +51,4 @@ public class RoomsMenu extends Menu{
     public byte getUserSelection() {
         return userSelection;
     }
-    
-    
-    
 }

@@ -1,5 +1,5 @@
-
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Ludwig Scherer
@@ -9,9 +9,9 @@ import java.util.ArrayList;
 public class Hotel 
 {
     private String hotelName;
-    private ArrayList<Room> rooms;
-    private ArrayList<Employee> employees;
-    private ArrayList<Guest> allGuests;
+    private Map<Integer, Room> rooms;
+    private Map<Integer, Employee> employees;
+    private Map<Integer, Guest> allGuests;
     
     /**
      * Constructor for objects of class Hotel
@@ -19,9 +19,9 @@ public class Hotel
     public Hotel(String hotelName)
     {
         this.hotelName = hotelName;
-        rooms = new ArrayList<Room>();
-        employees = new ArrayList<Employee>();
-        allGuests = new ArrayList<Guest>();
+        rooms = new HashMap<>();
+        employees = new HashMap<>();
+        allGuests = new HashMap<>();
     }
     /**
      * gets hotel name
@@ -35,7 +35,7 @@ public class Hotel
      * gets all occupied rooms
      * @return
      */
-    public ArrayList<Room> getRooms()
+    public Map<Integer, Room> getRooms()
     {
         return rooms;
     }
@@ -43,7 +43,7 @@ public class Hotel
      * gets all employees
      * @return
      */
-    public ArrayList<Employee> getEmployees()
+    public Map<Integer, Employee> getEmployees()
     {
         return employees;
     }
@@ -53,7 +53,7 @@ public class Hotel
      */
     public void addRoom(Room room)
     {
-        rooms.add(room);
+        rooms.put(room.getRoomNumber(), room);
     }
     /**
      * adds guest to allGuests
@@ -61,11 +61,11 @@ public class Hotel
      */
     public void addGuest(Guest guest)
     {
-        allGuests.add(guest);
+        allGuests.put(guest.getGuestID(), guest);
     }
     public void addEmployee(Employee employee)
     {
-        employees.add(employee);
+        employees.put(employee.getEmployeeId(), employee);
     }
     /**
      * removes guest from allGuests
@@ -73,6 +73,14 @@ public class Hotel
      */
     public void removeGuest(Guest guest)
     {
-        allGuests.remove(guest);
+        allGuests.remove(guest.getGuestID());
+    }
+    public void removeRoom(Room room)
+    {
+        rooms.remove(room.getRoomNumber());
+    }
+    public void removeEmployee(Employee employee)
+    {
+        employees.remove(employee.getEmployeeId());
     }
 }

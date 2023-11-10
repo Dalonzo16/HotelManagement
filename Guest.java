@@ -11,8 +11,9 @@ public class Guest
     private String phoneNumber;
     private String email;
     private String creditCardNumber;
-    private int GuestID;
+    private int guestID;
     Reservation reservation;
+    private static int counter = 1;
 
     /**
      * Constructor for objects of class Guest
@@ -29,6 +30,8 @@ public class Guest
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.reservation = reservation;
+        guestID = counter;
+        counter++;
     }
     /**
      * gets first name
@@ -76,7 +79,7 @@ public class Guest
      */
     public int getGuestID()
     {
-        return GuestID;
+        return guestID;
     }
     /**
      * gets reservation info
@@ -119,12 +122,12 @@ public class Guest
         this.email = email;
     }
     /**
-     * sets GuestID
-     * @param GuestID
+     * sets guestID
+     * @param guestID
      */
-    public void setGuestID(int GuestID)
+    public void setGuestID(int guestID)
     {
-        this.GuestID = GuestID;
+        this.guestID = guestID;
     }
     /**
      * sets credit card number

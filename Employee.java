@@ -22,7 +22,8 @@ public class Employee {
     public Employee(String password, int payRate){
         this.payRate = payRate;
         this.password = password;
-        employeeId = counter++; // ID is automatically incremented by 1 by using the public variable counter everytime a new employee is created
+        employeeId = counter; // ID is automatically incremented by 1 by using the public variable counter everytime a new employee is created
+        counter++;
     }
     /**
      * This is another constructor to initialize employee ID manually
