@@ -13,13 +13,12 @@ public class InitialLogin
     private int employeeID;
     private String password;
     private byte option;
-    private byte classification;
 
     public InitialLogin()
     {
         super();
     } 
-    public void option1(Map<Integer, Employee> employees)
+    public void option1(Hotel hotel, Map<Integer, Employee> employees)
     {
         Scanner in = new Scanner(System.in);
         Set<Integer> keySet = employees.keySet();
@@ -27,15 +26,15 @@ public class InitialLogin
         employeeID = in.nextInt();
         if(keySet.contains(employeeID))
         {
-            classification = 1;
-            //create new general staff menu
+            StaffMenu staffMenu = new StaffMenu();
+            staffMenu.displayMenu(hotel);
         }
         else
         {
             System.out.println("User ID does not exist.");
         }
     }
-    public void option2(Map<Integer, Employee> employees)
+    public void option2(Hotel hotel, Map<Integer, Employee> employees)
     {
         Scanner in = new Scanner(System.in);
         Set<Integer> keySet = employees.keySet();
@@ -49,7 +48,6 @@ public class InitialLogin
                 password = in.next();
                 if(employees.get(employeeID).getPassword() == password)
                 {
-                    classification = 2;
                     //create new receptionist menu
                 }
                 else
@@ -68,7 +66,7 @@ public class InitialLogin
         }
     }
    
-    public void option3(Map<Integer, Employee> employees)
+    public void option3(Hotel hotel, Map<Integer, Employee> employees)
     {
         Scanner in = new Scanner(System.in);
         Set<Integer> keySet = employees.keySet();
@@ -82,7 +80,6 @@ public class InitialLogin
                 password = in.next();
                 if(employees.get(employeeID).getPassword() == password)
                 {
-                    classification = 3;
                     //create new manager menu
                 }
                 else
@@ -100,9 +97,9 @@ public class InitialLogin
             System.out.println("User ID does not exist.");
         }
     }
-    public void displayMenu(Map<Integer, Employee> employees)
+    public void displayMenu(Hotel hotel)
     {
-        Map<Integer, Employee> allEmployees = employees;
+        Map<Integer, Employee> allEmployees = hotel.getEmployees();
         while(true)
         {
             Scanner in = new Scanner(System.in);
@@ -110,9 +107,9 @@ public class InitialLogin
             option = in.nextByte();
             switch (option)
             {
-                case 1: option1(allEmployees);  break;
-                case 2: option2(allEmployees);  break;
-                case 3: option3(allEmployees);  break;
+                case 1: option1(hotel, allEmployees);  break;
+                case 2: option2(hotel, allEmployees);  break;
+                case 3: option3(hotel, allEmployees);  break;
                 case 4: System.out.println("Bye...");
                         System.exit(0);
                                     break;

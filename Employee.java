@@ -13,20 +13,20 @@ public class Employee
     public static int counter = 1;
     private String address;
     public String shift;
-    public int payRate;
+    public double payRate;
     
     /**
      * This is a constructor method that initalizes password and pay rate as well as employee ID
      * @param password the employee password
      * @param payRate the employees pay rate
      */
-    public Employee(String password, int payRate)
+    public Employee(String firstName, String lastName,String password, double payRate)
     {
         this.payRate = payRate;
         this.password = password;
         employeeId = counter; // ID is automatically incremented by 1 by using the public variable counter everytime a new employee is created
         counter++;
-        System.out.println("The new employee was created with ID number: " + employeeId + "and password: " + password + 
+        System.out.println("The new employee" + firstName + lastName + " was created with ID number: " + employeeId + "and password: " + password + 
             " ; his pay rate per hour is: " + payRate);
     }
     /**
@@ -90,7 +90,7 @@ public class Employee
      * This method gets the employees pay rate
      * @return the employees pay rate
      */
-    public int getPayRate()
+    public double getPayRate()
     {
         return payRate;
     }

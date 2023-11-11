@@ -95,37 +95,64 @@ public class Hotel
      * removes employee from employees
      * @param employee
      */
-    public void removeEmployee(Employee employee)
+    public void removeEmployee(Integer employeeId)
     {
-        employees.remove(employee.getEmployeeId());
+        employees.remove(employeeId);
     }
+    /**
+     * adds reservation to reservations
+     * @param reservation
+     */
     public void addReservation(Reservation reservation)
     {
         reservations.put(reservation.getReservationNumber(), reservation);
     }
+    /**
+     * removes reservation from reservations
+     * @param reservation
+     */
     public void removeReservation(Reservation reservation)
     {
         reservations.remove(reservation.getReservationNumber());
     }
+    /**
+     * adds payment to payments
+     * @param payment
+     */
     public void addPayment(Payment payment)
     {
         payments.put(payment.getPaymentID(), payment);
     }
+    /**
+     * removes payment from payments
+     * @param payment
+     */
     public void removePayment(Payment payment)
     {
         payments.remove(payment.getPaymentID());
     }
+    /**
+     * gets all guests
+     * @return
+     */
     public Map<Integer, Guest> getAllGuests()
     {
         return allGuests;
     }
+    /**
+     * gets all reservations
+     * @return
+     */
     public Map<Integer, Reservation> getAllReservations()
     {
         return reservations;
     }
+    /**
+     * gets all payments
+     * @return
+     */
     public Map<Integer, Payment> getAllPayments()
     {
         return payments;
     }
-
 }

@@ -10,38 +10,46 @@ public class RoomsMenu
 {
     private byte option;
 
-    public void option1()
+    public void option1(Map<Integer, Room> rooms)
     {
-        //show available rooms
+        Room currentRoom;
+        String availableRooms = "";
+        System.out.println("The following rooms are available:\n");
+                for(Integer key : rooms.keySet())
+                {
+                    currentRoom = rooms.get(key);
+                    if(currentRoom.isAvailable())
+                    {
+                        availableRooms = availableRooms + Integer.toString(currentRoom.getRoomNumber()) + System.lineSeparator();
+                    }
+                }
+                System.out.println(availableRooms);
     }
-    public void option2()
+    public void option2(Map<Integer, Room> rooms)
     {
         //look up info about room
     } 
-    public void option3()
+    public void option3(Map<Integer, Room> rooms)
     {
         //back to main menu
     }
-    public void option4()
+    public void option4(Hotel hotel, Map<Integer, Room> rooms)
     {
-        //logout
+        InitialLogin initialLogin = new InitialLogin();
+        initialLogin.displayMenu(hotel);
     }
-    public void option5()
+    public void displayMenu(Hotel hotel, byte classification) 
     {
-        System.out.println("Bye...");
-        System.exit(0);
-    }
-    public void displayMenu() 
-    {
+        Map<Integer, Room> rooms = hotel.getRooms();
         Scanner in = new Scanner(System.in);
         System.out.println("Rooms menu, please select an option:\n(1) Show available rooms\n(2) Look up info about room #\n(3) Back to main menu\n(4)Logout\n(5)Quit");
         this.option = in.nextByte();
         switch (option)
             {
-                case 1: option1();  break;
-                case 2: option2();  break;
-                case 3: option3();  break;
-                case 4: option4();  break;
+                case 1: option1(rooms);  break;
+                case 2: option2(rooms);  break;
+                case 3: option3(rooms);  break;
+                case 4: option4(hotel, rooms);  break;
                 case 5: System.out.println("Bye...");
                         System.exit(0);
                                     break;

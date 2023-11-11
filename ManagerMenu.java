@@ -9,45 +9,42 @@ import java.util.Scanner;
 public class ManagerMenu
 {
     private byte option;
+    private byte classification = 3;
 
-    public ManagerMenu()
+    public void option1(Hotel hotel)
     {
-        super();
+        GuestsMenu guestsMenu = new GuestsMenu();
+        guestsMenu.displayMenu(hotel, classification);
     }
 
-    public void option1()
+    public void option2(Hotel hotel)
     {
-        //create new Guests menu
-    }
-
-    public void option2()
-    {
-        //create new Rooms menu
+        RoomsMenu roomsMenu = new RoomsMenu();
+        roomsMenu.displayMenu(hotel, classification);
     }
     
-    public void option3()
+    public void option3(Hotel hotel)
     {
-        //create new Reservations menu
+        ReservationMenu reservationsMenu = new ReservationMenu();
+        reservationsMenu.displayMenu(hotel, classification);
     }
-    public void option4()
+    public void option4(Hotel hotel)
     {
-        //create new Employees menu
+        EmployeesMenu employeeMenu = new EmployeesMenu();
+        employeeMenu.displayMenu(hotel);
     }
-    public void option5()
+    public void option5(Hotel hotel)
     {
-        //create new Reports menu
+        ReportsMenu reportsMenu = new ReportsMenu();
+        reportsMenu.displayMenu(hotel);
     }
-    public void option6()
+    public void option6(Hotel hotel)
     {
-        //Logout (call initial login menu)
-    }
-    public void option7()
-    {
-        System.out.println("Bye...");
-        System.exit(0);
+        InitialLogin initialLogin = new InitialLogin();
+        initialLogin.displayMenu(hotel);
     }
 
-    public void displayMenu(Map<Integer, Employee> employees)
+    public void displayMenu(Hotel hotel)
     {
         while(true)
         {
@@ -56,12 +53,12 @@ public class ManagerMenu
             option = in.nextByte();
             switch (option)
             {
-                case 1: option1();  break;
-                case 2: option2();  break;
-                case 3: option3();  break;
-                case 4: option4();  break;
-                case 5: option5();  break;
-                case 6: option6();  break;
+                case 1: option1(hotel);  break;
+                case 2: option2(hotel);  break;
+                case 3: option3(hotel);  break;
+                case 4: option4(hotel);  break;
+                case 5: option5(hotel);  break;
+                case 6: option6(hotel);  break;
                 case 7: System.out.println("Bye...");
                         System.exit(0);
                                     break;

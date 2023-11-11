@@ -8,25 +8,28 @@ import java.util.Scanner;
 public class ReceptionistMenu
 {
     private byte option;
+    private byte classification = 2;
     
-    public void option1()
+    public void option1(Hotel hotel)
     {
-        //create new Guests menu
+        GuestsMenu guestsMenu = new GuestsMenu();
+        guestsMenu.displayMenu(hotel, classification);
     }
-    public void option2()
+    public void option2(Hotel hotel)
     {
-        //create new Rooms menu
+        RoomsMenu roomsMenu = new RoomsMenu();
+        roomsMenu.displayMenu(hotel, classification);
     }
-    public void option3()
+    public void option3(Hotel hotel)
     {
         //create new Reservations menu
     }
-    public void option4()
+    public void option4(Hotel hotel)
     {
         //Logout (call initial login menu)
     }
 
-    public void displayMenu() 
+    public void displayMenu(Hotel hotel) 
     {
         while(true)
         {
@@ -35,10 +38,10 @@ public class ReceptionistMenu
             option = in.nextByte();
             switch (option)
             {
-                case 1: option1();  break;
-                case 2: option2();  break;
-                case 3: option3();  break;
-                case 4: option4();  break;
+                case 1: option1(hotel);  break;
+                case 2: option2(hotel);  break;
+                case 3: option3(hotel);  break;
+                case 4: option4(hotel);  break;
                 case 5: System.out.println("Bye...");
                         System.exit(0);
                                     break;

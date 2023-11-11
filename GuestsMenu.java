@@ -1,4 +1,5 @@
 
+import java.util.Map;
 import java.util.Scanner;
 /**
  *This is the GuestsMenu class a child class of Menu
@@ -9,33 +10,35 @@ public class GuestsMenu
 {
     private byte option;
     
-    public void option1()
+    public void option1(Map<Integer, Guest> guests)
     {
         //check-in guest
     }
-    public void option2()
+    public void option2(Map<Integer, Guest> guests)
     {
         //check-out guest
     }
-    public void option3()
+    public void option3(Map<Integer, Guest> guests)
     {
         //edit guest info
     }
-    public void option4()
+    public void option4(Map<Integer, Guest> guests)
     {
         //view all guests
     }
-    public void option5()
+    public void option5(Hotel hotel)
     {
         //back to main menu
     }
-    public void option6()
+    public void option6(Hotel hotel)
     {
-        //logout
+        InitialLogin initialLogin = new InitialLogin();
+        initialLogin.displayMenu(hotel);
     }
 
-    public void displayMenu() 
+    public void displayMenu(Hotel hotel, byte classification) 
     {
+        Map<Integer, Guest> guests = hotel.getAllGuests(); 
         while(true)
         {
             Scanner in = new Scanner(System.in);
@@ -43,12 +46,12 @@ public class GuestsMenu
             option = in.nextByte();
             switch (option)
             {
-                case 1: option1();  break;
-                case 2: option2();  break;
-                case 3: option3();  break;
-                case 4: option4();  break;
-                case 5: option5();  break;
-                case 6: option6();  break;
+                case 1: option1(guests);  break;
+                case 2: option2(guests);  break;
+                case 3: option3(guests);  break;
+                case 4: option4(guests);  break;
+                case 5: option5(hotel);  break;
+                case 6: option6(hotel);  break;
                 case 7: System.out.println("Bye...");
                         System.exit(0);
                                     break;
