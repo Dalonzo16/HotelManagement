@@ -50,7 +50,7 @@ public class RoomsMenu extends Menu
                 System.out.println("Enter the room number you want to search");
                 roomNumber = in.nextInt();
                 Room theRoom = hotel.getRooms().get(roomNumber);
-                System.out.println("Floor: " + theRoom.getRoomNumber() / 100 + " |Room Number: " + theRoom.getRoomNumber() + " |Available? : " + theRoom.isAvailable());
+                System.out.println("Floor: " + theRoom.getRoomNumber() / 100 + " | Room Number: " + theRoom.getRoomNumber() + " | Available?: " + theRoom.isAvailable());
             }
     }
     @Override

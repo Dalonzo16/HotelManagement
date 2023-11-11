@@ -23,9 +23,11 @@ public class Receptionist extends Employee{
         if(checkGuestExists(firstAndLastName, hotel.getGuests()) != null){
              Reservation reservation = hasReservation(theGuest);
             if(reservation != null){
+                double totalRoomPrice = 0; 
                 for(Room aRoom : reservation.getRooms()){
-                    aRoom.setUnavailable();
+                    totalRoomPrice += aRoom.getPricePerNight();
                 }
+                double grandTotal = totalRoomPrice * reservation.getDuration();
             }
             else{
             }
