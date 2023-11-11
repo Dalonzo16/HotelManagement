@@ -1,7 +1,5 @@
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.HashMap;
 /**
  *This is the Receptionsist class
  * @author Devon Alonzo
@@ -20,21 +18,28 @@ public class Receptionist extends Employee{
         Scanner in = new Scanner(System.in);
         System.out.println("Enter guests first and last name");
         firstAndLastName = in.nextLine();
+
         Guest theGuest = checkGuestExists(firstAndLastName, hotel.getGuests());
         if(checkGuestExists(firstAndLastName, hotel.getGuests()) != null){
              Reservation reservation = hasReservation(theGuest);
             if(reservation != null){
                 double totalRoomPrice = 0; 
+                System.out.print(firstAndLastName + " has a Reservation" + " for the following room(s): ");
+
                 for(Integer RoomNum : reservation.getRooms().keySet()){
                     Room rooms = reservation.getRooms().get(RoomNum);
                     totalRoomPrice += rooms.getPricePerNight();
+                    System.out.println(rooms.getRoomNumber() + " | Floor: " + rooms.getRoomNumber()/100);
                 }
+
                 double grandTotal = totalRoomPrice * reservation.getDuration();
-                System.out.print(firstAndLastName + "has a Reservation" + " for the following room(s) ");
-                for(Integer RoomNum : reservation.getRooms().keySet()){
-                    Room rooms = reservation.getRooms().get(RoomNum);
-                    System.out.println(" " + rooms.getRoomNumber() + " ");
-                }
+                
+                System.out.println("Amount due for a total of " + reservation.getDuration() + " nights is: $" + grandTotal);
+                String creditCardNum = in.next();
+                hotel.getGuests().get(firstAndLastName).setCreditCardNumber(creditCardNum);;
+                Payment payment = new Payment(grandTotal, hotel.getGuests().get(firstAndLastName).getCreditCardNumber() );
+                hotel.addPayment(payment.getPaymentID(), payment);
+
             }
             else{
 

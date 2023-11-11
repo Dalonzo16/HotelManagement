@@ -17,21 +17,12 @@ public class Payment
      * @param amountDue
      * @param creditCardNumber
      */
-    public Payment(double amountDue, String creditCardNumber) 
+    public Payment(double amountaid, String creditCardNumber) 
     {
-        this.amountDue = amountDue;
+        this.amountDue = amountPaid;
         this.creditCardNumber = creditCardNumber;
         amountPaid = 0;
-        paymentID = counter;
-        counter++;
-    }
-    /**
-     * gets amount due
-     * @return
-     */
-    public double getAmountDue()
-    {
-        return amountDue;
+        paymentID = counter++;
     }
     /**
      * gets credit card number
@@ -52,14 +43,6 @@ public class Payment
     public int getPaymentID()
     {
         return paymentID;
-    }
-    /**
-     * sets amount due
-     * @param amountDue
-     */
-    public void setAmountDue(double amountDue)
-    {
-        this.amountDue = amountDue;
     }
     /**
      * sets credit card number

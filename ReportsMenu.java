@@ -17,16 +17,19 @@ public class ReportsMenu extends Menu
         System.out.println("| 1. Show Payment Reports   |");
         System.out.println("| 2. Back to main menu      |");
         System.out.println("=============================");
-        this.userSelection = in.nextByte();
+        userSelection = in.nextByte();
     }
     /**
      * This is the checkInput method there is only option so far
      */
-    public void checkInput() 
+    public void checkInput(Hotel hotel, Receptionist employee) 
     {
         if(userSelection == 1)
         {
-            System.out.println("print payments");
+            for(int paymentId : hotel.getPayments().keySet()){
+                Payment payment = hotel.getPayments().get(paymentId);
+                System.out.println("A Payment of " + payment.getAmountPaid());
+            }
         }
     }
 

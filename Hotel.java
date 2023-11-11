@@ -12,6 +12,7 @@ public class Hotel
     private Map<Integer, Room> rooms;
     private Map<Integer, Employee> employees;
     private Map<String, Guest> allGuests;
+    private Map<Integer, Payment> payments;
     
     /**
      * Constructor for objects of class Hotel
@@ -22,6 +23,7 @@ public class Hotel
         rooms = new HashMap<>();
         employees = new HashMap<>();
         allGuests = new HashMap<>();
+        payments = new HashMap<>();
     }
     /**
      * gets hotel name
@@ -85,5 +87,11 @@ public class Hotel
     public void removeEmployee(Employee employee)
     {
         employees.remove(employee.getEmployeeId());
+    }
+    public Map<Integer, Payment> getPayments(){
+        return payments;
+    }
+    public void addPayment(int payId, Payment payment){
+        payments.put(payment.getPaymentID(), payment);
     }
 }
