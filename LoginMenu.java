@@ -37,7 +37,7 @@ public class LoginMenu
             }
         }
         else{
-            System.out.println("Employee ID does not exist");
+            System.out.println("Employee ID does not exist.");
         }
     }
     /**
