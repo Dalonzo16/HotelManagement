@@ -27,7 +27,7 @@ public class GuestsMenu extends Menu
      * This is the checkInput method uses a switch case statement to determine what computations to perfor,
      * has no parameters yet because we have not worked on the actual computations
      */
-    public void checkInput() 
+    public void checkInput(Hotel hotel, Receptionist employee) 
     {
         switch(this.userSelection)
         {

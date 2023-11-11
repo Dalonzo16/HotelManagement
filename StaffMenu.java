@@ -20,12 +20,12 @@ public class StaffMenu extends Menu {
     /**
      * This method checks the user input
      */
-    public void checkInput(){
+    public void checkInput(Hotel hotel){
         if(userSelection == 1){
             Menu option1_2 = new RoomsMenu();
             do{
                 option1_2.displayMenu();
-                option1_2.checkInput(null, null);
+                option1_2.checkInput(hotel);
             }while(option1_2.getUserSelection() != 3);
         }
     }

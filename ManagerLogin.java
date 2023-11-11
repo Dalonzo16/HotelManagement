@@ -33,7 +33,7 @@ public class ManagerLogin extends LoginMenu
         {
             if(employees.get(managerId) instanceof Manager)
             {
-                if(employees.get(managerId).getPassword() == password)
+                if(employees.get(managerId).getPassword().equals(password))
                 {
                     valid = true;
                 }

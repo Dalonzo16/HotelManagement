@@ -11,7 +11,7 @@ public class Hotel
     private String hotelName;
     private Map<Integer, Room> rooms;
     private Map<Integer, Employee> employees;
-    private Map<Integer, Guest> allGuests;
+    private Map<String, Guest> allGuests;
     
     /**
      * Constructor for objects of class Hotel
@@ -47,6 +47,9 @@ public class Hotel
     {
         return employees;
     }
+    public Map<String, Guest> getGuests(){
+        return allGuests;
+    }
     /**
      * adds room to list of rooms
      * @param room
@@ -59,9 +62,9 @@ public class Hotel
      * adds guest to allGuests
      * @param guest
      */
-    public void addGuest(Guest guest)
+    public void addGuest(String name, Guest guest)
     {
-        allGuests.put(guest.getGuestID(), guest);
+        allGuests.put(name, guest);
     }
     public void addEmployee(Employee employee)
     {
@@ -71,9 +74,9 @@ public class Hotel
      * removes guest from allGuests
      * @param guest
      */
-    public void removeGuest(Guest guest)
+    public void removeGuest(String name)
     {
-        allGuests.remove(guest.getGuestID());
+        allGuests.remove(name);
     }
     public void removeRoom(Room room)
     {

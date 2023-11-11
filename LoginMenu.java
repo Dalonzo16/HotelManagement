@@ -1,5 +1,4 @@
 import java.util.Map;
-import java.util.Set;
 import java.util.Scanner;
 /**
  *This is the LoginMenu class it is a parent class
@@ -29,21 +28,14 @@ public class LoginMenu
      */
     public void checkUserCredentials(Map<Integer, Employee> employees)
     {
-        Set<Integer> keySet = employees.keySet();
-        if(keySet.contains(employeeId))
-        {  
-            if(employees.get(employeeId).getPassword() == password)
-            {
-                valid = true;
-            }
-            else
-            {
-                System.out.println("Incorrect password");
-            }
+        if(employees.get(employeeId) != null && employees.get(employeeId).getPassword().equals(password)){
+             valid = true;
         }
-        else
-        {
-            System.out.println("User ID does not exist.");
+        else if(employees.get(employeeId) == null){
+            System.out.println("Employee ID does not exist");
+        }
+        else{
+            System.out.println("Employee ID or password incorrect");
         }
     }
     /**
