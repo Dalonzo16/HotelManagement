@@ -20,7 +20,6 @@ public class ReservationMenu extends Menu
         System.out.println("| 5. Back to main menu  |");
         System.out.println("=========================");
         this.userSelection = in.nextByte();
-        in.close();
     }
     /**
      * This is eh checkInput method there is no computations yet
