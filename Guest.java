@@ -10,18 +10,11 @@ public class Guest
     private String phoneNumber;
     private String email;
     private String creditCardNumber;
-
-=======
-    public static int counter = 1;
-    private int guestId;
-
     Reservation reservation;
-    private static int counter = 1;
 
     /**
      * Constructor for objects of class Guest
-     * @param firstName
-     * @param lastName
+     * @param firstAndLastName
      * @param phoneNumber
      * @param email
      * @param reservation
@@ -32,26 +25,13 @@ public class Guest
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.reservation = reservation;
-
-        guestId = counter;
-        counter++;
-
-        guestId = counter++;
-
-    }
-    public Guest(String firstAndLastName, String phoneNumber, String email) 
-    {
-        this.firstAndLastName = firstAndLastName;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        guestId = counter++;
+        System.out.println("The guest " + firstAndLastName + " was added");
     }
     /**
-     * gets first name
+     * gets first and last name
      * @return
      */
-    public String getFirstAndLastName() 
-    {
+    public String getfirstAndLastName(){
         return firstAndLastName;
     }
     /**
@@ -78,15 +58,7 @@ public class Guest
     {
         return creditCardNumber;
     }
-    /**
-     * gets guest ID
-     * @return
-     */
-    public int getGuestId()
-    {
 
-        return guestId;
-    }
     /**
      * gets reservation info
      * @return
@@ -96,12 +68,12 @@ public class Guest
         return reservation;
     }
     /**
-     * sets first name
+     * sets first and last name
      * @param firstName
      */
-    public void setFirstAndLastName(String firstAndLastName)
+    public void setFirstAndLastName(String name)
     {
-        this.firstAndLastName = firstAndLastName;
+        firstAndLastName = name;
     }
     /**
      * sets phone number
@@ -118,15 +90,6 @@ public class Guest
     public void setEmail(String email)
     {
         this.email = email;
-    }
-    /**
-     * sets guestID
-     * @param guestID
-     */
-    public void setGuestID(int guestID)
-    {
-
-        this.guestId = guestId;
     }
     /**
      * sets credit card number

@@ -18,7 +18,6 @@ public class ReportsMenu extends Menu
         System.out.println("| 2. Back to main menu      |");
         System.out.println("=============================");
         this.userSelection = in.nextByte();
-        in.close();
     }
     /**
      * This is the checkInput method there is only option so far

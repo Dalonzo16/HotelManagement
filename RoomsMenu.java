@@ -26,39 +26,32 @@ public class RoomsMenu extends Menu
      *This is the checkInput method it recieves a list of rooms to show the available rooms and search a room
      * @param map a list of rooms
      */
-    public void checkInput(Map<Integer, Room> rooms)//this is just a list of all the rooms need to switch to the availrooms list
+    public void checkInput(Hotel hotel)//this is just a list of all the rooms need to switch to the availrooms list
     {
-        String availableRooms;
         Room currentRoom;
+        String availableRooms = "";
         switch(this.userSelection)
         {
             case 1:
-                for(Integer key : rooms.keySet())
+                System.out.println("The following rooms are available:\n");
+                for(Integer key : hotel.getRooms().keySet())
                 {
-                    currentRoom = rooms.get(key);
+                    currentRoom = hotel.getRooms().get(key);
                     if(currentRoom.isAvailable())
                     {
-                        
+                        availableRooms = availableRooms + Integer.toString(currentRoom.getRoomNumber()) + System.lineSeparator();
                     }
                 }
+                System.out.println(availableRooms);
             break;
             case 2:
                 int roomNumber;
                 System.out.println("Enter the room number you want to search");
                 Scanner in = new Scanner(System.in);
                 roomNumber = in.nextInt();
-                for(Integer key : rooms.keySet())
-                {
-                    currentRoom = rooms.get(key);
-                    if(currentRoom.getRoomNumber() == roomNumber)
-                    {
-                        System.out.println("Floor: " + (int) currentRoom.getRoomNumber()/100 + " | Room Number: " + currentRoom.getRoomNumber() + " | $"+ currentRoom.getPricePerNight() + " per night | ");
-=======
-               
-                        break;
-                    }
-                }
-        }
+                Room theRoom = hotel.getRooms().get(roomNumber);
+                System.out.println("Floor: " + theRoom.getRoomNumber() / 10 + "Room Number: " + theRoom.getRoomNumber() + "Available? : " + theRoom.isAvailable());
+            }
     }
     @Override
     public byte getUserSelection() 

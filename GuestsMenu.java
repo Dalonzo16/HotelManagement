@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 /**
  *This is the GuestsMenu class a child class of Menu
@@ -10,7 +9,8 @@ public class GuestsMenu extends Menu
     private byte userSelection;
     
     @Override
-    public void displayMenu() {
+    public void displayMenu() 
+    {
             Scanner in = new Scanner(System.in);
             System.out.println("=========================");
             System.out.println("| 1. Check in           |");
@@ -22,16 +22,17 @@ public class GuestsMenu extends Menu
             System.out.println("| 7. Back to main menu  |");
             System.out.println("=========================");
             this.userSelection = in.nextByte();
-            in.close();
     }
     /**
      * This is the checkInput method uses a switch case statement to determine what computations to perfor,
      * has no parameters yet because we have not worked on the actual computations
      */
-    public void checkInput(Hotel hotel, Receptionist receptionist) {
-        switch(userSelection){
-            case 1: 
-                receptionist.checkInGuest(hotel);
+    public void checkInput(Hotel hotel, Receptionist employee) 
+    {
+        switch(this.userSelection)
+        {
+            case 1:
+                
             break;
             case 2:
                 System.out.println("Guest Checked out");
@@ -51,7 +52,6 @@ public class GuestsMenu extends Menu
             break;
         }
     }
-
     @Override
     public byte getUserSelection() 
     {

@@ -1,7 +1,5 @@
-
 import java.util.HashMap;
 import java.util.Map;
-=======
 
 /**
  * @author Ludwig Scherer
@@ -13,7 +11,8 @@ public class Hotel
     private String hotelName;
     private Map<Integer, Room> rooms;
     private Map<Integer, Employee> employees;
-    private Map<Integer, Guest> allGuests;
+    private Map<String, Guest> allGuests;
+    
     /**
      * Constructor for objects of class Hotel
      */
@@ -23,7 +22,7 @@ public class Hotel
         rooms = new HashMap<>();
         employees = new HashMap<>();
         allGuests = new HashMap<>();
-
+    }
     /**
      * gets hotel name
      * @return
@@ -65,21 +64,19 @@ public class Hotel
      */
     public void addGuest(String name, Guest guest)
     {
-        allGuests.put(guest.getGuestID(), guest);
+        allGuests.put(name, guest);
     }
     public void addEmployee(Employee employee)
     {
         employees.put(employee.getEmployeeId(), employee);
-=======
-
+    }
     /**
      * removes guest from allGuests
      * @param guest
      */
     public void removeGuest(String name)
     {
-
-        allGuests.remove(guest.getGuestID());
+        allGuests.remove(name);
     }
     public void removeRoom(Room room)
     {
@@ -88,11 +85,5 @@ public class Hotel
     public void removeEmployee(Employee employee)
     {
         employees.remove(employee.getEmployeeId());
-=======
-        allGuests.remove(name);
-    }
-    public void addEmployees(Employee anEmployee){
-        employees.add(anEmployee);
-
     }
 }

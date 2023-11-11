@@ -11,8 +11,7 @@ public class Reservation
     private String guestName;
     private ArrayList<Room> rooms;
     private int duration;
-    public static int counter = 1;
-
+    public static int counter = 0;
 
     /**
      * Constructor for objects of class Reservation

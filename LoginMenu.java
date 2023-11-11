@@ -21,7 +21,6 @@ public class LoginMenu
         employeeId = in.nextInt();
         System.out.print("Password:    ");
         password = in.next();
-        in.close();
     }
     /**
      * This is the checkUserCredentials method it checks the user input to make sure the ID exists and the password is correct recieves a list of employees
@@ -29,24 +28,14 @@ public class LoginMenu
      */
     public void checkUserCredentials(Map<Integer, Employee> employees)
     {
-        Employee currentEmployee;
-        for(Integer key : employees.keySet())//for each loop to check if credentials are valid
-        {
-            currentEmployee = employees.get(key);
-            if(currentEmployee.getEmployeeId() == employeeId  && currentEmployee.getPassword().equals(password))
-            {
-                valid = true; //valid is true if ID matches and password matches
-                break;
-            }
-            if(currentEmployee.getPassword().equals(password))
-            {
-                System.out.println("Employee ID does not exist");
-                
-            }
-            if(currentEmployee.getEmployeeId() == employeeId)
-            {
-                System.out.println("Password incorrect");
-            }
+        if(employees.get(employeeId) != null && employees.get(employeeId).getPassword().equals(password)){
+             valid = true;
+        }
+        else if(employees.get(employeeId) == null){
+            System.out.println("Employee ID does not exist");
+        }
+        else{
+            System.out.println("Employee ID or password incorrect");
         }
     }
     /**

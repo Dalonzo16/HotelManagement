@@ -25,7 +25,7 @@ public class ReservationMenu extends Menu
     /**
      * This is eh checkInput method there is no computations yet
      */
-    public void checkInput()
+    public void checkInput(Hotel hotel)
     {
         switch(userSelection)
         {

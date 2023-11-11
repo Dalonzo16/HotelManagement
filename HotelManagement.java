@@ -1,7 +1,4 @@
-
-=======
 import java.util.Map;
-import java.util.HashMap;
 
 
 
@@ -9,41 +6,35 @@ import java.util.HashMap;
  *This program is a hotel management program
  * @author Devon
  */
-`
-=======
-public class HotelManagement {
-
+public class HotelManagement 
+{
     /**
      * This method calls the main menu methods to display the menu options and take in the inputs
      * @param aMenu an object of Menu
      * @param option the quit option for the main menu
-     * @param map a list of rooms
-     * @param map2 a list of employees
+     * @param rooms a list of rooms
+     * @param employees a list of employees
      */
-    public static void menus(Menu aMenu, byte option, Map<Integer, Room> map, Map<Integer, Employee> map2)
+    public static void menus(Menu aMenu, byte option, Hotel hotel)
     {
         do
         {
             aMenu.displayMenu();
-            aMenu.checkInput(map, map2);
+            aMenu.checkInput(hotel);
+        }
+        while(aMenu.getUserSelection() != option);
     }
     /**
      * This is the main method
      * @param args a list of command line arguments
      */
-
     public static void main(String[] args) 
     {    
         Hotel mainHotel = new Hotel("Best Hotel Ever"); //created hotel object
-        Employee employee1 = new Employee("hello", 15);//creating employees
-=======
-        
-        Receptionist employee1 = new Receptionist("hello", 12);//creating employees
-
+        Employee employee1 = new Receptionist("hello", 15);//creating employees
         Employee employee2 = new Employee("hi", 15);
         Employee employee3 = new Employee("bye",15);
         Manager manager1 = new Manager("manager",20);//created one manager
-        
        
         mainHotel.addEmployee(employee1);//added employees
         mainHotel.addEmployee(employee2);
@@ -52,15 +43,13 @@ public class HotelManagement {
         Room room1 = new Room(101, 50.00);//created room
         mainHotel.addRoom(room1);//added room to hotel
 
-
         Reservation reservation1 = new Reservation("Bob", 2);
         reservation1.addRoom(room1);
         Guest guest1 = new Guest("Bob Lashley", "5758462145", "bobLash@gmail.com", reservation1);
         mainHotel.addGuest("Bob Lashley", guest1);
 
+
         Menu main = new Menu();
-
-        menus(main, main.getQuitOption(), mainHotel.getRooms(), mainHotel.getEmployees());
-=======
-
+        menus(main, main.getQuitOption(), mainHotel);
+    }
 }

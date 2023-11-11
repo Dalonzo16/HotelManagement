@@ -1,14 +1,12 @@
 import java.util.Map;
 import java.util.Scanner;
-import java.util.TreeMap;
-
+import java.util.HashMap;
 /**
  *This is the Receptionsist class
  * @author Devon Alonzo
  * @date 11-8-2023
  */
 public class Receptionist extends Employee{
-    
     public Receptionist(String password, int payRate){ // need to add new methods
         super(password, payRate);
     }
@@ -42,12 +40,7 @@ public class Receptionist extends Employee{
      */
      private Guest checkGuestExists(String firstAndLastName, Map<String, Guest> guests){
         Guest guest = null;
-        for(String name : guests.keySet()){
-            if(firstAndLastName.equalsIgnoreCase(name)){
-                guest = guests.get(name);
-                break;
-            }
-        }
+
         return guest;
     }
     /**
@@ -59,5 +52,4 @@ public class Receptionist extends Employee{
         Reservation reservationNum = guest.getReservationInfo();
         return reservationNum;
     }
-        
 }

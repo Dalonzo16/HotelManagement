@@ -35,14 +35,14 @@ public class ReceptionistMenu extends Menu {
                 Menu option2_1 = new RoomsMenu();
                 do{
                     option2_1.displayMenu();
-                    option2_1.checkInput(null, null);
+                    option2_1.checkInput(hotel);
                 }while(option2_1.getUserSelection() != 3);
             break;
             case 3:
                 Menu option3_1 = new ReservationMenu();
                 do{
                     option3_1.displayMenu();
-                    option3_1.checkInput(null, null);
+                    option3_1.checkInput(hotel);
                 }while(option3_1.getUserSelection() != 5);
             break;
         }

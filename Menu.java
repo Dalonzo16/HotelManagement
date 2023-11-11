@@ -8,7 +8,7 @@ import java.util.Scanner;
  */
 public class Menu 
 {
-    private byte userSelection;
+     private byte userSelection;
     private byte quitOption;
     
     public Menu(){
@@ -31,7 +31,6 @@ public class Menu
         System.out.println("| 4. Exit           | ");
         System.out.println("=====================");
         this.userSelection = in.nextByte();
-        in.close();
     }
     /**
      * This is the checkInput method it creates a new object of whatever submenu is seleted. it recieves a list of rooms that is recieved in case 2 and it recieves a list of employees in case 4
@@ -39,10 +38,10 @@ public class Menu
      * @param rooms2 a list of employees
      */
 
-    public void checkInput(Hotel hotel, Receptionist anEmployee){
+    public void checkInput(Hotel hotel){
         switch(userSelection){
             case 1:
-                Menu option1 = new ReceptionistMenu();
+                ReceptionistMenu option1 = new ReceptionistMenu();
                 LoginMenu regLogin = new LoginMenu();
                 do{
                     regLogin.displayLogin();
@@ -51,12 +50,12 @@ public class Menu
 
                 do{
                     option1.displayMenu();
-                    option1.checkInput(hotel, anEmployee);
+                    option1.checkInput(hotel);
                 }while(option1.getUserSelection() != 4);
 
             break;
             case 2:
-                Menu option2 = new StaffMenu();
+                StaffMenu option2 = new StaffMenu();
                 LoginMenu regLogin1 = new LoginMenu();
                 do{
                     regLogin1.displayLogin();
@@ -65,11 +64,11 @@ public class Menu
                 
                 do{
                     option2.displayMenu();
-                    option2.checkInput(hotel, anEmployee);
+                    option2.checkInput(hotel);
                 }while(option2.getUserSelection() != 2);
             break;
             case 3:
-                Menu option3 = new ManagerMenu();
+                ManagerMenu option3 = new ManagerMenu();
                 ManagerLogin mangLogin = new ManagerLogin();
                 do{
                     mangLogin.displayLogin();
@@ -78,7 +77,7 @@ public class Menu
 
                 do{
                     option3.displayMenu();
-                    option3.checkInput(hotel, anEmployee);
+                    option3.checkInput(hotel);
                 }while(option3.getUserSelection() != 6);               
 
         }
