@@ -38,8 +38,16 @@ public class GuestsMenu extends Menu
                 employee.checkOutGuest(hotel);
                 break;
             case 3:
-                
-                System.out.println("created Guest");
+                Scanner in = new Scanner(System.in);
+                System.out.println("Guest Name: ");
+                String firstAndLastName = in.nextLine();
+                System.out.println("Guest Phone Number: ");
+                String phoneNumber = in.next();
+                System.out.println("Guest Email: ");
+                String email = in.next();
+                Guest newGuest = new Guest(firstAndLastName, phoneNumber, email);
+                hotel.addGuest(firstAndLastName, newGuest);
+                System.out.println("Guest " + firstAndLastName + " created" );
                 break;
             case 4:
                 System.out.println("Removed Guest");
@@ -49,7 +57,7 @@ public class GuestsMenu extends Menu
                 break;
             case 6:
                 System.out.println("Guests");
-            break;
+                break;
         }
     }
     @Override

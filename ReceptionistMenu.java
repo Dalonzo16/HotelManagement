@@ -17,7 +17,7 @@ public class ReceptionistMenu extends Menu {
         System.out.println("| 3. Reservations       |");
         System.out.println("| 4. Back to Main Menu  |");
         System.out.println("=========================");
-        this.userSelection = in.nextByte();
+        userSelection = in.nextByte();
     }
     /**
      * This method check the input of the user by using a switch case statement and then calls other submenus

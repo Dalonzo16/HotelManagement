@@ -25,7 +25,12 @@ public class Guest
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.reservation = reservation;
-        System.out.println("The guest " + firstAndLastName + " was added");
+    }
+    public Guest(String firstAndLastName, String phoneNumber, String email) 
+    {
+        this.firstAndLastName = firstAndLastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
     }
     /**
      * gets first and last name
@@ -98,5 +103,11 @@ public class Guest
     public void setCreditCardNumber(String creditCardNumber)
     {
         this.creditCardNumber = creditCardNumber;
+    }
+    public void setReservation(Reservation reservation){
+        this.reservation = reservation;
+    }
+    public void removeReservation(){
+        reservation = null;
     }
 }

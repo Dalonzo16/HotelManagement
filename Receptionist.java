@@ -69,7 +69,17 @@ public class Receptionist extends Employee{
         String firstAndLastName;
         System.out.println("Enter the guest first and last name to check out: ");
         firstAndLastName = in.nextLine();
-        hotel.getGuests().remove(firstAndLastName);
+        if(hotel.getGuests().get(firstAndLastName) == null || hasReservation(hotel.getGuests().get(firstAndLastName)) == null ){
+            System.out.println("Guest does not exist or has not been checked in. Please try again.");
+            firstAndLastName = in.nextLine();
+        }
+        Guest guest = hotel.getGuests().get(firstAndLastName);
+        for(int roomNum : guest.getReservationInfo().getRooms().keySet()){
+            Room rooms = guest.getReservationInfo().getRooms().get(roomNum);
+            rooms.setAvailable();
+        }
+        System.out.println("Guest check out");
+
     }
     /**
      * This method checks to see if a guest exists in the hotel system

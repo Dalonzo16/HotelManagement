@@ -30,7 +30,7 @@ public class Menu
         System.out.println("| 3. Manager        |");
         System.out.println("| 4. Exit           | ");
         System.out.println("=====================");
-        this.userSelection = in.nextByte();
+        userSelection = in.nextByte();
     }
     /**
      * This is the checkInput method it creates a new object of whatever submenu is seleted. it recieves a list of rooms that is recieved in case 2 and it recieves a list of employees in case 4
