@@ -30,7 +30,7 @@ public class RoomsMenu extends Menu
     {
         Room currentRoom;
         String availableRooms = "";
-        switch(this.userSelection)
+        switch(userSelection)
         {
             case 1:
                 System.out.println("The following rooms are available:\n");

@@ -24,7 +24,7 @@ public class ManagerMenu extends Menu {
     /**
      * This the checkInput method it checks the users input and then uses a switch case statement
      */
-    public void checkInput(Hotel hotel, Receptionist employee){
+    public void checkInput3(Hotel hotel, Receptionist employee){
         switch(userSelection){
             case 1:
                 Menu option1_3 = new GuestsMenu();

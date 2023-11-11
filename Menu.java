@@ -50,7 +50,7 @@ public class Menu
 
                 do{
                     option1.displayMenu();
-                    option1.checkInput(hotel, employee);
+                    option1.checkInput1(hotel, employee);
                 }while(option1.getUserSelection() != 4);
 
             break;
@@ -64,7 +64,7 @@ public class Menu
                 
                 do{
                     option2.displayMenu();
-                    option2.checkInput(hotel);
+                    option2.checkInput2(hotel);
                 }while(option2.getUserSelection() != 2);
             break;
             case 3:
@@ -77,7 +77,7 @@ public class Menu
 
                 do{
                     option3.displayMenu();
-                    option3.checkInput(hotel, employee);
+                    option3.checkInput3(hotel, employee);
                 }while(option3.getUserSelection() != 6);               
 
         }

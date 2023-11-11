@@ -4,7 +4,7 @@ import java.util.Scanner;
  * @Author Devon Alonzo
  * @date 2023-11-09 19:48:58
  */
-public class ReceptionistMenu {
+public class ReceptionistMenu extends Menu {
 
     private byte userSelection;
     
@@ -22,7 +22,7 @@ public class ReceptionistMenu {
     /**
      * This method check the input of the user by using a switch case statement and then calls other submenus
      */
-    public void checkInput(Hotel hotel, Receptionist anEmployee){
+    public void checkInput1(Hotel hotel, Receptionist anEmployee){
         switch(userSelection){
             case 1:
                 GuestsMenu option1_1 = new GuestsMenu();
