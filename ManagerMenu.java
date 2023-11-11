@@ -24,41 +24,41 @@ public class ManagerMenu extends Menu {
     /**
      * This the checkInput method it checks the users input and then uses a switch case statement
      */
-    public void checkInput(Hotel hotel){
+    public void checkInput(Hotel hotel, Receptionist employee){
         switch(userSelection){
             case 1:
                 Menu option1_3 = new GuestsMenu();
                 do{
                     option1_3.displayMenu();
-                    option1_3.checkInput(hotel);
+                    option1_3.checkInput(hotel, employee);
                 }while(option1_3.getUserSelection() != 7);
             break;
             case 2:
                 Menu option2_3 = new RoomsMenu();
                 do{
                     option2_3.displayMenu();
-                    option2_3.checkInput(hotel);
+                    option2_3.checkInput(hotel, employee);
                 }while(option2_3.getUserSelection() != 3);
             break;
             case 3:
                 Menu option3_3 = new ReservationMenu();
                 do{
                     option3_3.displayMenu();
-                    option3_3.checkInput(hotel);
+                    option3_3.checkInput(hotel, employee);
                 }while(option3_3.getUserSelection() != 5);
             break;
             case 4:
                 Menu option4_3 = new EmployeesMenu();
                 do{
                     option4_3.displayMenu();
-                    option4_3.checkInput(hotel);
+                    option4_3.checkInput(hotel, employee);
                 }while(option4_3.getUserSelection() != 5);
             break;
             case 5:
                 Menu option5_3 = new ReportsMenu();
                 do{
                     option5_3.displayMenu();
-                    option5_3.checkInput(hotel);
+                    option5_3.checkInput(hotel, employee);
                 }while(option5_3.getUserSelection() != 2);
 
 

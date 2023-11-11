@@ -23,7 +23,9 @@ public class Receptionist extends Employee{
         if(checkGuestExists(firstAndLastName, hotel.getGuests()) != null){
              Reservation reservation = hasReservation(theGuest);
             if(reservation != null){
-                System.out.println("Has reservation");
+                for(Room aRoom : reservation.getRooms()){
+                    aRoom.setUnavailable();
+                }
             }
             else{
             }
@@ -39,8 +41,7 @@ public class Receptionist extends Employee{
      * @return the guest that has been entered
      */
      private Guest checkGuestExists(String firstAndLastName, Map<String, Guest> guests){
-        Guest guest = null;
-
+        Guest guest = guests.get(firstAndLastName);
         return guest;
     }
     /**

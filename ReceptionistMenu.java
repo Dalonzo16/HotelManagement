@@ -4,15 +4,15 @@ import java.util.Scanner;
  * @Author Devon Alonzo
  * @date 2023-11-09 19:48:58
  */
-public class ReceptionistMenu extends Menu {
+public class ReceptionistMenu {
 
     private byte userSelection;
     
-    @Override
+
     public void displayMenu() {
         Scanner in = new Scanner(System.in);
         System.out.println("=========================");
-        System.out.println("| 1. G            |");
+        System.out.println("| 1. Guests             |");
         System.out.println("| 2. Rooms              |");
         System.out.println("| 3. Reservations       |");
         System.out.println("| 4. Back to Main Menu  |");
@@ -25,14 +25,14 @@ public class ReceptionistMenu extends Menu {
     public void checkInput(Hotel hotel, Receptionist anEmployee){
         switch(userSelection){
             case 1:
-                GuestsMenu option1_2 = new GuestsMenu();
+                GuestsMenu option1_1 = new GuestsMenu();
                 do{
-                    option1_2.displayMenu();
-                    option1_2.checkInput(hotel, anEmployee);
-                }while(option1_2.getUserSelection() != 7);
+                    option1_1.displayMenu();
+                    option1_1.checkInput(hotel, anEmployee);
+                }while(option1_1.getUserSelection() != 7);
                 break;
             case 2:
-                Menu option2_1 = new RoomsMenu();
+                RoomsMenu option2_1 = new RoomsMenu();
                 do{
                     option2_1.displayMenu();
                     option2_1.checkInput(hotel);
@@ -42,7 +42,7 @@ public class ReceptionistMenu extends Menu {
                 Menu option3_1 = new ReservationMenu();
                 do{
                     option3_1.displayMenu();
-                    option3_1.checkInput(hotel);
+                    option3_1.checkInput(hotel, anEmployee);
                 }while(option3_1.getUserSelection() != 5);
                 break;
         }

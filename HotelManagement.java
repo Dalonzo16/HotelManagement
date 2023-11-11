@@ -15,12 +15,12 @@ public class HotelManagement
      * @param rooms a list of rooms
      * @param employees a list of employees
      */
-    public static void menus(Menu aMenu, byte option, Hotel hotel)
+    public static void menus(Menu aMenu, byte option, Hotel hotel, Receptionist receptionist)
     {
         do
         {
             aMenu.displayMenu();
-            aMenu.checkInput(hotel);
+            aMenu.checkInput(hotel, receptionist);
         }
         while(aMenu.getUserSelection() != option);
     }
@@ -31,7 +31,7 @@ public class HotelManagement
     public static void main(String[] args) 
     {    
         Hotel mainHotel = new Hotel("Best Hotel Ever"); //created hotel object
-        Employee employee1 = new Receptionist("hello", 15);//creating employees
+        Receptionist employee1 = new Receptionist("hello", 15);//creating employees
         Employee employee2 = new Employee("hi", 15);
         Employee employee3 = new Employee("bye",15);
         Manager manager1 = new Manager("manager",20);//created one manager
@@ -50,6 +50,6 @@ public class HotelManagement
 
 
         Menu main = new Menu();
-        menus(main, main.getQuitOption(), mainHotel);
+        menus(main, main.getQuitOption(), mainHotel, employee1);
     }
 }

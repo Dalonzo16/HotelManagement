@@ -1,4 +1,4 @@
-import java.util.Map;
+
 import java.util.Scanner;
 
 /**
@@ -19,7 +19,7 @@ public class RoomsMenu extends Menu
         System.out.println("| 2. Search Room Information  |");
         System.out.println("| 3. Back to main menu        |");
         System.out.println("===============================");
-        this.userSelection = in.nextByte();
+        userSelection = in.nextByte();
     }
     
     /**
@@ -45,9 +45,9 @@ public class RoomsMenu extends Menu
                 System.out.println(availableRooms);
             break;
             case 2:
+                Scanner in = new Scanner(System.in);
                 int roomNumber;
                 System.out.println("Enter the room number you want to search");
-                Scanner in = new Scanner(System.in);
                 roomNumber = in.nextInt();
                 Room theRoom = hotel.getRooms().get(roomNumber);
                 System.out.println("Floor: " + theRoom.getRoomNumber() / 10 + "Room Number: " + theRoom.getRoomNumber() + "Available? : " + theRoom.isAvailable());

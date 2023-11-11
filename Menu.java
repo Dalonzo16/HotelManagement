@@ -38,7 +38,7 @@ public class Menu
      * @param rooms2 a list of employees
      */
 
-    public void checkInput(Hotel hotel){
+    public void checkInput(Hotel hotel, Receptionist employee){
         switch(userSelection){
             case 1:
                 ReceptionistMenu option1 = new ReceptionistMenu();
@@ -50,7 +50,7 @@ public class Menu
 
                 do{
                     option1.displayMenu();
-                    option1.checkInput(hotel);
+                    option1.checkInput(hotel, employee);
                 }while(option1.getUserSelection() != 4);
 
             break;
@@ -77,7 +77,7 @@ public class Menu
 
                 do{
                     option3.displayMenu();
-                    option3.checkInput(hotel);
+                    option3.checkInput(hotel, employee);
                 }while(option3.getUserSelection() != 6);               
 
         }
