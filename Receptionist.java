@@ -29,6 +29,7 @@ public class Receptionist extends Employee{
                 for(Integer RoomNum : reservation.getRooms().keySet()){
                     Room rooms = reservation.getRooms().get(RoomNum);
                     totalRoomPrice += rooms.getPricePerNight();
+                    rooms.setUnavailable();
                     System.out.println(rooms.getRoomNumber() + " | Floor: " + rooms.getRoomNumber()/100);
                 }
 
