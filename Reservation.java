@@ -11,8 +11,6 @@ public class Reservation
     private String guestName;
     private ArrayList<Room> rooms;
     private int duration;
-    public static int counter = 1;
-
 
     /**
      * Constructor for objects of class Reservation
@@ -21,11 +19,11 @@ public class Reservation
      * @param rooms
      * @param duration
      */
-    public Reservation(String guestName,  int duration)
+    public Reservation(int reservationNumber, String guestName, ArrayList<Room> rooms, int duration)
     {
-        reservationNumber = counter++;
+        this.reservationNumber = reservationNumber;
         this.guestName = guestName;
-        rooms = new ArrayList<>();
+        this.rooms = rooms;
         this.duration = duration;
     }
     /**

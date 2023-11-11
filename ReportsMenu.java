@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -6,11 +5,13 @@ import java.util.Scanner;
  * @author Devon Alonzo
  * @date 11-8-2023
  */
-public class ReportsMenu extends Menu {
+public class ReportsMenu extends Menu 
+{
     private byte userSelection;
     
     @Override
-    public void displayMenu(){
+    public void displayMenu()
+    {
         Scanner in = new Scanner(System.in);
         System.out.println("=============================");
         System.out.println("| 1. Show Payment Reports   |");
@@ -21,15 +22,17 @@ public class ReportsMenu extends Menu {
     /**
      * This is the checkInput method there is only option so far
      */
-    public void checkInput() {
-        if(userSelection == 1){
+    public void checkInput() 
+    {
+        if(userSelection == 1)
+        {
             System.out.println("print payments");
         }
-
     }
 
     @Override
-    public byte getUserSelection() {
+    public byte getUserSelection() 
+    {
         return userSelection;
     }
     

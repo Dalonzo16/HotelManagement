@@ -16,11 +16,12 @@ public class Room
      * @param roomNumber
      * @param pricePerNight
      */
-    public Room(int roomNumber,  double pricePerNight)
+    public Room(int roomNumber, double pricePerNight)
     {
         this.roomNumber = roomNumber;
         this.pricePerNight = pricePerNight;
         isAvailable = true;
+        System.out.println("The room " + roomNumber + " was successfully created. Its price per night is: " + pricePerNight);
     }
     /**
      * gets room number
@@ -42,7 +43,7 @@ public class Room
      * gets availability
      * @return
      */
-    public boolean getIsAvailable()
+    public boolean isAvailable()
     {
         return isAvailable;
     }
@@ -50,13 +51,24 @@ public class Room
      * gets cleanliness
      * @return
      */
-    public boolean getIsClean()
+    public boolean isClean()
     {
         return isClean;
     }
-    /**
-     * This method gets the floor number
-     * @return the floor number
-     */
-
+    public void setDirty()
+    {
+        isClean = false;
+    }
+    public void setUnavailable()
+    {
+        isAvailable = false;
+    }
+    public void clean()
+    {
+        isClean = true;
+    }
+    public void setAvailable()
+    {
+        isAvailable = true;
+    }
 }
