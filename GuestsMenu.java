@@ -58,7 +58,7 @@ public class GuestsMenu extends Menu
             case 6:
                 for(String name : hotel.getGuests().keySet()){
                     Guest guest = hotel.getGuests().get(name);
-                    System.out.println("Name :" + guest.getfirstAndLastName() + "\nPhone Number: " + guest.getPhoneNumber() + "\nEmail : " + guest.getEmail());
+                    System.out.println("\nName :" + guest.getfirstAndLastName() + " | Phone Number: " + guest.getPhoneNumber() + " | Email : " + guest.getEmail());
                 }
                 break;
         }
