@@ -1,15 +1,16 @@
 
-import java.util.ArrayList;
 /**
  * @author Ludwig Scherer
  * @date 10-30-2023
  */
-
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 public class Reservation 
 {
     private int reservationNumber;
     private String guestName;
-    private ArrayList<Room> rooms;
+    private Map<Integer, Room> rooms;
     private int duration;
     public static int counter = 0;
 
@@ -20,12 +21,12 @@ public class Reservation
      * @param rooms
      * @param duration
      */
-    public Reservation(String guestName,  int duration)
+     public Reservation(String guestName,  int duration)
     {
         reservationNumber = counter++;
         this.guestName = guestName;
-        rooms = new ArrayList<>();
         this.duration = duration;
+        rooms = new HashMap<>();
     }
     /**
      * gets reservation number
@@ -47,7 +48,7 @@ public class Reservation
      * gets rooms
      * @return
      */
-    public ArrayList<Room> getRooms()
+    public Map<Integer, Room> getRooms()
     {
         return rooms;
     }
@@ -63,9 +64,9 @@ public class Reservation
      * adds room to rooms
      * @param room
      */
-    public void addRoom(Room room)
+    public void addRoom(int roomNum, Room room)
     {
-        rooms.add(room);
+        rooms.put(roomNum, room);
     }
     /**
      * removes room from rooms

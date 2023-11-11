@@ -1,5 +1,6 @@
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.HashMap;
 /**
  *This is the Receptionsist class
@@ -24,12 +25,19 @@ public class Receptionist extends Employee{
              Reservation reservation = hasReservation(theGuest);
             if(reservation != null){
                 double totalRoomPrice = 0; 
-                for(Room aRoom : reservation.getRooms()){
-                    totalRoomPrice += aRoom.getPricePerNight();
+                for(Integer RoomNum : reservation.getRooms().keySet()){
+                    Room rooms = reservation.getRooms().get(RoomNum);
+                    totalRoomPrice += rooms.getPricePerNight();
                 }
                 double grandTotal = totalRoomPrice * reservation.getDuration();
+                System.out.println(firstAndLastName + "has a Reservation" + " for the following room(s)");
+                for(Integer RoomNum : reservation.getRooms().keySet()){
+                    Room rooms = reservation.getRooms().get(RoomNum);
+                    System.out.print(" " + rooms.getRoomNumber() + " ");
+                }
             }
             else{
+
             }
         }
         else{
@@ -52,7 +60,7 @@ public class Receptionist extends Employee{
      * @return reservation number
      */
     private Reservation hasReservation(Guest guest){
-        Reservation reservationNum = guest.getReservationInfo();
-        return reservationNum;
+        Reservation reservation = guest.getReservationInfo();
+        return reservation;
     }
 }

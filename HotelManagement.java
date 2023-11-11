@@ -44,7 +44,7 @@ public class HotelManagement
         mainHotel.addRoom(room1);//added room to hotel
 
         Reservation reservation1 = new Reservation("Bob", 2);
-        reservation1.addRoom(room1);
+        reservation1.addRoom(101, room1);
         Guest guest1 = new Guest("Bob Lashley", "5758462145", "bobLash@gmail.com", reservation1);
         mainHotel.addGuest("Bob Lashley", guest1);
 
