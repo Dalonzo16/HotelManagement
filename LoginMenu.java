@@ -28,14 +28,16 @@ public class LoginMenu
      */
     public void checkUserCredentials(Map<Integer, Employee> employees)
     {
-        if(employees.get(employeeId) != null && employees.get(employeeId).getPassword().equals(password)){
-             valid = true;
-        }
-        else if(employees.get(employeeId) == null){
-            System.out.println("Employee ID does not exist");
+        if(employees.get(employeeId) != null){
+            if(employees.get(employeeId).getPassword().equals(password)){
+                valid = true;
+            }
+            else{
+                System.out.println("Password incorrect");
+            }
         }
         else{
-            System.out.println("Employee ID or password incorrect");
+            System.out.println("Employee ID does not exist");
         }
     }
     /**
