@@ -19,18 +19,18 @@ public class RoomsMenu extends Menu
         System.out.println("| 2. Search Room Information  |");
         System.out.println("| 3. Back to main menu        |");
         System.out.println("===============================");
-        userSelection = in.nextByte();
+        this.userSelection = in.nextByte();
     }
     
     /**
      *This is the checkInput method it recieves a list of rooms to show the available rooms and search a room
      * @param map a list of rooms
      */
-    public void checkInput(Hotel hotel)//this is just a list of all the rooms need to switch to the availrooms list
+    public void checkInput(Hotel hotel, Receptionist employee)//this is just a list of all the rooms need to switch to the availrooms list
     {
         Room currentRoom;
         String availableRooms = "";
-        switch(userSelection)
+        switch(this.userSelection)
         {
             case 1:
                 System.out.println("The following rooms are available:\n");
@@ -50,7 +50,7 @@ public class RoomsMenu extends Menu
                 System.out.println("Enter the room number you want to search");
                 roomNumber = in.nextInt();
                 Room theRoom = hotel.getRooms().get(roomNumber);
-                System.out.println("Floor: " + theRoom.getRoomNumber() / 10 + "Room Number: " + theRoom.getRoomNumber() + "Available? : " + theRoom.isAvailable());
+                System.out.println("Floor: " + theRoom.getRoomNumber() / 100 + " |Room Number: " + theRoom.getRoomNumber() + " |Available? : " + theRoom.isAvailable());
             }
     }
     @Override

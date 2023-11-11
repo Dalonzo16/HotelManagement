@@ -18,10 +18,9 @@ public class EmployeesMenu extends Menu
         System.out.println("| 2. Remove Employee              |");
         System.out.println("| 3. Search Employee Information  |");
         System.out.println("| 4. View All Employees           |");
-        System.out.println("| 5. Back to main menu                         |");
+        System.out.println("| 5. Back to main menu            |");
         System.out.println("===================================");
         this.userSelection = in.nextByte();
-        in.close();
     }
     /**
      * This is the checkInput method there is no computations yet

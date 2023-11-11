@@ -64,7 +64,7 @@ public class Menu
                 
                 do{
                     option2.displayMenu();
-                    option2.checkInput2(hotel);
+                    option2.checkInput2(hotel, employee);
                 }while(option2.getUserSelection() != 2);
             break;
             case 3:

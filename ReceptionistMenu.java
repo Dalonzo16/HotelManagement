@@ -23,7 +23,7 @@ public class ReceptionistMenu extends Menu {
      * This method check the input of the user by using a switch case statement and then calls other submenus
      */
     public void checkInput1(Hotel hotel, Receptionist anEmployee){
-        switch(userSelection){
+        switch(this.userSelection){
             case 1:
                 GuestsMenu option1_1 = new GuestsMenu();
                 do{
@@ -35,7 +35,7 @@ public class ReceptionistMenu extends Menu {
                 RoomsMenu option2_1 = new RoomsMenu();
                 do{
                     option2_1.displayMenu();
-                    option2_1.checkInput(hotel);
+                    option2_1.checkInput(hotel, anEmployee);
                 }while(option2_1.getUserSelection() != 3);
                 break;
             case 3:
