@@ -70,6 +70,7 @@ public class Receptionist extends Employee{
         System.out.println("Enter the guest first and last name to check out: ");
         firstAndLastName = in.nextLine();
         if(hotel.getGuests().get(firstAndLastName) == null || hasReservation(hotel.getGuests().get(firstAndLastName)) == null ){
+            
             System.out.println("Guest does not exist or has not been checked in. Please try again.");
             firstAndLastName = in.nextLine();
         }

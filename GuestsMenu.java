@@ -48,7 +48,7 @@ public class GuestsMenu extends Menu
                 Guest newGuest = new Guest(firstAndLastName, phoneNumber, email);
                 hotel.addGuest(firstAndLastName, newGuest);
                 System.out.println("Guest " + firstAndLastName + " created" );
-                break;
+            break;
             case 4:
                 System.out.println("Removed Guest");
                 break;
@@ -56,7 +56,10 @@ public class GuestsMenu extends Menu
                 System.out.println("Edited Guest");
                 break;
             case 6:
-                System.out.println("Guests");
+                for(String name : hotel.getGuests().keySet()){
+                    Guest guest = hotel.getGuests().get(name);
+                    System.out.println("Name :" + guest.getfirstAndLastName() + "\nPhone Number: " + guest.getPhoneNumber() + "\nEmail : " + guest.getEmail());
+                }
                 break;
         }
     }
