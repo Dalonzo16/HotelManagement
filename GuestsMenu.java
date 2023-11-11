@@ -32,7 +32,7 @@ public class GuestsMenu extends Menu
         switch(this.userSelection)
         {
             case 1:
-                
+                employee.checkInGuest(hotel);
             break;
             case 2:
                 System.out.println("Guest Checked out");
