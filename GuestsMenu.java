@@ -78,7 +78,7 @@ public class GuestsMenu
         while(true)
         {
             Scanner in = new Scanner(System.in);
-            System.out.printf("%nWhat do you want to do?%n(1) Check-in guest %n(2) Check-out guest %n(3) Edit guest info %n(4) View all guests%n(5) Back to main menu%n (6) Logout%n (7) Quit%n");
+            System.out.printf("%nWhat do you want to do?%n(1) Check-in guest %n(2) Check-out guest %n(3) Edit guest info %n(4) View all guests%n(5) Back to main menu%n(6) Logout%n(7) Quit%n");
             option = in.nextByte();
             switch (option) // switch statement for the different menu options defined above
             {

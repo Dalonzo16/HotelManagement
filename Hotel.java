@@ -155,4 +155,85 @@ public class Hotel
     {
         return payments;
     }
+    /**
+     * this method cleans a specific room
+     * @param roomNumber
+     */
+    public void cleanRoom(int roomNumber)
+    {
+        rooms.get(roomNumber).clean();
+        System.out.println("Room " + roomNumber + " has been cleaned");
+    }
+    /**
+     * This method cleans all the rooms in the hotel
+     * @param hotel
+     */
+    public void cleanAllRooms()
+    {
+        for(Integer key : rooms.keySet())
+        {
+            rooms.get(key).clean();
+        }
+        System.out.println("All rooms have been cleaned");
+    }
+    /**
+     * This method displays all the available rooms in the hotel
+     * @param hotel
+     */
+    public String getAvailableRooms()
+    {
+        Room currentRoom;
+        String availableRooms = "";
+        System.out.println("The following rooms are available:\n");
+                for(Integer key : rooms.keySet())
+                {
+                    currentRoom = rooms.get(key);
+                    if(currentRoom.isAvailable())
+                    {
+                        availableRooms = availableRooms + Integer.toString(currentRoom.getRoomNumber()) + System.lineSeparator();
+                    }
+                }
+        if(availableRooms.equals(""))
+        {
+            availableRooms = "There are no available rooms";
+        }
+        return availableRooms;
+    }
+    /**
+     * This method displays the info about a specific room
+     * @param rooms
+     */
+    public String lookUpRoom(int roomNumber)
+    {
+        if(!rooms.containsKey(roomNumber))
+        {
+            return "Room not found";
+        }
+        Room roomToSearch;
+        roomToSearch = rooms.get(roomNumber);
+        return "Floor: " + (int) roomToSearch.getRoomNumber()/100 + " | Room Number: " + roomToSearch.getRoomNumber() + " | $"+ roomToSearch.getPricePerNight() + " per night | Is it available? " + roomToSearch.isAvailable() + " | Is it clean? " + roomToSearch.isClean();
+    }
+    /**
+     * This method displays all the occupied rooms in the hotel
+     * @param hotel
+     */
+    public String getOccupiedRooms()
+    {
+        Room currentRoom;
+        String occupiedRooms = "";
+        System.out.println("The following rooms are occupied:\n");
+                for(Integer key : rooms.keySet())
+                {
+                    currentRoom = rooms.get(key);
+                    if(!currentRoom.isAvailable())
+                    {
+                        occupiedRooms = occupiedRooms + Integer.toString(currentRoom.getRoomNumber()) + System.lineSeparator();
+                    }
+                }
+        if(occupiedRooms.equals(""))
+        {
+            occupiedRooms = "There are no occupied rooms";
+        }
+        return occupiedRooms;
+    }
 }
