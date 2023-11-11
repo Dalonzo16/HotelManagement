@@ -19,13 +19,13 @@ public class ManagerMenu extends Menu {
         System.out.println("| 5. Reports            |");
         System.out.println("| 6. Back to Main Menu  |");
         System.out.println("=========================");
-        this.userSelection = in.nextByte();
+        userSelection = in.nextByte();
     }
     /**
      * This the checkInput method it checks the users input and then uses a switch case statement
      */
     public void checkInput3(Hotel hotel, Receptionist employee){
-        switch(userSelection){
+        switch(this.userSelection){
             case 1:
                 Menu option1_3 = new GuestsMenu();
                 do{

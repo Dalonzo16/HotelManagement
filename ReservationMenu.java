@@ -19,27 +19,27 @@ public class ReservationMenu extends Menu
         System.out.println("| 4. Search Reservation |");
         System.out.println("| 5. Back to main menu  |");
         System.out.println("=========================");
-        this.userSelection = in.nextByte();
+        userSelection = in.nextByte();
     }
     /**
      * This is eh checkInput method there is no computations yet
      */
     public void checkInput(Hotel hotel, Receptionist employee)
     {
-        switch(userSelection)
+        switch(this.userSelection)
         {
             case 1:
                 System.out.println("created");
-            break;
+                break;
             case 2:
                 System.out.println("edited");
-            break;
+                break;
             case 3:
                 System.out.println("canceled");
-            break;
+                break;
             case 4:
                 System.out.println("searched");
-            break;
+                break;
         }
     }
     

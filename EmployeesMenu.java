@@ -20,14 +20,14 @@ public class EmployeesMenu extends Menu
         System.out.println("| 4. View All Employees           |");
         System.out.println("| 5. Back to main menu            |");
         System.out.println("===================================");
-        this.userSelection = in.nextByte();
+        userSelection = in.nextByte();
     }
     /**
      * This is the checkInput method there is no computations yet
      */
     public void checkInput() 
     {
-        switch(userSelection)
+        switch(this.userSelection)
         {
             case 1:
                 

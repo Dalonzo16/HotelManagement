@@ -78,7 +78,8 @@ public class Menu
                 do{
                     option3.displayMenu();
                     option3.checkInput3(hotel, employee);
-                }while(option3.getUserSelection() != 6);               
+                }while(option3.getUserSelection() != 6); 
+                break;              
 
         }
     }
@@ -88,7 +89,7 @@ public class Menu
      */
     public byte getUserSelection()
     {
-        return userSelection;
+        return this.userSelection;
     }
     /**
      * This method gets the quit option

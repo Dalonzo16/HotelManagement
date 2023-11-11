@@ -28,7 +28,7 @@ public class ReportsMenu extends Menu
         {
             for(int paymentId : hotel.getPayments().keySet()){
                 Payment payment = hotel.getPayments().get(paymentId);
-                System.out.println("A Payment of " + payment.getAmountPaid());
+                System.out.println("A Payment of " + payment.getAmountPaid() + " was made");
             }
         }
     }

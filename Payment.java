@@ -16,7 +16,7 @@ public class Payment
      * @param amountDue
      * @param creditCardNumber
      */
-    public Payment(double amountaid, String creditCardNumber) 
+    public Payment(double amountPaid, String creditCardNumber) 
     {
         this.amountPaid = amountPaid;
         this.creditCardNumber = creditCardNumber;
