@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -6,95 +6,97 @@ import java.util.Scanner;
  * @author Devon Alonzo
  * @date 11-8-2023
  */
-public class Menu {
-    
-    private byte userSelection;
+public class Menu 
+{
+     private byte userSelection;
     private byte quitOption;
     
     public Menu(){
-        this.quitOption = 6;
+        this.quitOption = 4;
+
     }
     /**\
      * This is the displayMenu method it displays the menu options and recieves the user input
      */
-    public void displayMenu(){
+    public void displayMenu()
+    {
         Scanner in = new Scanner(System.in);
         System.out.println("=============================================================================");
         System.out.println("|   Welcome to Hotel Mangement. Please select one of the following options  |");
         System.out.println("=============================================================================\n");
         System.out.println("=====================");
-        System.out.println("| 1. Guests         |");
-        System.out.println("| 2. Rooms          |");
-        System.out.println("| 3. Reservations   |");
-        System.out.println("| 4. Employees      |");
-        System.out.println("| 5. Reports        |");
-        System.out.println("| 6. Quit           |");
+        System.out.println("| 1. Receptionist   |");
+        System.out.println("| 2. Staff          |");
+        System.out.println("| 3. Manager        |");
+        System.out.println("| 4. Exit           | ");
         System.out.println("=====================");
         this.userSelection = in.nextByte();
     }
     /**
      * This is the checkInput method it creates a new object of whatever submenu is seleted. it recieves a list of rooms that is recieved in case 2 and it recieves a list of employees in case 4
      * @param rooms a list of rooms
-     * @param managers a list of employees
+     * @param rooms2 a list of employees
      */
-    public void checkInput(ArrayList<Room> rooms, ArrayList<Employee> managers){
+
+    public void checkInput(Hotel hotel){
         switch(userSelection){
             case 1:
-                GuestsMenu option1 = new GuestsMenu(); //created object of type Guestsmenu it is a submenu
+                ReceptionistMenu option1 = new ReceptionistMenu();
+                LoginMenu regLogin = new LoginMenu();
                 do{
-                    option1.displayMenu(); // a do while loop that keeps showing the options unitl the quit option is selected
-                    option1.checkInput();
-                }while(option1.getUserSelection() != 7);
+                    regLogin.displayLogin();
+                    regLogin.checkUserCredentials(hotel.getEmployees());
+                }while(!regLogin.isValid());
+
+                do{
+                    option1.displayMenu();
+                    option1.checkInput(hotel);
+                }while(option1.getUserSelection() != 4);
+
             break;
             case 2:
-                RoomsMenu option2 = new RoomsMenu();
+                StaffMenu option2 = new StaffMenu();
+                LoginMenu regLogin1 = new LoginMenu();
+                do{
+                    regLogin1.displayLogin();
+                    regLogin1.checkUserCredentials(hotel.getEmployees());
+                }while(!regLogin1.isValid());
+                
                 do{
                     option2.displayMenu();
-                    option2.checkInput(rooms);
-                }while(option2.getUserSelection() != 3);
+                    option2.checkInput(hotel);
+                }while(option2.getUserSelection() != 2);
             break;
             case 3:
-                ReservationMenu option3 = new ReservationMenu();
+                ManagerMenu option3 = new ManagerMenu();
+                ManagerLogin mangLogin = new ManagerLogin();
+                do{
+                    mangLogin.displayLogin();
+                    mangLogin.checkManagerCredentials(hotel.getEmployees());
+                }while(!mangLogin.isValid());
+
                 do{
                     option3.displayMenu();
-                    option3.checkInput();
-                }while(option3.getUserSelection() != 5);
-                
-            case 4:
-                EmployeesMenu option4= new EmployeesMenu();
-                ManagerLogin manager = new ManagerLogin();
-                do{
-                    manager.displayLogin();
-                    manager.checkManagerCredentials(managers);
-                }while(!manager.isValid());
-                do{
-                    option4.displayMenu();
-                    option4.checkInput();
-                }while(option4.getUserSelection() != 5);
-            break;
-            case 5:
-                ReportsMenu option5 = new ReportsMenu();
-                do{
-                    option5.displayMenu();
-                    option5.checkInput();
-                }while(option5.getUserSelection() != 2);
+                    option3.checkInput(hotel);
+                }while(option3.getUserSelection() != 6);               
+
         }
     }
     /**
      * this method gets the user selection
      * @return the users selection
      */
-    public byte getUserSelection(){
+    public byte getUserSelection()
+    {
         return userSelection;
     }
     /**
      * This method gets the quit option
      * @return the quit option
      */
-    public byte getQuitOption() {
+    public byte getQuitOption() 
+    {
         return quitOption;
     }
-    
-    
 }
     

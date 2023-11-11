@@ -1,5 +1,6 @@
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Ludwig Scherer
@@ -8,20 +9,20 @@ import java.util.ArrayList;
 
 public class PaymentReports 
 {
-    private ArrayList<Payment> payments;
+    private Map<Integer, Payment> payments;
 
     /**
      * Constructor for objects of class PaymentReports
      */
     public PaymentReports() 
     {
-        payments = new ArrayList<Payment>();
+        payments = new HashMap<>();
     }
     /**
      * gets all payments
      * @return
      */
-    public ArrayList<Payment> getPayments()
+    public Map<Integer, Payment> getPayments()
     {
         return payments;
     }
@@ -31,6 +32,6 @@ public class PaymentReports
      */
     public void addPayment(Payment payment)
     {
-        payments.add(payment);
+        payments.put(payment.getPaymentID(), payment);
     }
 }

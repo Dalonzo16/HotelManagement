@@ -4,12 +4,13 @@ import java.util.Scanner;
  * @author Devon Alonzo
  * @date 11-8-2023
  */
-public class GuestsMenu extends Menu {
+public class GuestsMenu extends Menu 
+{
     private byte userSelection;
     
-
     @Override
-    public void displayMenu() {
+    public void displayMenu() 
+    {
             Scanner in = new Scanner(System.in);
             System.out.println("=========================");
             System.out.println("| 1. Check in           |");
@@ -26,8 +27,10 @@ public class GuestsMenu extends Menu {
      * This is the checkInput method uses a switch case statement to determine what computations to perfor,
      * has no parameters yet because we have not worked on the actual computations
      */
-    public void checkInput() {
-        switch(this.userSelection){
+    public void checkInput(Hotel hotel, Receptionist employee) 
+    {
+        switch(this.userSelection)
+        {
             case 1:
                 
             break;
@@ -48,15 +51,10 @@ public class GuestsMenu extends Menu {
                 System.out.println("Guests");
             break;
         }
-       
     }
-
     @Override
-    public byte getUserSelection() {
+    public byte getUserSelection() 
+    {
         return userSelection;
     }
-
-
-    
-    
 }

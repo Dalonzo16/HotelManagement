@@ -3,7 +3,8 @@
  * @author Devon Alonzo
  * @date 11-8-2023
  */
-public class Employee {
+public class Employee 
+{
     private String firstName;
     private String lastName;
     private String phoneNumber;
@@ -19,44 +20,52 @@ public class Employee {
      * @param password the employee password
      * @param payRate the employees pay rate
      */
-    public Employee(String password, int payRate){
+    public Employee(String password, int payRate)
+    {
         this.payRate = payRate;
         this.password = password;
         employeeId = counter++; // ID is automatically incremented by 1 by using the public variable counter everytime a new employee is created
+        System.out.println("The new employee was created with ID number: " + employeeId + "and password: " + password + 
+            " ; his pay rate per hour is: " + payRate);
     }
     /**
      * This is another constructor to initialize employee ID manually
      * @param employeeId the employees ID
      */
-    public Employee(int employeeId){
+    public Employee(int employeeId)
+    {
         this.employeeId = employeeId;
     }
    /**
     * This method gets the employees first name
     * @return the employees first name
     */
-    public String getFirstName() {
+    public String getFirstName()
+    {
         return firstName;
     }
     /**
      * This method gets the employees last name
      * @return the employees last name
      */
-    public String getLastName() {
+    public String getLastName()
+    {
         return lastName;
     }
     /**
      * This method gets the employees address
      * @return the employees address
      */
-    public String getAddress() {
+    public String getAddress()
+    {
         return address;
     }
     /**
      * This method gets the employees phone number
      * @return the employees phone number
      */
-    public String getPhoneNumber() {
+    public String getPhoneNumber()
+    {
         return phoneNumber;
     }
     
@@ -64,70 +73,72 @@ public class Employee {
      * This method gets the employees ID
      * @return the employees ID
      */
-    public int getEmployeeId() {
+    public int getEmployeeId()
+    {
         return employeeId;
     }
     /**
      * This method gets the employees password
      * @return the employees password
      */
-    public String getPassword() {
+    public String getPassword()
+    {
         return password;
     }
     /**
      * This method gets the employees pay rate
      * @return the employees pay rate
      */
-    public int getPayRate() {
+    public int getPayRate()
+    {
         return payRate;
     }
     /**
      * This method sets the employees ID
      * @param employeeId the new employee ID
      */
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeId(int employeeId)
+    {
         this.employeeId = employeeId;
     }
     /**
      * This method sets the employees first name
      * @param firstName the employees first name
      */
-    public void setFirstName(String firstName) {
+    public void setFirstName(String firstName)
+    {
         this.firstName = firstName;
     }
     /**
      * This method sets the employees last name
      * @param lastName the employees last name
      */
-    public void setLastName(String lastName) {
+    public void setLastName(String lastName)
+    {
         this.lastName = lastName;
     }
     /**
      * This method sets the employees phone number
      * @param phoneNumber the employees phone number
      */
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(String phoneNumber)
+    {
         this.phoneNumber = phoneNumber;
     }
     /**
      * This method sets the employees password
      * @param password the employees password
      */
-    public void setPassword(String password) {
+    public void setPassword(String password)
+    {
         this.password = password;
     }
     /**
      * This method sets the employees address
      * @param address the employees address
      */
-    public void setAddress(String address) {
+    public void setAddress(String address)
+    {
         this.address = address;
     }
-
-    
-    
-    
-    
-    
-    
 }

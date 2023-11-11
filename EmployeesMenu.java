@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -6,11 +5,13 @@ import java.util.Scanner;
  * @author Devon Alonzo
  * @date 11-8-2023
  */
-public class EmployeesMenu extends Menu{
+public class EmployeesMenu extends Menu
+{
     private byte userSelection;
 
     @Override
-    public void displayMenu() {
+    public void displayMenu() 
+    {
         Scanner in = new Scanner(System.in);
         System.out.println("===================================");
         System.out.println("| 1. Create New Employee          |");
@@ -20,12 +21,15 @@ public class EmployeesMenu extends Menu{
         System.out.println("| 5. Back to main menu                         |");
         System.out.println("===================================");
         this.userSelection = in.nextByte();
+        in.close();
     }
     /**
      * This is the checkInput method there is no computations yet
      */
-    public void checkInput() {
-        switch(userSelection){
+    public void checkInput() 
+    {
+        switch(userSelection)
+        {
             case 1:
                 
             break;
@@ -43,12 +47,8 @@ public class EmployeesMenu extends Menu{
     }
 
     @Override
-    public byte getUserSelection() {
+    public byte getUserSelection()
+    {
         return userSelection;
     }
-    
-    
-    
-    
-    
 }
