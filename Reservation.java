@@ -10,7 +10,8 @@ public class Reservation
     private int reservationNumber;
     private String guestName;
     private Map<Integer, Room> rooms;
-    private int duration;
+    private byte durationInDays;
+    private byte numberOfGuests;
 
     /**
      * Constructor for objects of class Reservation
@@ -19,12 +20,13 @@ public class Reservation
      * @param rooms
      * @param duration
      */
-    public Reservation(int reservationNumber, String guestName, Map<Integer, Room> rooms, int duration)
+    public Reservation(int reservationNumber, String guestName, byte numberOfGuests, Map<Integer, Room> rooms, byte duration)
     {
         this.reservationNumber = reservationNumber;
         this.guestName = guestName;
         this.rooms = rooms;
-        this.duration = duration;
+        this.durationInDays = duration;
+        this.numberOfGuests = numberOfGuests;
     }
     /**
      * gets reservation number
@@ -56,7 +58,7 @@ public class Reservation
      */
     public int getDuration()
     {
-        return duration;
+        return durationInDays;
     }
     /**
      * adds room to rooms
@@ -78,8 +80,8 @@ public class Reservation
      * changes duration
      * @param duration
      */
-    public void changeDuration(int duration)
+    public void changeDuration(byte durationInDays)
     {
-        this.duration = duration;
+        this.durationInDays = durationInDays;
     }
 }

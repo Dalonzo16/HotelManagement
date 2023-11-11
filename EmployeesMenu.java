@@ -1,4 +1,3 @@
-
 import java.util.Map;
 import java.util.Scanner;
 
@@ -11,6 +10,13 @@ public class EmployeesMenu
 {
     private byte option;
 
+    /**
+     * This is the constructor for the EmployeesMenu class
+     */
+    public EmployeesMenu()
+    {
+        option = 0;
+    }
     /**
      * This method creates a new employee by asking the user for the employee info and 
      * then calls the addEmployee method from the Hotel class
@@ -41,20 +47,30 @@ public class EmployeesMenu
         System.out.println("Please enter the ID of the employee you want to remove: ");
         int employeeID = in.nextInt();
     }
+    /**
+     * This method looks up an employee by asking the user for the employee ID and 
+     * then calls the getEmployee method from the Hotel class
+     * @param hotel
+     */
     public void option3(Map<Integer, Employee> employees)
     {
         Scanner in = new Scanner(System.in);
         System.out.println("Please enter the ID of the employee you want to look up: ");
         int employeeID = in.nextInt();
-        if(employees.containsKey(employeeID))
+        if(employees.containsKey(employeeID)) // if the employee ID exists
         {
-            System.out.println(employees.get(employeeID));
+            Employee employee = employees.get(employeeID);
+            System.out.println("Employee " + employeeID + ": " + employee.getFirstName() + " " + employee.getLastName() + "\nAddress: " + employee.getAddress() + "\nPhone number: " + employee.getPhoneNumber() + "\nPay Rate: " + employee.getPayRate() +  "\nShift: " + employee.getShift());
         }
         else
         {
             System.out.println("Employee ID does not exist.");
         }
     }
+    /**
+     * This method displays all the employees in the hotel
+     * @param hotel
+     */
     public void option4(Hotel hotel)
     {
         Map<Integer, Employee> employees = hotel.getEmployees();
@@ -63,25 +79,37 @@ public class EmployeesMenu
             System.out.println(employees.get(key));
         }
     }
+    /**
+     * This method takes the manager back to the main menu
+     * @param hotel
+     */
     public void option5(Hotel hotel)
     {
         ManagerMenu managerMenu = new ManagerMenu();
         managerMenu.displayMenu(hotel);
     }
+    /**
+     * This method logs the user out and takes them back to the initial login menu
+     * @param hotel
+     */
     public void option6(Hotel hotel)
     {
-        //logout
+        InitialLogin initialLogin = new InitialLogin();
+        initialLogin.displayMenu(hotel);
     }
-
-    public void displayMenu(Hotel hotel) 
+    /**
+     * This method displays the employees menu
+     * @param hotel
+     */
+    public void displayMenu(Hotel hotel) // displays menu to user
     {
         while(true)
         {
-            Map<Integer, Employee> employees = hotel.getAllEmployees();
+            Map<Integer, Employee> employees = hotel.getEmployees();
             Scanner in = new Scanner(System.in);
-            System.out.printf("%nWhat do you want to do?%n(1) Create new employee %n(2) Remove employee %n(3) Look up employee info %n(4) View all employees%n(5) Back to main menu%n (6) Logout%n (7) Quit");
+            System.out.printf("%nWhat do you want to do?%n(1) Create new employee %n(2) Remove employee %n(3) Look up employee info %n(4) View all employees%n(5) Back to main menu%n(6) Logout%n(7) Quit%n");
             option = in.nextByte();
-            switch (option)
+            switch (option) // switch statement for the different menu options defined above
             {
                 case 1: option1(hotel);  break;
                 case 2: option2(employees);  break;

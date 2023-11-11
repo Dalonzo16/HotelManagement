@@ -9,25 +9,32 @@ public class Employee
     private String lastName;
     private String phoneNumber;
     private String password;
-    private  int employeeId;
+    private int employeeId;
     public static int counter = 1;
     private String address;
-    public String shift;
+    public double shiftDuration;
     public double payRate;
     
     /**
      * This is a constructor method that initalizes password and pay rate as well as employee ID
+     * @param firstName the employees first name
+     * @param lastName the employees last name
      * @param password the employee password
      * @param payRate the employees pay rate
      */
     public Employee(String firstName, String lastName,String password, double payRate)
     {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.payRate = payRate;
         this.password = password;
         employeeId = counter; // ID is automatically incremented by 1 by using the public variable counter everytime a new employee is created
+        phoneNumber = "";
+        address = "";
+        shiftDuration = 0;
         counter++;
-        System.out.println("The new employee" + firstName + lastName + " was created with ID number: " + employeeId + "and password: " + password + 
-            " ; his pay rate per hour is: " + payRate);
+        System.out.println("The new employee" + firstName + " " + lastName + " was created with ID number: " + employeeId + " and password: " + password + 
+            " ; His pay rate per hour is: $" + payRate);
     }
     /**
      * This is another constructor to initialize employee ID manually
@@ -69,7 +76,6 @@ public class Employee
     {
         return phoneNumber;
     }
-    
     /**
      * This method gets the employees ID
      * @return the employees ID
@@ -93,6 +99,14 @@ public class Employee
     public double getPayRate()
     {
         return payRate;
+    }
+    /**
+     * This method gets the employees shift duration
+     * @return the employees shift duration
+     */
+    public double getShift()
+    {
+        return shiftDuration;
     }
     /**
      * This method sets the employees ID
@@ -141,5 +155,21 @@ public class Employee
     public void setAddress(String address)
     {
         this.address = address;
+    }
+    /**
+     * This method sets the employees shift duration
+     * @param shiftDuration the employees shift duration
+     */
+    public void setShift(double shiftDuration)
+    {
+        this.shiftDuration = shiftDuration;
+    }
+    /**
+     * This method sets the employees pay rate
+     * @param payRate the employees pay rate
+     */
+    public void setPayRate(double payRate)
+    {
+        this.payRate = payRate;
     }
 }

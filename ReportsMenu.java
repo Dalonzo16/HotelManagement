@@ -34,7 +34,7 @@ public class ReportsMenu
         while(true)
         {
             Scanner in = new Scanner(System.in);
-            System.out.printf("%nWhat do you want to do?%n(1) Show hotel income %n(2) Show payroll report%n(3) Main menu%n(4) Logout%n(5) Exit)");
+            System.out.printf("%nWhat do you want to do?%n(1) Show hotel income %n(2) Show payroll report%n(3) Main menu%n(4) Logout%n(5) Exit%n");
             option = in.nextByte();
             switch (option)
             {

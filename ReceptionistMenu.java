@@ -22,11 +22,13 @@ public class ReceptionistMenu
     }
     public void option3(Hotel hotel)
     {
-        //create new Reservations menu
+        ReservationMenu reservationsMenu = new ReservationMenu();
+        reservationsMenu.displayMenu(hotel, classification);
     }
     public void option4(Hotel hotel)
     {
-        //Logout (call initial login menu)
+        InitialLogin initialLoginMenu = new InitialLogin();
+        initialLoginMenu.displayMenu(hotel);
     }
 
     public void displayMenu(Hotel hotel) 
@@ -34,7 +36,7 @@ public class ReceptionistMenu
         while(true)
         {
             Scanner in = new Scanner(System.in);
-            System.out.printf("%nWhat do you want to access?%n(1) Guests %n(2) Rooms %n(3) Reservations %n(4) Logout%n(5) Exit)");
+            System.out.printf("%nWhat do you want to access?%n(1) Guests %n(2) Rooms %n(3) Reservations %n(4) Logout%n(5) Exit%n");
             option = in.nextByte();
             switch (option)
             {

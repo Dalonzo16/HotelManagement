@@ -41,7 +41,7 @@ public class ReservationMenu
         Map<Integer, Reservation> reservations = hotel.getAllReservations();
         while(true)
         {
-            System.out.printf("%nWhat do you want to do?%n(1) Create Reservation %n(2) Edit Reservation %n(3) Cancel Reservation %n(4) Look up reservation %n(5) Back to main menu%n (6) Logout%n (7) Quit");
+            System.out.printf("%nWhat do you want to do?%n(1) Create Reservation %n(2) Edit Reservation %n(3) Cancel Reservation %n(4) Look up reservation %n(5) Back to main menu%n (6) Logout%n (7) Quit%n");
             Scanner in = new Scanner(System.in);
             option = in.nextByte();
             switch (option)

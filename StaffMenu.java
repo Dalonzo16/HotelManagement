@@ -1,4 +1,3 @@
-import java.util.Map;
 import java.util.Scanner;
 /**
  * This is the staff menu class another child class of Menu
@@ -8,34 +7,52 @@ import java.util.Scanner;
 public class StaffMenu
 {
     private byte option;
-    private byte classification = 1;
+    private byte classification;
 
-    public void option1(Hotel hotel, Map<Integer, Room> rooms)
+    /**
+     * This is the constructor for the StaffMenu class
+     */
+    public StaffMenu()
+    {
+        option = 0;
+        classification = 1;
+    }
+    /**
+     * This method displays the rooms menu
+     * @param hotel
+     */
+    public void option1(Hotel hotel)
     {
         RoomsMenu roomsMenu = new RoomsMenu();
-        roomsMenu.displayMenu(hotel, rooms);
+        roomsMenu.displayMenu(hotel, classification);
     }
-    public void option2()
+    /**
+     * This method logs the user out and takes them back to the initial login menu
+     */
+    public void option2(Hotel hotel)
     {
-        //Logout (call initial login menu)
+        InitialLogin initialLogin = new InitialLogin();
+        initialLogin.displayMenu(hotel);
     }
-
+    /**
+     * This method displays the menu for the staff
+     * @param hotel
+     */
     public void displayMenu(Hotel hotel)
     {
         while(true)
         {
-            Map<Integer, Room> rooms = hotel.getRooms();
             Scanner in = new Scanner(System.in);
-            System.out.printf("%nWhat do you want to access?%n(1) Rooms%n(2) Logout%n(3) Exit)");
+            System.out.printf("%nWhat do you want to access?%n(1) Rooms%n(2) Logout%n(3) Exit%n");
             option = in.nextByte();
-            switch (option)
+            switch (option) // switch statement for menu options
             {
-                case 1: option1(hotel, rooms);  break;
-                case 2: option2();  break;
+                case 1: option1(hotel);  break;
+                case 2: option2(hotel);  break;
                 case 5: System.out.println("Bye...");
                         System.exit(0);
                                     break;
-                default:System.out.println("Please select a valid option.");
+                default:System.out.println("Please select a valid option.\n");
             }
         }
     }

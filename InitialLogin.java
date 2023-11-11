@@ -1,4 +1,3 @@
-
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -14,41 +13,57 @@ public class InitialLogin
     private String password;
     private byte option;
 
+    /**
+     * Constructor for objects of class InitialLogin
+     */
     public InitialLogin()
     {
-        super();
-    } 
+        employeeID = 0;
+        password = "";
+        option = 0;
+    }
+    /**
+     * This is the login option for General Staff
+     * @param hotel
+     * @param employees
+     */
     public void option1(Hotel hotel, Map<Integer, Employee> employees)
     {
         Scanner in = new Scanner(System.in);
         Set<Integer> keySet = employees.keySet();
         System.out.println("Please enter your employee ID: ");
         employeeID = in.nextInt();
-        if(keySet.contains(employeeID))
+        if(keySet.contains(employeeID)) // if the employee ID exists
         {
-            StaffMenu staffMenu = new StaffMenu();
-            staffMenu.displayMenu(hotel);
+            StaffMenu staffMenu = new StaffMenu(); // create a new StaffMenu object
+            staffMenu.displayMenu(hotel); // call the displayMenu method from the StaffMenu class
         }
         else
         {
             System.out.println("User ID does not exist.");
         }
     }
+    /**
+     * This is the login option for Receptionists
+     * @param hotel
+     * @param employees
+     */
     public void option2(Hotel hotel, Map<Integer, Employee> employees)
     {
         Scanner in = new Scanner(System.in);
         Set<Integer> keySet = employees.keySet();
         System.out.printf("%nPlease enter your employee ID: ");
         employeeID = in.nextInt();
-        if(keySet.contains(employeeID) )
+        if(keySet.contains(employeeID)) // if the employee ID exists
         {
-            if(employees.get(employeeID) instanceof Receptionist || employees.get(employeeID) instanceof Manager)
+            if(employees.get(employeeID) instanceof Receptionist || employees.get(employeeID) instanceof Manager) // if the employee is a receptionist or a manager
             {
                 System.out.println("Please enter your password: ");
                 password = in.next();
-                if(employees.get(employeeID).getPassword() == password)
+                if(password.compareTo(employees.get(employeeID).getPassword()) == 0) // if the password is correct
                 {
-                    //create new receptionist menu
+                    ReceptionistMenu receptionistMenu = new ReceptionistMenu(); // create a new ReceptionistMenu object
+                    receptionistMenu.displayMenu(hotel); // call the displayMenu method from the ReceptionistMenu class
                 }
                 else
                 {
@@ -65,22 +80,27 @@ public class InitialLogin
             System.out.println("User ID does not exist.");
         }
     }
-   
+    /**
+     * This is the login option for Managers
+     * @param hotel
+     * @param employees
+     */
     public void option3(Hotel hotel, Map<Integer, Employee> employees)
     {
         Scanner in = new Scanner(System.in);
         Set<Integer> keySet = employees.keySet();
         System.out.println("Please enter your employee ID: ");
         employeeID = in.nextInt();
-        if(keySet.contains(employeeID))
+        if(keySet.contains(employeeID)) // if the employee ID exists
         {
-            if(employees.get(employeeID) instanceof Manager)
+            if(employees.get(employeeID) instanceof Manager) // if the employee is a manager
             {
                 System.out.println("Please enter your password: ");
                 password = in.next();
-                if(employees.get(employeeID).getPassword() == password)
+                if(password.compareTo(employees.get(employeeID).getPassword()) == 0) // if the password is correct
                 {
-                    //create new manager menu
+                    ManagerMenu managerMenu = new ManagerMenu(); // create a new ManagerMenu object
+                    managerMenu.displayMenu(hotel); // call the displayMenu method from the ManagerMenu class
                 }
                 else
                 {
@@ -97,15 +117,19 @@ public class InitialLogin
             System.out.println("User ID does not exist.");
         }
     }
+    /**
+     * This method displays the initial login menu
+     * @param hotel
+     */
     public void displayMenu(Hotel hotel)
     {
         Map<Integer, Employee> allEmployees = hotel.getEmployees();
         while(true)
         {
             Scanner in = new Scanner(System.in);
-            System.out.printf("%nSelect one of the options accordingly to your position:%n(1) General Staff %n(2) Receptionist %n(3) Manager %n(4) Quit %n");
+            System.out.printf("%nSelect one of the options accordingly to your position:%n(1) General Staff %n(2) Receptionist %n(3) Manager %n(4) Quit%n");
             option = in.nextByte();
-            switch (option)
+            switch (option) // switch statement for the different login options defined above
             {
                 case 1: option1(hotel, allEmployees);  break;
                 case 2: option2(hotel, allEmployees);  break;

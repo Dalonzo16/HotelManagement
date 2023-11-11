@@ -30,7 +30,8 @@ public class Guest
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.reservation = reservation;
-        guestID = counter;
+        this.creditCardNumber = "";
+        this.guestID = counter;
         System.out.println("The guest " + firstName + " " + lastName + " was added with guest ID: " + guestID);
         counter++;
     }

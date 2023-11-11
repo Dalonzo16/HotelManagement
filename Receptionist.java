@@ -5,17 +5,15 @@
  */
 public class Receptionist extends Employee
 {
-    
-    public Receptionist(String password, int payRate)// need to add new methods
+    /**
+     * This is a constructor method it initializes receptionist pass word and pay rate
+     * @param firstName receptionist first name
+     * @param lastName receptionist last name
+     * @param password receptionist password
+     * @param payRate receptionist pay rate
+     */ 
+    public Receptionist(String firstName, String lastName, String password, double payRate)// need to add new methods
     { 
-        super(password, payRate);
-    }
-    public void checkInGuest(String firstName, String lastName, int reservationNumber)
-    {
-        
-    }
-    public void checkOutGuest(String phoneNumber, Payment thePayment)
-    {
-        
+        super(firstName, lastName, password, payRate);
     }
 }
