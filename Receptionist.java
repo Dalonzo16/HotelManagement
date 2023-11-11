@@ -30,10 +30,10 @@ public class Receptionist extends Employee{
                     totalRoomPrice += rooms.getPricePerNight();
                 }
                 double grandTotal = totalRoomPrice * reservation.getDuration();
-                System.out.println(firstAndLastName + "has a Reservation" + " for the following room(s)");
+                System.out.print(firstAndLastName + "has a Reservation" + " for the following room(s) ");
                 for(Integer RoomNum : reservation.getRooms().keySet()){
                     Room rooms = reservation.getRooms().get(RoomNum);
-                    System.out.print(" " + rooms.getRoomNumber() + " ");
+                    System.out.println(" " + rooms.getRoomNumber() + " ");
                 }
             }
             else{
