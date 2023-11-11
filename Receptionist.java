@@ -40,11 +40,14 @@ public class Receptionist extends Employee{
                 String creditCardNum = in.next();
                 System.out.println("Enter amount to be paid: ");
                 double payAmount = in.nextDouble();
-                do{
+                if(payAmount != grandTotal){
+                    do{
                     grandTotal = grandTotal - payAmount;
                     System.out.println("amount due: " + grandTotal);
                     payAmount = in.nextDouble();
                 }while(payAmount != grandTotal);
+
+                }
 
                 hotel.getGuests().get(firstAndLastName).setCreditCardNumber(creditCardNum);;
                 Payment payment = new Payment(grandTotal, hotel.getGuests().get(firstAndLastName).getCreditCardNumber() );
@@ -61,7 +64,7 @@ public class Receptionist extends Employee{
         }
     }
     public void checkOutGuest(Hotel hotel){
-        
+
         Scanner in = new Scanner(System.in);
         String firstAndLastName;
         System.out.println("Enter the guest first and last name to check out: ");

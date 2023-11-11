@@ -21,7 +21,7 @@ public class GuestsMenu extends Menu
             System.out.println("| 6. See all guests     |");
             System.out.println("| 7. Back to main menu  |");
             System.out.println("=========================");
-            this.userSelection = in.nextByte();
+            userSelection = in.nextByte();
     }
     /**
      * This is the checkInput method uses a switch case statement to determine what computations to perfor,
@@ -33,20 +33,20 @@ public class GuestsMenu extends Menu
         {
             case 1:
                 employee.checkInGuest(hotel);
-            break;
+                break;
             case 2:
                 employee.checkOutGuest(hotel);
-            break;
+                break;
             case 3:
                 
                 System.out.println("created Guest");
-            break;
+                break;
             case 4:
                 System.out.println("Removed Guest");
-            break;
+                break;
             case 5:
                 System.out.println("Edited Guest");
-            break;
+                break;
             case 6:
                 System.out.println("Guests");
             break;
