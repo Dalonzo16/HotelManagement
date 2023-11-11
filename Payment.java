@@ -6,7 +6,6 @@
 
 public class Payment 
 {
-    private double amountDue;
     private double amountPaid;
     private String creditCardNumber;
     private int paymentID;
@@ -19,7 +18,7 @@ public class Payment
      */
     public Payment(double amountaid, String creditCardNumber) 
     {
-        this.amountDue = amountPaid;
+        this.amountPaid = amountPaid;
         this.creditCardNumber = creditCardNumber;
         amountPaid = 0;
         paymentID = counter++;
