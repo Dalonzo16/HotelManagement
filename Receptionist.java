@@ -36,10 +36,20 @@ public class Receptionist extends Employee{
                 double grandTotal = totalRoomPrice * reservation.getDuration();
                 
                 System.out.println("Amount due for a total of " + reservation.getDuration() + " nights is: $" + grandTotal);
+                System.out.println("Enter Credit card Number: ");
                 String creditCardNum = in.next();
+                System.out.println("Enter amount to be paid: ");
+                double payAmount = in.nextDouble();
+                do{
+                    grandTotal = grandTotal - payAmount;
+                    System.out.println("amount due: " + grandTotal);
+                    payAmount = in.nextDouble();
+                }while(payAmount != grandTotal);
+
                 hotel.getGuests().get(firstAndLastName).setCreditCardNumber(creditCardNum);;
                 Payment payment = new Payment(grandTotal, hotel.getGuests().get(firstAndLastName).getCreditCardNumber() );
                 hotel.addPayment(payment.getPaymentID(), payment);
+                System.out.println("Guest checked in");
 
             }
             else{
@@ -49,6 +59,14 @@ public class Receptionist extends Employee{
         else{
             System.out.println("This guest is not yet in the system. Please add guest in the 'Add New Guest' option. ");
         }
+    }
+    public void checkOutGuest(Hotel hotel){
+        
+        Scanner in = new Scanner(System.in);
+        String firstAndLastName;
+        System.out.println("Enter the guest first and last name to check out: ");
+        firstAndLastName = in.nextLine();
+        hotel.getGuests().remove(firstAndLastName);
     }
     /**
      * This method checks to see if a guest exists in the hotel system

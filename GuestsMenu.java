@@ -35,7 +35,7 @@ public class GuestsMenu extends Menu
                 employee.checkInGuest(hotel);
             break;
             case 2:
-                System.out.println("Guest Checked out");
+                employee.checkOutGuest(hotel);
             break;
             case 3:
                 
