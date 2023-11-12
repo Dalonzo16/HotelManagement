@@ -47,9 +47,9 @@ public class StaffMenu
             option = in.nextByte();
             switch (option) // switch statement for menu options
             {
-                case 1: option1(hotel);  break;
-                case 2: option2(hotel);  break;
-                case 5: System.out.println("Bye...");
+                case 1: option1(hotel);  break; // rooms menu option
+                case 2: option2(hotel);  break; // logout option
+                case 5: System.out.println("Bye..."); // quit option
                         System.exit(0);
                                     break;
                 default:System.out.println("Please select a valid option.\n");

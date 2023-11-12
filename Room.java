@@ -39,7 +39,7 @@ public class Room
         return pricePerNight;
     }
     /**
-     * gets availability
+     * gets availability of room
      * @return
      */
     public boolean isAvailable()

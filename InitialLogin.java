@@ -131,10 +131,10 @@ public class InitialLogin
             option = in.nextByte();
             switch (option) // switch statement for the different login options defined above
             {
-                case 1: option1(hotel, allEmployees);  break;
-                case 2: option2(hotel, allEmployees);  break;
-                case 3: option3(hotel, allEmployees);  break;
-                case 4: System.out.println("Bye...");
+                case 1: option1(hotel, allEmployees);  break; //general staff 
+                case 2: option2(hotel, allEmployees);  break; //receptionist
+                case 3: option3(hotel, allEmployees);  break; //manager
+                case 4: System.out.println("Bye..."); //quit
                         System.exit(0);
                                     break;
                 default:System.out.println("Please select a valid option.");

@@ -12,7 +12,7 @@ public class Guest
     private String email;
     private String creditCardNumber;
     private int guestID;
-    Reservation reservation;
+    private Reservation reservation;
     private static int counter = 1;
 
     /**
@@ -87,7 +87,7 @@ public class Guest
      * gets reservation info
      * @return
      */
-    public Reservation getReservationInfo()
+    public Reservation getReservation()
     {
         return reservation;
     }
@@ -138,5 +138,9 @@ public class Guest
     public void setCreditCardNumber(String creditCardNumber)
     {
         this.creditCardNumber = creditCardNumber;
+    }
+    public int getReservationNumber()
+    {
+        return reservation.getReservationNumber();
     }
 }

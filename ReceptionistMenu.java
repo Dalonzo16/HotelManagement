@@ -40,12 +40,12 @@ public class ReceptionistMenu
             option = in.nextByte();
             switch (option)
             {
-                case 1: option1(hotel);  break;
-                case 2: option2(hotel);  break;
-                case 3: option3(hotel);  break;
-                case 4: option4(hotel);  break;
-                case 5: System.out.println("Bye...");
-                        System.exit(0);
+                case 1: option1(hotel);  break; //guests
+                case 2: option2(hotel);  break; //rooms
+                case 3: option3(hotel);  break; //reservations
+                case 4: option4(hotel);  break; //logout
+                case 5: System.out.println("Bye..."); //exit
+                        System.exit(0); //exits program
                                     break;
                 default:System.out.println("Please select a valid option.");
             }

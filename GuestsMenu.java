@@ -17,15 +17,18 @@ public class GuestsMenu
     {
         option = 0;
     }
-    public void option1(Map<Integer, Guest> guests) //check-in guest
+    public void option1(Hotel hotel) //check-in guest
     {
-        //TO-DO: check-in guest method
+        System.out.println("Please enter the reservation number of the guest: ");
+        Scanner in = new Scanner(System.in);
+        int reservationNumber = in.nextInt();
+        hotel.checkInGuest(reservationNumber);
     }
-    public void option2(Map<Integer, Guest> guests) //check-out guest
+    public void option2(Hotel hotel) //check-out guest
     {
         //TO-DO: check-out guest method
     }
-    public void option3(Map<Integer, Guest> guests) // edit guest info
+    public void option3(Hotel hotel) // edit guest info
     {
         //TO-DO: edit guest info method
     }
@@ -33,8 +36,9 @@ public class GuestsMenu
      * This method displays all the guests in the hotel
      * @param guests
      */
-    public void option4(Map<Integer, Guest> guests)
+    public void option4(Hotel hotel)
     {
+        Map<Integer, Guest> guests = hotel.getAllGuests();
         Set<Integer> keySet = guests.keySet();
         for(Integer key : keySet)
         {
@@ -73,8 +77,7 @@ public class GuestsMenu
      * @param classification
      */
     public void displayMenu(Hotel hotel, byte classification)  //display menu
-    {
-        Map<Integer, Guest> guests = hotel.getAllGuests(); 
+    { 
         while(true)
         {
             Scanner in = new Scanner(System.in);
@@ -82,13 +85,13 @@ public class GuestsMenu
             option = in.nextByte();
             switch (option) // switch statement for the different menu options defined above
             {
-                case 1: option1(guests);  break;
-                case 2: option2(guests);  break;
-                case 3: option3(guests);  break;
-                case 4: option4(guests);  break;
-                case 5: option5(hotel, classification);  break;
-                case 6: option6(hotel);  break;
-                case 7: System.out.println("Bye...");
+                case 1: option1(hotel);  break; //check-in guest
+                case 2: option2(hotel);  break; //check-out guest
+                case 3: option3(hotel);  break; //edit guest info
+                case 4: option4(hotel);  break; //view all guests
+                case 5: option5(hotel, classification);  break; //back to main menu
+                case 6: option6(hotel);  break; //logout
+                case 7: System.out.println("Bye..."); //quit
                         System.exit(0);
                                     break;
                 default:System.out.println("Please select a valid option.");

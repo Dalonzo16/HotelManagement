@@ -111,14 +111,14 @@ public class RoomsMenu
             this.option = in.nextByte();
             switch (option) // switch statement for menu options
             {
-                case 1: option1(hotel);  break;
-                case 2: option2(hotel);  break;
-                case 3: option3(hotel);  break;
-                case 4: option4(hotel);  break;
-                case 5: option5(hotel);  break;
-                case 6: option6(hotel, classification);  break;
-                case 7: option7(hotel, rooms);  break;
-                case 8: System.out.println("Bye...");
+                case 1: option1(hotel);  break; // show available rooms option
+                case 2: option2(hotel);  break; // show occupied rooms option
+                case 3: option3(hotel);  break; // look up info about room option
+                case 4: option4(hotel);  break; // clean a room option
+                case 5: option5(hotel);  break; // clean all rooms option
+                case 6: option6(hotel, classification);  break; // back to main menu option
+                case 7: option7(hotel, rooms);  break; // logout option
+                case 8: System.out.println("Bye..."); // quit option
                         System.exit(0);
                                     break;
                 default:System.out.println("Please select a valid option.\n");

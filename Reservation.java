@@ -12,17 +12,18 @@ public class Reservation
     private Map<Integer, Room> rooms;
     private byte durationInDays;
     private byte numberOfGuests;
+    private static int counter = 1;
 
     /**
      * Constructor for objects of class Reservation
-     * @param reservationNumber
+     * @param numberOfGuests
      * @param guestName
      * @param rooms
      * @param duration
      */
-    public Reservation(int reservationNumber, String guestName, byte numberOfGuests, Map<Integer, Room> rooms, byte duration)
+    public Reservation(String guestName, byte numberOfGuests, Map<Integer, Room> rooms, byte duration)
     {
-        this.reservationNumber = reservationNumber;
+        this.reservationNumber = counter;
         this.guestName = guestName;
         this.rooms = rooms;
         this.durationInDays = duration;

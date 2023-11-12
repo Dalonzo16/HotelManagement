@@ -85,13 +85,13 @@ public class ManagerMenu
             option = in.nextByte();
             switch (option) // switch statement for the different menu options defined above
             {
-                case 1: option1(hotel);  break;
-                case 2: option2(hotel);  break;
-                case 3: option3(hotel);  break;
-                case 4: option4(hotel);  break;
-                case 5: option5(hotel);  break;
-                case 6: option6(hotel);  break;
-                case 7: System.out.println("Bye...");
+                case 1: option1(hotel);  break; //guests
+                case 2: option2(hotel);  break; //rooms
+                case 3: option3(hotel);  break; //reservations
+                case 4: option4(hotel);  break; //employees
+                case 5: option5(hotel);  break; //reports
+                case 6: option6(hotel);  break; //logout
+                case 7: System.out.println("Bye..."); //exit
                         System.exit(0);
                                     break;
                 default:System.out.println("Please select a valid option.");

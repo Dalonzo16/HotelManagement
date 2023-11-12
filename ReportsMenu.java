@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 
 /**
@@ -17,18 +16,25 @@ public class ReportsMenu
     public void option2()
     {
         //show payroll report
-    } 
+    }
+    /**
+     * This method takes the manager back to the main menu
+     * @param hotel
+     */ 
     public void option3(Hotel hotel)
     {
         ManagerMenu managerMenu = new ManagerMenu();
         managerMenu.displayMenu(hotel);
     }
+    /**
+     * This method takes the user back to the initial login menu
+     * @param hotel
+     */
     public void option4(Hotel hotel)
     {
         InitialLogin initialLogin = new InitialLogin();
         initialLogin.displayMenu(hotel);
     }
-    
     public void displayMenu(Hotel hotel)
     {
         while(true)
@@ -38,11 +44,11 @@ public class ReportsMenu
             option = in.nextByte();
             switch (option)
             {
-                case 1: option1();  break;
-                case 2: option2();  break;
-                case 3: option3(hotel);  break;
-                case 4: option4(hotel);  break;
-                case 5: System.out.println("Bye...");
+                case 1: option1();  break; //show hotel income
+                case 2: option2();  break; //show payroll report
+                case 3: option3(hotel);  break; //go back to main menu
+                case 4: option4(hotel);  break; //logout
+                case 5: System.out.println("Bye..."); //exit
                         System.exit(0);
                                     break;
                 default:System.out.println("Please select a valid option.");

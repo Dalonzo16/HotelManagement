@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  * @author Ludwig Scherer
@@ -95,9 +96,19 @@ public class Hotel
      * removes employee from employees
      * @param employee
      */
-    public void removeEmployee(Integer employeeId)
+    public void removeEmployee()
     {
-        employees.remove(employeeId);
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter the ID of the employee you want to remove: ");
+        int employeeID = in.nextInt();
+        if(employees.containsKey(employeeID))
+        {
+            employees.remove(employeeID);
+        }
+        else
+        {
+            System.out.println("Employee ID does not exist.");
+        }
     }
     /**
      * adds reservation to reservations
@@ -235,5 +246,121 @@ public class Hotel
             occupiedRooms = "There are no occupied rooms";
         }
         return occupiedRooms;
+    }
+    public void checkInGuest(int reservationNumber)
+    {
+        if(reservations.containsKey(reservationNumber))
+        {
+            Reservation reservation = reservations.get(reservationNumber);
+            Room currentRoom;
+            createGuest();
+            Map<Integer, Room> reservedRooms = reservation.getRooms();
+            for(Integer key : reservedRooms.keySet())
+            {
+                currentRoom = reservedRooms.get(key);
+                currentRoom.setUnavailable();
+                System.out.println("Guest is checked in");
+            }
+        }
+        else
+        {
+            System.out.println("No reservation found. Please create a reservation in the reservation menu before checking a guest in.");
+        }
+    }
+    public void checkOutGuest(int reservationNumber)
+    {
+        if(reservations.containsKey(reservationNumber))
+        {
+            Reservation reservation;
+        }
+        else
+        {
+
+        }
+        //TO-DO: check-out guest method
+    }
+    public void createGuest()
+    {
+        //TO-DO: create guest method
+    }
+    public void editGuestInfo(Guest guest)
+    {
+        //TO-DO: edit guest info method
+    }
+    public void cancelReservation(int reservationNumber)
+    {
+        //TO-DO: cancel reservation method
+    }
+    public void createReservation()
+    {
+        System.out.println();
+    }
+    public void editReservation(int reservationNumber)
+    {
+        //TO-DO: edit reservation method
+    }
+    public void lookUpReservation(int reservationNumber)
+    {
+        //TO-DO: look up reservation method
+    }
+    public void showAllReservations()
+    {
+        //TO-DO: show all reservations method
+    }
+    public void createPayment()
+    {
+        //TO-DO: create payment method
+    }
+    public void editPayment(Payment payment)
+    {
+        //TO-DO: edit payment method
+    }
+    public void lookUpPayment(int paymentID)
+    {
+        //TO-DO: look up payment method
+    }
+    public void showAllPayments()
+    {
+        //TO-DO: show all payments method
+    }
+    public void createEmployee()
+    {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter the employee's first name:");
+        String firstName = in.next();
+        System.out.println("Please enter the employee's last name:");
+        String lastName = in.next();
+        System.out.println("Please enter the employee's password:");
+        String password = in.next();
+        System.out.println("Please enter the employee's pay rate:");
+        double payRate = in.nextDouble();
+        Employee employee = new Employee(firstName, lastName, password, payRate);
+        addEmployee(employee);
+    }
+    public void editEmployee()
+    {
+        
+    }
+    public void lookUpEmployee()
+    {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter the ID of the employee you want to look up: ");
+        int employeeID = in.nextInt();
+        if(employees.containsKey(employeeID)) // if the employee ID exists
+        {
+            Employee employee = employees.get(employeeID);
+            System.out.println("Employee " + employeeID + ": " + employee.getFirstName() + " " + employee.getLastName() + "\nAddress: " + employee.getAddress() + "\nPhone number: " + employee.getPhoneNumber() + "\nPay Rate: " + employee.getPayRate() +  "\nShift: " + employee.getShift());
+        }
+        else
+        {
+            System.out.println("Employee ID does not exist.");
+        }
+    }
+    public void printAllEmployees()
+    {
+        for(Integer key : employees.keySet())
+        {
+            System.out.println(employees.get(key));
+        }
     }
 }
