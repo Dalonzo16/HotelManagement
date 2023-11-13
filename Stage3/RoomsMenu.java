@@ -38,7 +38,7 @@ public class RoomsMenu extends InitialLogin
      */
     public void option3(Hotel hotel)
     {
-        hotel.lookUpRoom();
+        System.out.println(hotel.lookUpRoom());
     }
     /**
      * This method cleans a specific room
