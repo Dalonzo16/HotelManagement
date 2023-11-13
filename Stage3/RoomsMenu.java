@@ -40,11 +40,15 @@ public class RoomsMenu extends InitialLogin
     {
         System.out.println(hotel.lookUpRoom());
     }
+    public void option4(Hotel hotel)
+    {
+        hotel.editRoom();
+    }
     /**
      * This method cleans a specific room
      * @param hotel
      */
-    public void option4(Hotel hotel)
+    public void option5(Hotel hotel)
     {
         hotel.cleanRoom();
     }
@@ -52,7 +56,7 @@ public class RoomsMenu extends InitialLogin
      * This method cleans all the rooms in the hotel
      * @param hotel
      */
-    public void option5(Hotel hotel)
+    public void option6(Hotel hotel)
     {
         hotel.cleanAllRooms();
     }
@@ -61,7 +65,7 @@ public class RoomsMenu extends InitialLogin
      * @param hotel
      * @param classification
      */
-    public void option6(Hotel hotel, byte classification)
+    public void option7(Hotel hotel, byte classification)
     {
         if(classification == 1)
         {
@@ -82,7 +86,7 @@ public class RoomsMenu extends InitialLogin
     /**
      * This method logs the user out and takes them back to the initial login menu
      */
-    public void option7(Hotel hotel)
+    public void option8(Hotel hotel)
     {
         InitialLogin initialLogin = new InitialLogin();
         initialLogin.displayMenu(hotel);
@@ -97,18 +101,19 @@ public class RoomsMenu extends InitialLogin
         while(true)
         {
             Scanner in = new Scanner(System.in);
-            System.out.println("Rooms menu, please select an option:\n(1) Show available rooms\n(2) Show occupied rooms\n(3) Look up info about room #\n(4) Clean a room #\n(5) Clean all rooms\n(6) Back to main menu\n(7) Logout\n(8) Quit\n");
+            System.out.println("Rooms menu, please select an option:\n(1) Show available rooms\n(2) Show occupied rooms\n(3) Look up info about room #\n(4) Edit a room #\n(5) Clean a room #\n(6) Clean all rooms\n(7) Back to main menu\n(8) Logout\n(9) Quit\n");
             this.option = in.nextByte();
             switch (option) // switch statement for menu options
             {
                 case 1: option1(hotel);  break; // show available rooms option
                 case 2: option2(hotel);  break; // show occupied rooms option
                 case 3: option3(hotel);  break; // look up info about room option
-                case 4: option4(hotel);  break; // clean a room option
-                case 5: option5(hotel);  break; // clean all rooms option
-                case 6: option6(hotel, classification);  break; // back to main menu option
-                case 7: option7(hotel);  break; // logout option
-                case 8: System.out.println("Bye..."); // quit option
+                case 4: option4(hotel);  break; // edit room 
+                case 5: option5(hotel);  break; // clean a room option
+                case 6: option6(hotel);  break; // clean all rooms option
+                case 7: option7(hotel, classification);  break; // back to main menu option
+                case 8: option8(hotel);  break; // logout option
+                case 9: System.out.println("Bye..."); // quit option
                         System.exit(0);
                                     break;
                 default:System.out.println("Please select a valid option.\n");
