@@ -254,6 +254,17 @@ public class Hotel
         int reservationNumber = in.nextInt();
         if(reservations.containsKey(reservationNumber))
         {
+            removeReservation(reservationNumber);
+        }
+        else
+        {
+            System.out.println("Reservation number does not exist.");
+        }
+    }
+    public void removeReservation(int reservationNumber)
+    {
+        if(reservations.containsKey(reservationNumber))
+        {
             reservations.remove(reservationNumber);
         }
         else
@@ -398,14 +409,14 @@ public class Hotel
         {
             Reservation reservation = reservations.get(reservationNumber);
             Room currentRoom;
-            createGuest();
+            addGuest();
             Map<Integer, Room> reservedRooms = reservation.getRooms();
             for(Integer key : reservedRooms.keySet())
             {
                 currentRoom = reservedRooms.get(key);
                 currentRoom.setUnavailable();
-                System.out.println("Guest is checked in");
             }
+            System.out.println("Guest is checked in");
         }
         else
         {
@@ -433,21 +444,17 @@ public class Hotel
             System.out.println("Guest ID does not exist.");
         }
     }
-    public void createGuest()
+    public void editGuestInfo(int guestID)
     {
-        //TO-DO: create guest method
-    }
-    public void editGuestInfo(Guest guest)
-    {
-        //TO-DO: edit guest info method
-    }
-    public void cancelReservation(int reservationNumber)
-    {
-        //TO-DO: cancel reservation method
-    }
-    public void createReservation()
-    {
-        System.out.println();
+        Guest guestToEdit = allGuests.get(guestID);
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter the guest's first name:");
+        String firstName = in.next();
+        System.out.println("Please enter the guest's last name:");
+        String lastName = in.next();
+        System.out.println("Please enter the guest's phone number:");
+        String phoneNumber = in.next();
+        System.out.println("Please enter the guest's email:");
     }
     public void editReservation(int reservationNumber)
     {
@@ -476,20 +483,6 @@ public class Hotel
     public void showAllPayments()
     {
         //TO-DO: show all payments method
-    }
-    public void createEmployee()
-    {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Please enter the employee's first name:");
-        String firstName = in.next();
-        System.out.println("Please enter the employee's last name:");
-        String lastName = in.next();
-        System.out.println("Please enter the employee's password:");
-        String password = in.next();
-        System.out.println("Please enter the employee's pay rate:");
-        double payRate = in.nextDouble();
-        Employee employee = new Employee(firstName, lastName, password, payRate);
-        addEmployee(employee);
     }
     public void editEmployee()
     {
