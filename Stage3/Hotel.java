@@ -734,7 +734,7 @@ public class Hotel
         System.out.println("All current payments: ");
         for(Integer key : payments.keySet())
         {
-            System.out.println(payments.get(key));
+            lookUpPayment(key);
         }
     }
     /**
@@ -872,6 +872,6 @@ public class Hotel
         }
         double totalWeeklyPay = payForOneShift * 5;
 
-        System.out.println("Weekly PayRoll Expenses: $" + totalWeeklyPay + " | Total earnings from reservations: " + grandTotal);
+        System.out.println("Weekly PayRoll Expenses: $" + totalWeeklyPay + " | Total earnings from reservations: $" + grandTotal);
     }
 }

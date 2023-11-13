@@ -23,6 +23,12 @@ public class HotelManagement
         Employee employee3 = new Employee("Michael", "Phelps", "bye",15);
         Employee reseptionist1 = new Receptionist("Lionel", "Messi", "goat", 100);
         Employee manager1 = new Manager("Eduardo", "Ceh-Varela", "master",20);//created one manager
+
+        employee1.setShift(8);
+        employee2.setShift(8);
+        employee3.setShift(8);
+        reseptionist1.setShift(8);
+        manager1.setShift(8);
         
         Room room1 = new Room(100, 100.00);//created rooms for reserved rooms
         Room room2 = new Room(204, 70.00);
