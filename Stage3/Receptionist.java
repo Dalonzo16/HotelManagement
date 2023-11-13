@@ -1,3 +1,4 @@
+package Stage3;
 /**
  *This is the Receptionsist class
  * @author Devon Alonzo
