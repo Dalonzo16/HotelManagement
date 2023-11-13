@@ -23,7 +23,7 @@ public class RoomsMenu
      */
     public void option1(Hotel hotel)
     {
-        System.out.println(hotel.getAvailableRooms());
+        System.out.println(hotel.printAvailableRooms());
     }
     /**
      * This method displays all the occupied rooms in the hotel
@@ -31,7 +31,7 @@ public class RoomsMenu
      */
     public void option2(Hotel hotel)
     {
-        System.out.println(hotel.getOccupiedRooms());
+        System.out.println(hotel.printOccupiedRooms());
     }
     /**
      * This method displays the info about a specific room

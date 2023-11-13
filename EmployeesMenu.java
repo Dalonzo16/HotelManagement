@@ -23,7 +23,7 @@ public class EmployeesMenu
      */
     public void option1(Hotel hotel)
     {
-        hotel.createEmployee();
+        hotel.addEmployee();
     }
     /**
      * This method removes an employee by asking the user for the employee ID and 

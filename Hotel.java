@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * @author Ludwig Scherer
@@ -56,6 +57,16 @@ public class Hotel
      * adds room to list of rooms
      * @param room
      */
+    public void addRoom()
+    {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter the room number:");
+        int roomNumber = in.nextInt();
+        System.out.println("Please enter the price per night:");
+        double pricePerNight = in.nextDouble();
+        Room room = new Room(roomNumber, pricePerNight);
+        addRoom(room);
+    }
     public void addRoom(Room room)
     {
         rooms.put(room.getRoomNumber(), room);
@@ -64,6 +75,24 @@ public class Hotel
      * adds guest to allGuests
      * @param guest
      */
+    public void addGuest()
+    {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter the guest's first name:");
+        String firstName = in.next();
+        System.out.println("Please enter the guest's last name:");
+        String lastName = in.next();
+        System.out.println("Please enter the guest's phone number:");
+        String phoneNumber = in.next();
+        System.out.println("Please enter the guest's email:");
+        String email = in.next();
+        System.out.println("Please enter the guest's reservation number:");
+        int reservationNumber = in.nextInt();
+        Reservation reservation = reservations.get(reservationNumber);
+        Guest guest = new Guest(firstName, lastName, phoneNumber, email, reservation);
+
+        addGuest(guest);
+    }
     public void addGuest(Guest guest)
     {
         allGuests.put(guest.getGuestID(), guest);
@@ -72,6 +101,20 @@ public class Hotel
      * adds employee to employees
      * @param employee
      */
+    public void addEmployee()
+    {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter the employee's first name:");
+        String firstName = in.next();
+        System.out.println("Please enter the employee's last name:");
+        String lastName = in.next();
+        System.out.println("Please enter the employee's password:");
+        String password = in.next();
+        System.out.println("Please enter the employee's pay rate:");
+        double payRate = in.nextDouble();
+        Employee employee = new Employee(firstName, lastName, password, payRate);
+        addEmployee(employee);
+    }
     public void addEmployee(Employee employee)
     {
         employees.put(employee.getEmployeeId(), employee);
@@ -80,17 +123,59 @@ public class Hotel
      * removes guest from allGuests
      * @param guest
      */
-    public void removeGuest(Guest guest)
+    public void removeGuest()
     {
-        allGuests.remove(guest.getGuestID());
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter the ID of the guest you want to remove: ");
+        int guestID = in.nextInt();
+        if(allGuests.containsKey(guestID))
+        {
+            removeGuest(guestID);
+        }
+        else
+        {
+            System.out.println("Guest ID does not exist.");
+        }
+    }
+    public void removeGuest(int guestID)
+    {
+        if(allGuests.containsKey(guestID))
+        {
+            allGuests.remove(guestID);
+        }
+        else
+        {
+            System.out.println("Guest ID does not exist.");
+        }
     }
     /**
      * removes room from rooms
      * @param room
      */
-    public void removeRoom(Room room)
+    public void removeRoom()
     {
-        rooms.remove(room.getRoomNumber());
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter the room number of the room you want to remove: ");
+        int roomNumber = in.nextInt();
+        if(rooms.containsKey(roomNumber))
+        {
+            removeRoom(roomNumber);
+        }
+        else
+        {
+            System.out.println("Room number does not exist.");
+        }
+    }
+    public void removeRoom(int roomNumber)
+    {
+        if(rooms.containsKey(roomNumber))
+        {
+            rooms.remove(roomNumber);
+        }
+        else
+        {
+            System.out.println("Room number does not exist.");
+        }
     }
     /**
      * removes employee from employees
@@ -101,6 +186,17 @@ public class Hotel
         Scanner in = new Scanner(System.in);
         System.out.println("Please enter the ID of the employee you want to remove: ");
         int employeeID = in.nextInt();
+        if(employees.containsKey(employeeID))
+        {
+            removeEmployee(employeeID);
+        }
+        else
+        {
+            System.out.println("Employee ID does not exist.");
+        }
+    }
+    public void removeEmployee(int employeeID)
+    {
         if(employees.containsKey(employeeID))
         {
             employees.remove(employeeID);
@@ -114,6 +210,35 @@ public class Hotel
      * adds reservation to reservations
      * @param reservation
      */
+    public void addReservation()
+    {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter the guest's last name:");
+        String lastName = in.next();
+        System.out.println("Please enter the number of guests:");
+        byte numberOfGuests = in.nextByte();
+        System.out.println("Please enter the duration of stay:");
+        byte duration = in.nextByte();
+        Map<Integer, Room> roomsToReserve = new HashMap<>();
+        System.out.println("Please enter the amount of room you want to reserve:");
+        int amountOfRooms = in.nextInt();
+        for(int i = 0; i < amountOfRooms; i++)
+        {
+            System.out.println("Please enter the room number of room " + (i+1) + ":");
+            int roomNumber = in.nextInt();
+            if(rooms.containsKey(roomNumber))
+            {
+                roomsToReserve.put(roomNumber, rooms.get(roomNumber));
+            }
+            else
+            {
+                System.out.println("Room number does not exist.");
+                i--;
+            }
+        }
+        Reservation reservation = new Reservation(lastName, numberOfGuests, roomsToReserve, duration);
+        addReservation(reservation);
+    }
     public void addReservation(Reservation reservation)
     {
         reservations.put(reservation.getReservationNumber(), reservation);
@@ -122,9 +247,19 @@ public class Hotel
      * removes reservation from reservations
      * @param reservation
      */
-    public void removeReservation(Reservation reservation)
+    public void removeReservation()
     {
-        reservations.remove(reservation.getReservationNumber());
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter the reservation number of the reservation you want to remove: ");
+        int reservationNumber = in.nextInt();
+        if(reservations.containsKey(reservationNumber))
+        {
+            reservations.remove(reservationNumber);
+        }
+        else
+        {
+            System.out.println("Reservation number does not exist.");
+        }
     }
     /**
      * adds payment to payments
@@ -138,9 +273,19 @@ public class Hotel
      * removes payment from payments
      * @param payment
      */
-    public void removePayment(Payment payment)
+    public void removePayment()
     {
-        payments.remove(payment.getPaymentID());
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter the payment ID of the payment you want to remove: ");
+        int paymentID = in.nextInt();
+        if(payments.containsKey(paymentID))
+        {
+            payments.remove(paymentID);
+        }
+        else
+        {
+            System.out.println("Payment ID does not exist.");
+        }
     }
     /**
      * gets all guests
@@ -191,7 +336,7 @@ public class Hotel
      * This method displays all the available rooms in the hotel
      * @param hotel
      */
-    public String getAvailableRooms()
+    public String printAvailableRooms()
     {
         Room currentRoom;
         String availableRooms = "";
@@ -228,7 +373,7 @@ public class Hotel
      * This method displays all the occupied rooms in the hotel
      * @param hotel
      */
-    public String getOccupiedRooms()
+    public String printOccupiedRooms()
     {
         Room currentRoom;
         String occupiedRooms = "";
@@ -267,17 +412,26 @@ public class Hotel
             System.out.println("No reservation found. Please create a reservation in the reservation menu before checking a guest in.");
         }
     }
-    public void checkOutGuest(int reservationNumber)
+    public void checkOutGuest(int guestID)
     {
-        if(reservations.containsKey(reservationNumber))
+        if(allGuests.containsKey(guestID))
         {
-            Reservation reservation;
+            Guest guest = allGuests.get(guestID);
+            Reservation reservation = guest.getReservation();
+            Set<Integer> keySet = reservation.getRooms().keySet();
+            for(Integer key : keySet)
+            {
+                rooms.get(key).setAvailable();
+                rooms.get(key).setDirty();
+            }
+            reservations.remove(reservation.getReservationNumber());
+            allGuests.remove(guestID);
+            System.out.println("Guest is checked out");
         }
         else
         {
-
+            System.out.println("Guest ID does not exist.");
         }
-        //TO-DO: check-out guest method
     }
     public void createGuest()
     {
