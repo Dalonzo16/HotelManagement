@@ -232,8 +232,8 @@ public class Hotel
         }
     }
     /**
-     * adds reservation to reservations
-     * @param reservation
+     * adds reservation to reservations by getting the reservation info from the user and 
+     * calling the other addReservation method with the Reservation object as parameter
      */
     public void addReservation()
     {
@@ -264,13 +264,17 @@ public class Hotel
         Reservation reservation = new Reservation(lastName, numberOfGuests, roomsToReserve, duration);
         addReservation(reservation);
     }
+    /**
+     * adds reservation to reservations (receiving the reservation as parameter)
+     * @param reservation
+     */
     public void addReservation(Reservation reservation)
     {
             reservations.put(reservation.getReservationNumber(), reservation);
     }
     /**
-     * removes reservation from reservations
-     * @param reservation
+     * removes reservation from reservations by getting the reservation number from the user and 
+     * calling the other removeReservation method with the input
      */
     public void removeReservation()
     {
@@ -279,6 +283,10 @@ public class Hotel
         int reservationNumber = in.nextInt();
         removeReservation(reservationNumber);
     }
+    /**
+     * removes reservation from reservations (receiving the reservationNumber as parameter)
+     * @param reservationNumber
+     */
     public void removeReservation(int reservationNumber)
     {
         if(reservations.containsKey(reservationNumber))
@@ -291,8 +299,8 @@ public class Hotel
         }
     }
     /**
-     * adds payment to payments
-     * @param payment
+     * adds payment to payments by getting the payment info from the user and calling 
+     * the other addPayment method with the Payment object as parameter
      */
     public void addPayment()
     {
@@ -304,13 +312,17 @@ public class Hotel
         Payment payment = new Payment(amountPaid, creditCardNumber);
         addPayment(payment);
     }
+    /**
+     * adds payment to payments (receiving the payment as parameter)
+     * @param payment
+     */
     public void addPayment(Payment payment)
     {
         payments.put(payment.getPaymentID(), payment);
     }
     /**
-     * removes payment from payments
-     * @param payment
+     * removes payment from payments by getting the payment ID from the user and 
+     * calling the other removePayment method with the input
      */
     public void removePayment()
     {
@@ -319,6 +331,10 @@ public class Hotel
         int paymentID = in.nextInt();
         payments.remove(paymentID);
     }
+    /**
+     * removes payment from payments (receiving the paymentID as parameter)
+     * @param paymentID
+     */
     public void removePayment(int paymentID)
     {
         if(payments.containsKey(paymentID))
@@ -355,8 +371,8 @@ public class Hotel
         return payments;
     }
     /**
-     * this method cleans a specific room
-     * @param roomNumber
+     * this method cleans a specific room by getting the room number from the user and 
+     * calling the other cleanRoom method with the input
      */
     public void cleanRoom()
     {
@@ -365,6 +381,10 @@ public class Hotel
         int roomNumber = in.nextInt();
         cleanRoom(roomNumber);
     }
+    /**
+     * this method cleans a specific room (receiving the roomNumber as parameter)
+     * @param roomNumber
+     */
     public void cleanRoom(int roomNumber)
     {
         rooms.get(roomNumber).clean();
@@ -481,6 +501,7 @@ public class Hotel
             }
             double grandTotal = totalRoomPrice * reservation.getDuration();
             Payment payment = new Payment(grandTotal, guest.getCreditCardNumber());
+            addPayment(payment);
             System.out.println("Amount due for a total of " + reservation.getDuration() + " nights is: $" + grandTotal);
             System.out.println("Enter amount paid: ");
             payment.setAmountPaid(in.nextDouble());
