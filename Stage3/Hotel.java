@@ -719,7 +719,7 @@ public class Hotel
         if(payments.containsKey(paymentID))
         {
             Payment payment = payments.get(paymentID);
-            System.out.println("Payment " + paymentID + " with amount: " + payment.getAmountPaid() + "\nPaid with Credit card: " + payment.getCreditCardNumber());
+            System.out.println("Payment " + paymentID + " with amount: $" + payment.getAmountPaid() + "\nPaid with Credit card: " + payment.getCreditCardNumber() + "\n");
         }
         else
         {
@@ -872,6 +872,6 @@ public class Hotel
         }
         double totalWeeklyPay = payForOneShift * 5;
 
-        System.out.println("Weekly PayRoll Expenses: $" + totalWeeklyPay + " | Total earnings from reservations: $" + grandTotal);
+        System.out.println("Weekly PayRoll Expenses: $" + totalWeeklyPay + " | Total earnings from bookings: $" + grandTotal + "\n");
     }
 }
