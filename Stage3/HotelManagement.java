@@ -75,6 +75,8 @@ public class HotelManagement
         Payment payment2 = new Payment(100, "8924572371430");
         payment1.setAmountPaid(510);
         payment2.setAmountPaid(660);
+        mainHotel.addPayment(payment1); //added payments to hotel
+        mainHotel.addPayment(payment2);
 
         InitialLogin initialLogin = new InitialLogin();//created initial login object
         initialLogin.displayMenu(mainHotel);//displayed initial login menu
