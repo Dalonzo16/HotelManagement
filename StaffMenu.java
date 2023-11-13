@@ -1,6 +1,6 @@
 import java.util.Scanner;
 /**
- * This is the staff menu class another child class of Menu
+ * This is the staff menu 
  * @author Devon Alonzo
  * @date 2023-11-09 19:46:59
  */

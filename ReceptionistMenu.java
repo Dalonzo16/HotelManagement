@@ -1,7 +1,7 @@
 
 import java.util.Scanner;
 /**
- * This is the ReceptionistMenu class another child class of Menu
+ * This is the ReceptionistMenu class
  * @Author Devon Alonzo
  * @date 2023-11-09 19:48:58
  */

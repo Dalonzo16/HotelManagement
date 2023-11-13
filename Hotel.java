@@ -409,12 +409,30 @@ public class Hotel
         {
             Reservation reservation = reservations.get(reservationNumber);
             Room currentRoom;
+            createGuest();
+            double totalRoomPrice=0;
             addGuest();
             Map<Integer, Room> reservedRooms = reservation.getRooms();
             for(Integer key : reservedRooms.keySet())
             {
                 currentRoom = reservedRooms.get(key);
+                totalRoomPrice += currentRoom.getPricePerNight();
                 currentRoom.setUnavailable();
+            }
+            double grandTotal = totalRoomPrice * reservation.getDuration();
+                
+            System.out.println("Amount due for a total of " + reservation.getDuration() + " nights is: $" + grandTotal);
+            System.out.println("Enter Credit card Number: ");
+            String creditCardNum = in.next();
+            System.out.println("Enter amount to be paid: ");
+            double payAmount = in.nextDouble();
+            if(payAmount != grandTotal){
+                do{
+                grandTotal = grandTotal - payAmount;
+                System.out.println("amount due: " + grandTotal);
+                payAmount = in.nextDouble();
+            }while(payAmount != grandTotal);
+
             }
             System.out.println("Guest is checked in");
         }
