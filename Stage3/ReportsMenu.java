@@ -58,7 +58,7 @@ public class ReportsMenu extends InitialLogin
         while(true)
         {
             Scanner in = new Scanner(System.in);
-            System.out.printf("%nWhat do you want to do?%n(1) Show hotel income%n(3) Show all payments%n(2) Main menu%n(3) Logout%n(4) Exit%n");
+            System.out.printf("%nWhat do you want to do?%n(1) Show hotel income%n(2) Show all payments%n(3) Main menu%n(4) Logout%n(5) Exit%n");
             option = in.nextByte();
             switch (option)
             {

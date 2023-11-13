@@ -38,7 +38,7 @@ public class HotelManagement
         Map<Integer, Room> reservedRooms = new HashMap<Integer, Room>(); //created maps for reserved rooms for guest objects
         Map<Integer, Room> reservedRooms2 = new HashMap<Integer, Room>();
 
-        reservedRooms.put(204, room4);
+        reservedRooms.put(204, room1);
         reservedRooms.put(204, room2);
         reservedRooms2.put(305, room3);
         reservedRooms2.put(203, room4);
@@ -67,10 +67,14 @@ public class HotelManagement
         
         mainHotel.addGuest(guest1);//added guests to hotel
         mainHotel.addGuest(guest2);
-        room1.setUnavailable(); // sets room unavaiable since hard coded guests "skip" the check in
+        room1.setUnavailable(); // sets room unavailable since hard coded guests "skip" the check in
         room2.setUnavailable();
         room3.setUnavailable();
         room4.setUnavailable();
+        Payment payment1 = new Payment(100, "4587345160345"); //created payments and set as paid also because hardcoded guests skip the check in
+        Payment payment2 = new Payment(100, "8924572371430");
+        payment1.setAmountPaid(510);
+        payment2.setAmountPaid(660);
 
         InitialLogin initialLogin = new InitialLogin();//created initial login object
         initialLogin.displayMenu(mainHotel);//displayed initial login menu
