@@ -23,7 +23,7 @@ public class RoomsMenu
      */
     public void option1(Hotel hotel)
     {
-        System.out.println(hotel.printAvailableRooms());
+        hotel.printOccupiedRooms();
     }
     /**
      * This method displays all the occupied rooms in the hotel
@@ -31,7 +31,7 @@ public class RoomsMenu
      */
     public void option2(Hotel hotel)
     {
-        System.out.println(hotel.printOccupiedRooms());
+        hotel.printOccupiedRooms();
     }
     /**
      * This method displays the info about a specific room
@@ -39,11 +39,7 @@ public class RoomsMenu
      */
     public void option3(Hotel hotel)
     {
-        int roomNumber;
-        System.out.println("Enter the room number you want to search");
-        Scanner in = new Scanner(System.in);
-        roomNumber = in.nextInt();
-        System.out.println(hotel.lookUpRoom(roomNumber));
+        hotel.lookUpRoom();
     }
     /**
      * This method cleans a specific room
@@ -51,11 +47,7 @@ public class RoomsMenu
      */
     public void option4(Hotel hotel)
     {
-        Scanner in = new Scanner(System.in);
-        int roomNumber;
-        System.out.println("Enter the room number you want to clean");
-        roomNumber = in.nextInt();
-        hotel.cleanRoom(roomNumber);
+        hotel.cleanRoom();
     }
     /**
      * This method cleans all the rooms in the hotel

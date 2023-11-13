@@ -10,7 +10,7 @@ public class Reservation
     private int reservationNumber;
     private String guestName;
     private Map<Integer, Room> rooms;
-    private byte durationInDays;
+    private byte durationInNights;
     private byte numberOfGuests;
     private static int counter = 1;
 
@@ -26,7 +26,7 @@ public class Reservation
         this.reservationNumber = counter;
         this.guestName = guestName;
         this.rooms = rooms;
-        this.durationInDays = duration;
+        this.durationInNights = duration;
         this.numberOfGuests = numberOfGuests;
     }
     /**
@@ -59,7 +59,7 @@ public class Reservation
      */
     public int getDuration()
     {
-        return durationInDays;
+        return durationInNights;
     }
     /**
      * adds room to rooms
@@ -81,8 +81,28 @@ public class Reservation
      * changes duration
      * @param duration
      */
-    public void changeDuration(byte durationInDays)
+    public void setDuration(byte durationInNights)
     {
-        this.durationInDays = durationInDays;
+        this.durationInNights = durationInNights;
+    }
+    public void setGuestName(String guestName)
+    {
+        this.guestName = guestName;
+    }
+    public void setNumberOfGuests(byte numberOfGuests)
+    {
+        this.numberOfGuests = numberOfGuests;
+    }
+    public byte getNumberOfGuests()
+    {
+        return numberOfGuests;
+    }
+    public void setRooms(Map<Integer, Room> rooms)
+    {
+        this.rooms = rooms;
+    }
+    public void setReservationNumber(int reservationNumber)
+    {
+        this.reservationNumber = reservationNumber;
     }
 }

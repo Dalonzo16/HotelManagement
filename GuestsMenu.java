@@ -19,18 +19,15 @@ public class GuestsMenu
     }
     public void option1(Hotel hotel) //check-in guest
     {
-        System.out.println("Please enter the reservation number of the guest: ");
-        Scanner in = new Scanner(System.in);
-        int reservationNumber = in.nextInt();
-        hotel.checkInGuest(reservationNumber);
+        hotel.checkInGuest();
     }
     public void option2(Hotel hotel) //check-out guest
     {
-        //TO-DO: check-out guest method
+        hotel.checkOutGuest();
     }
     public void option3(Hotel hotel) // edit guest info
     {
-        //TO-DO: edit guest info method
+        hotel.editGuestInfo();
     }
     /**
      * This method displays all the guests in the hotel
@@ -38,12 +35,7 @@ public class GuestsMenu
      */
     public void option4(Hotel hotel)
     {
-        Map<Integer, Guest> guests = hotel.getAllGuests();
-        Set<Integer> keySet = guests.keySet();
-        for(Integer key : keySet)
-        {
-            System.out.println(guests.get(key).toString());
-        }
+        hotel.printAllGuests();
     }
     /**
      * This method takes the employee back to the main menu according to their classification

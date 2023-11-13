@@ -23,14 +23,14 @@ public class Guest
      * @param email
      * @param reservation
      */
-    public Guest(String firstName, String lastName, String phoneNumber, String email, Reservation reservation) 
+    public Guest(String firstName, String lastName, String phoneNumber, String email, String creditCardNumber, Reservation reservation) 
     {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.reservation = reservation;
-        this.creditCardNumber = "";
+        this.creditCardNumber = creditCardNumber;
         this.guestID = counter;
         System.out.println("The guest " + firstName + " " + lastName + " was added with guest ID: " + guestID);
         counter++;
@@ -135,6 +135,10 @@ public class Guest
      * sets credit card number
      * @param creditCardNumber
      */
+    public void setReservation(Reservation reservation)
+    {
+        this.reservation = reservation;
+    }
     public void setCreditCardNumber(String creditCardNumber)
     {
         this.creditCardNumber = creditCardNumber;

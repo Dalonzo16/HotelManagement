@@ -23,11 +23,7 @@ public class ReservationMenu
      */
     public void option2(Hotel hotel)
     {
-        Scanner in = new Scanner(System.in);
-        int reservationNumber;
-        System.out.println("Enter the number of the reservation you want to cancel");
-        reservationNumber = in.nextInt();
-        hotel.removeReservation(reservationNumber);
+        hotel.editReservation();
     }
     /**
      * this is the remove reservation option
@@ -43,11 +39,7 @@ public class ReservationMenu
      */
     public void option4(Hotel hotel)
     {
-        Scanner in = new Scanner(System.in);
-        int reservationNumber;
-        System.out.println("Enter the number of the reservation you want to look up");
-        reservationNumber = in.nextInt();
-        hotel.lookUpReservation(reservationNumber);
+        hotel.lookUpReservation();
     }
     /**
      * this is the back to main menu option
@@ -89,13 +81,13 @@ public class ReservationMenu
             option = in.nextByte();
             switch (option)
             {
-                case 1: option1(hotel);  break; // create reservation option
-                case 2: option2(hotel);  break; // edit reservation option
-                case 3: option3(hotel);  break; // cancel reservation option 
-                case 4: option4(hotel);  break; // look up reservation option
-                case 5: option5(hotel, classification);  break; // back to main menu option
-                case 6: option6(hotel);  break; // logout option
-                case 7: System.out.println("Bye..."); // quit option
+                case 1: option1(hotel);  break; // add reservation
+                case 2: option2(hotel);  break; // edit reservation 
+                case 3: option3(hotel);  break; // cancel reservation  
+                case 4: option4(hotel);  break; // look up reservation 
+                case 5: option5(hotel, classification);  break; // back to main menu
+                case 6: option6(hotel);  break; // logout 
+                case 7: System.out.println("Bye..."); // quit 
                         System.exit(0);
                                     break;
                 default:System.out.println("Please select a valid option.");

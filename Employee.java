@@ -36,14 +36,6 @@ public class Employee
         System.out.println("The new employee" + firstName + " " + lastName + " was created with ID number: " + employeeId + " and password: " + password + 
             " ; His pay rate per hour is: $" + payRate);
     }
-    /**
-     * This is another constructor to initialize employee ID manually
-     * @param employeeId the employees ID
-     */
-    public Employee(int employeeId)
-    {
-        this.employeeId = employeeId;
-    }
    /**
     * This method gets the employees first name
     * @return the employees first name

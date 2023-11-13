@@ -8,20 +8,18 @@ import java.util.Scanner;
 public class ReportsMenu
 {
     private byte option;
-
+    /**
+     * this method shows the hotel economics
+     */
     public void option1()
     {
-        //show hotel income
-    }
-    public void option2()
-    {
-        //show payroll report
+        //TO-DO: show hotel economics
     }
     /**
      * This method takes the manager back to the main menu
      * @param hotel
      */ 
-    public void option3(Hotel hotel)
+    public void option2(Hotel hotel)
     {
         ManagerMenu managerMenu = new ManagerMenu();
         managerMenu.displayMenu(hotel);
@@ -30,7 +28,7 @@ public class ReportsMenu
      * This method takes the user back to the initial login menu
      * @param hotel
      */
-    public void option4(Hotel hotel)
+    public void option3(Hotel hotel)
     {
         InitialLogin initialLogin = new InitialLogin();
         initialLogin.displayMenu(hotel);
@@ -40,15 +38,14 @@ public class ReportsMenu
         while(true)
         {
             Scanner in = new Scanner(System.in);
-            System.out.printf("%nWhat do you want to do?%n(1) Show hotel income %n(2) Show payroll report%n(3) Main menu%n(4) Logout%n(5) Exit%n");
+            System.out.printf("%nWhat do you want to do?%n(1) Show hotel income%n(2) Main menu%n(3) Logout%n(4) Exit%n");
             option = in.nextByte();
             switch (option)
             {
-                case 1: option1();  break; //show hotel income
-                case 2: option2();  break; //show payroll report
-                case 3: option3(hotel);  break; //go back to main menu
-                case 4: option4(hotel);  break; //logout
-                case 5: System.out.println("Bye..."); //exit
+                case 1: option1();  break; //show hotel economics
+                case 2: option2(hotel);  break; //go back to main menu
+                case 3: option3(hotel);  break; //logout
+                case 4: System.out.println("Bye..."); //exit
                         System.exit(0);
                                     break;
                 default:System.out.println("Please select a valid option.");
