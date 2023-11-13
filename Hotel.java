@@ -824,4 +824,19 @@ public class Hotel
             System.out.println(allGuests.get(key));
         }
     }
+    public void printHotelEconomics(){
+        double grandTotal = 0;
+        double payForOneShift = 0;
+        for(int key : payments.keySet()){
+            Payment payment = payments.get(key);
+            grandTotal += payment.getAmountPaid();
+        }
+        for(int employeeID : employees.keySet()){
+            Employee employee = employees.get(employeeID);
+            payForOneShift = employee.getPayRate() * employee.getShift();
+        }
+        double totalWeeklyPay = payForOneShift * 5;
+
+        System.out.println("Weekly PayRoll Expenses: $" + totalWeeklyPay + " | Total earnings from reservations: " + grandTotal);
+    }
 }

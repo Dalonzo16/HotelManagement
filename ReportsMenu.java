@@ -1,4 +1,4 @@
-import java.util.Scanner;
+1import java.util.Scanner;
 
 /**
  *This is the ReportsMenu another child class of Menu
@@ -13,6 +13,7 @@ public class ReportsMenu
      */
     public void option1(Hotel hotel)
     {
+        
         hotel.printHotelEconomics();
     }
     /**
