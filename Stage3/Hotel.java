@@ -688,14 +688,14 @@ public class Hotel
         }
     }
     /**
-     * this method prints all reservations
+     * this method calls the lookUpReservation method for every reservation
      */
     public void printAllReservations()
     {
         System.out.println("All current reservations: ");
         for(Integer key : reservations.keySet())
         {
-            System.out.println(reservations.get(key));
+            lookUpReservation(key);
         }
     }
     /**
@@ -806,7 +806,7 @@ public class Hotel
         if(employees.containsKey(employeeID)) // if the employee ID exists
         {
             Employee employee = employees.get(employeeID);
-            System.out.println("Employee " + employeeID + ": " + employee.getFirstName() + " " + employee.getLastName() + "\nAddress: " + employee.getAddress() + "\nPhone number: " + employee.getPhoneNumber() + "\nPay Rate: " + employee.getPayRate() +  "\nShift: " + employee.getShift());
+            System.out.println("Employee " + employeeID + ": " + employee.getFirstName() + " " + employee.getLastName() + "\nAddress: " + employee.getAddress() + "\nPhone number: " + employee.getPhoneNumber() + "\nPay Rate: " + employee.getPayRate() +  "\nShift: " + employee.getShift() + "\n");
         }
         else
         {
@@ -820,7 +820,25 @@ public class Hotel
     {
         for(Integer key : employees.keySet())
         {
-            System.out.println(employees.get(key));
+            lookUpEmployee(key);
+        }
+    }
+    public void lookUpGuest()
+    {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter the ID of the guest you want to look up: ");
+        int guestID = in.nextInt();
+        lookUpGuest(allGuests.get(guestID));
+    }
+    public void lookUpGuest(Guest guest)
+    {
+        if(allGuests.containsValue(guest))
+        {
+            System.out.println("Guest #" + guest.getGuestID() + "\n" + guest.getFirstName() + " " + guest.getLastName() + "\nPhone number: " + guest.getPhoneNumber() + "\nEmail: " + guest.getEmail() + "\nCredit card number: " + guest.getCreditCardNumber() + "\nReservation number: " + guest.getReservation().getReservationNumber() + "\n");
+        }
+        else
+        {
+            System.out.println("Guest does not exist.");
         }
     }
     /**
@@ -830,7 +848,7 @@ public class Hotel
     {
         for(Integer key : allGuests.keySet())
         {
-            System.out.println(allGuests.get(key));
+            lookUpGuest(allGuests.get(key));
         }
     }
     /**
