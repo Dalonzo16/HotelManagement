@@ -21,7 +21,7 @@ public class HotelManagement
         Employee employee3 = new Employee("Michael", "Phelps", "bye",15);
         Employee reseptionist1 = new Receptionist("Lionel", "Messi", "goat", 100);
         Employee manager1 = new Manager("Eduardo", "Ceh-Varela", "master",20);//created one manager
-       
+        
         mainHotel.addEmployee(employee1);//added employees
         mainHotel.addEmployee(employee2);
         mainHotel.addEmployee(employee3);
