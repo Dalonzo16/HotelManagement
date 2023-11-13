@@ -451,7 +451,7 @@ public class Hotel
     /**
      * This method prints all the occupied rooms in the hotel
      */
-    public String printOccupiedRooms()
+    public void printOccupiedRooms()
     {
         Room currentRoom;
         String occupiedRooms = "";
@@ -468,7 +468,7 @@ public class Hotel
         {
             occupiedRooms = "There are no occupied rooms";
         }
-        return occupiedRooms;
+        System.out.println(occupiedRooms);
     }
     /**
      * this method checks in a guest by getting the reservation number from the user and calling 
