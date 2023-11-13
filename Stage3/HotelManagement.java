@@ -1,4 +1,3 @@
-package Stage3;
 import java.util.Map;
 import java.util.Random;
 import java.util.HashMap;

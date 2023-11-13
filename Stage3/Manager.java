@@ -1,4 +1,3 @@
-package Stage3;
 /**
  *This is the Manager class a child class of Employee
  * @author Devon Alonzo
