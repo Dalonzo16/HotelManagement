@@ -578,17 +578,17 @@ public class Hotel
     {
         Guest guestToEdit = allGuests.get(guestID);
         Scanner in = new Scanner(System.in);
-        System.out.println("Please enter the guest's first name:");
+        System.out.println("Please enter the desired guest's first name:");
         String firstName = in.next();
-        System.out.println("Please enter the guest's last name:");
+        System.out.println("Please enter the desired guest's last name:");
         String lastName = in.next();
-        System.out.println("Please enter the guest's phone number:");
+        System.out.println("Please enter the desired guest's phone number:");
         String phoneNumber = in.next();
-        System.out.println("Please enter the guest's email:");
+        System.out.println("Please enter the desired guest's email:");
         String email = in.next();
-        System.out.println("Please enter the guest's credit card number:");
+        System.out.println("Please enter the desired guest's credit card number:");
         String creditCardNumber = in.next();
-        System.out.println("Please enter the guest's reservation number:");
+        System.out.println("Please enter the desired guest's reservation number:");
         int reservationNumber = in.nextInt();
         editReservation(reservationNumber);
         guestToEdit.setFirstName(firstName);
@@ -653,6 +653,40 @@ public class Hotel
         else
         {
             System.out.println("Reservation number does not exist.");
+        }
+    }
+    /**
+     * this method edits a room by getting the room number from the user and calling 
+     * the other editRoom method with the input
+     */
+    public void editRoom()
+    {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter the room number of the room you want to edit: ");
+        int roomNumber = in.nextInt();
+        editRoom(roomNumber);
+    }
+    /**
+     * this method edits a room (receiving the roomNumber as parameter)
+     * @param roomNumber
+     */
+    public void editRoom(int roomNumber)
+    {
+        if(rooms.containsKey(roomNumber))
+        {
+            Room roomToEdit = rooms.get(roomNumber);
+            Scanner in = new Scanner(System.in);
+            System.out.println("Please enter the new room number:");
+            int newRoomNumber = in.nextInt();
+            System.out.println("Please enter the new price per night:");
+            double pricePerNight = in.nextDouble();
+            roomToEdit.setRoomNumber(newRoomNumber);
+            roomToEdit.setPricePerNight(pricePerNight);
+            System.out.println("Room info has been updated");
+        }
+        else
+        {
+            System.out.println("Room number does not exist.");
         }
     }
     /**
@@ -759,19 +793,19 @@ public class Hotel
         {
             Employee employeeToEdit = employees.get(employeeID);
             Scanner in = new Scanner(System.in);
-            System.out.println("Please enter the employee's first name:");
+            System.out.println("Please enter the desired employee's first name:");
             String firstName = in.next();
-            System.out.println("Please enter the employee's last name:");
+            System.out.println("Please enter the desired employee's last name:");
             String lastName = in.next();
-            System.out.println("Please enter the employee's address:");
+            System.out.println("Please enter the desired employee's address:");
             String address = in.next();
-            System.out.println("Please enter the employee's phone number:");
+            System.out.println("Please enter the desired employee's phone number:");
             String phoneNumber = in.next();
-            System.out.println("Please enter the employee's pay rate:");
+            System.out.println("Please enter the desired employee's pay rate:");
             double payRate = in.nextDouble();
-            System.out.println("Please enter the employee's shift duration:");
+            System.out.println("Please enter the desired employee's shift duration:");
             int shiftDuration = in.nextInt();
-            System.out.println("Please enter the employee's password:");
+            System.out.println("Please enter desired the employee's password:");
             String password = in.next();
             employeeToEdit.setFirstName(firstName);
             employeeToEdit.setLastName(lastName);
@@ -824,6 +858,10 @@ public class Hotel
             lookUpEmployee(key);
         }
     }
+    /**
+     * this method looks up a guest by getting the guest ID from the user and calling the 
+     * other lookUpGuest method with the Guest corresponding to the ID
+     */
     public void lookUpGuest()
     {
         Scanner in = new Scanner(System.in);
@@ -831,6 +869,10 @@ public class Hotel
         int guestID = in.nextInt();
         lookUpGuest(allGuests.get(guestID));
     }
+    /**
+     * this method looks up a guest (receiving the guest as parameter)
+     * @param guest
+     */
     public void lookUpGuest(Guest guest)
     {
         if(allGuests.containsValue(guest))
