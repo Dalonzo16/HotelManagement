@@ -1,4 +1,3 @@
-package Stage3;
 import java.util.Scanner;
 
 /**
