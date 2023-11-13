@@ -1,3 +1,4 @@
+package Stage3;
 /**
  *This is the Employee class it is a parent class
  * @author Devon Alonzo

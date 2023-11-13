@@ -1,3 +1,4 @@
+package Stage3;
 import java.util.Scanner;
 /**
  *This is the GuestsMenu class a child class of Menu

@@ -1,3 +1,4 @@
+package Stage3;
 import java.util.Scanner;
 
 /**
@@ -22,7 +23,7 @@ public class RoomsMenu extends InitialLogin
      */
     public void option1(Hotel hotel)
     {
-        hotel.printOccupiedRooms();
+        hotel.printAvailableRooms();
     }
     /**
      * This method displays all the occupied rooms in the hotel
