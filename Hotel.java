@@ -392,7 +392,6 @@ public class Hotel
     }
     /**
      * This method cleans all the rooms in the hotel
-     * @param hotel
      */
     public void cleanAllRooms()
     {
@@ -403,8 +402,7 @@ public class Hotel
         System.out.println("All rooms have been cleaned");
     }
     /**
-     * This method displays all the available rooms in the hotel
-     * @param hotel
+     * This method prints all the available rooms in the hotel
      */
     public String printAvailableRooms()
     {
@@ -426,8 +424,8 @@ public class Hotel
         return availableRooms;
     }
     /**
-     * This method displays the info about a specific room
-     * @param rooms
+     * This method displays the info about a specific room by getting the room number from the user and 
+     * calling the other lookUpRoom method with the input
      */
     public String lookUpRoom()
     {
@@ -436,6 +434,10 @@ public class Hotel
         int roomNumber = in.nextInt();
         return lookUpRoom(roomNumber);
     }
+    /**
+     * This method displays the info about a specific room (receiving the roomNumber as parameter)
+     * @param roomNumber
+     */
     public String lookUpRoom(int roomNumber)
     {
         if(!rooms.containsKey(roomNumber))
@@ -447,8 +449,7 @@ public class Hotel
         return "Floor: " + (int) roomToSearch.getRoomNumber()/100 + " | Room Number: " + roomToSearch.getRoomNumber() + " | $"+ roomToSearch.getPricePerNight() + " per night | Is it available? " + roomToSearch.isAvailable() + " | Is it clean? " + roomToSearch.isClean();
     }
     /**
-     * This method displays all the occupied rooms in the hotel
-     * @param hotel
+     * This method prints all the occupied rooms in the hotel
      */
     public String printOccupiedRooms()
     {
@@ -470,7 +471,8 @@ public class Hotel
         return occupiedRooms;
     }
     /**
-     * this method checks in a guest
+     * this method checks in a guest by getting the reservation number from the user and calling 
+     * the other checkInGuest method with the input
      */
     public void checkInGuest()
     {
@@ -522,7 +524,8 @@ public class Hotel
         }
     }
     /**
-     * this method checks out a guest by getting the guest ID from the user and calling the other checkOutGuest method with the input
+     * this method checks out a guest by getting the guest ID from the user and 
+     * calling the other checkOutGuest method with the input
      */
     public void checkOutGuest()
     {
@@ -557,7 +560,8 @@ public class Hotel
         }
     }
     /**
-     * this method edits a guest's info by getting the guest ID from the user and calling the other editGuestInfo method with the input
+     * this method edits a guest's info by getting the guest ID from the user and calling 
+     * the other editGuestInfo method with the input
      */
     public void editGuestInfo()
     {
@@ -597,7 +601,8 @@ public class Hotel
 
     }
     /**
-     * this method edits a room's info by getting the room number from the user and calling the other editRoomInfo method with the input
+     * this method edits a room's info by getting the room number from the user and 
+     * calling the other editRoomInfo method with the input
      */
     public void editReservation()
     {
@@ -651,7 +656,8 @@ public class Hotel
         }
     }
     /**
-     * this method looks up a reservation by getting the reservation number from the user and calling the other lookUpReservation method with the input
+     * this method looks up a reservation by getting the reservation number from the user and 
+     * calling the other lookUpReservation method with the input
      */
     public void lookUpReservation()
     {

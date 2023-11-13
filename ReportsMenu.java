@@ -11,9 +11,9 @@ public class ReportsMenu
     /**
      * this method shows the hotel economics
      */
-    public void option1()
+    public void option1(Hotel hotel)
     {
-        //TO-DO: show hotel economics
+        hotel.printHotelEconomics();
     }
     /**
      * This method takes the manager back to the main menu
@@ -42,7 +42,7 @@ public class ReportsMenu
             option = in.nextByte();
             switch (option)
             {
-                case 1: option1();  break; //show hotel economics
+                case 1: option1(hotel);  break; //show hotel economics
                 case 2: option2(hotel);  break; //go back to main menu
                 case 3: option3(hotel);  break; //logout
                 case 4: System.out.println("Bye..."); //exit
