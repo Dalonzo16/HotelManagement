@@ -499,7 +499,7 @@ public class Hotel
             {
                 currentRoom = reservedRooms.get(key);
                 totalRoomPrice += currentRoom.getPricePerNight();
-                currentRoom.setUnavailable();
+                rooms.get(currentRoom.getRoomNumber()).setUnavailable();
             }
             double grandTotal = totalRoomPrice * reservation.getDuration();
             Payment payment = new Payment(grandTotal, guest.getCreditCardNumber());
