@@ -699,7 +699,8 @@ public class Hotel
         }
     }
     /**
-     * this method looks up a payment by getting the payment ID from the user and calling the other lookUpPayment method with the input
+     * this method looks up a payment by getting the payment ID from the user and calling the other 
+     * lookUpPayment method with the input
      */
     public void lookUpPayment()
     {
@@ -736,7 +737,8 @@ public class Hotel
         }
     }
     /**
-     * this method edits an employee by getting the employee ID from the user and calling the other editEmployee method with the input
+     * this method edits an employee by getting the employee ID from the user and 
+     * calling the other editEmployee method with the input
      */
     public void editEmployee()
     {
@@ -785,7 +787,8 @@ public class Hotel
         }
     }
     /**
-     * this method looks up an employee by getting the employee ID from the user and calling the other lookUpEmployee method with the input
+     * this method looks up an employee by getting the employee ID from the user and 
+     * calling the other lookUpEmployee method with the input
      */
     public void lookUpEmployee()
     {
@@ -794,7 +797,10 @@ public class Hotel
         int employeeID = in.nextInt();
         lookUpEmployee(employeeID);
     }
-    
+    /**
+     * this method looks up an employee (receiving the employeeID as parameter)
+     * @param employeeID
+     */
     public void lookUpEmployee(int employeeID)
     {
         if(employees.containsKey(employeeID)) // if the employee ID exists
@@ -817,6 +823,9 @@ public class Hotel
             System.out.println(employees.get(key));
         }
     }
+    /**
+     * this method prints all guests
+     */
     public void printAllGuests()
     {
         for(Integer key : allGuests.keySet())
@@ -824,14 +833,21 @@ public class Hotel
             System.out.println(allGuests.get(key));
         }
     }
-    public void printHotelEconomics(){
+    /**
+     * this method calculates and prints the hotel economics 
+     * i.e. the total weekly payroll expenses and the total earnings from reservations
+     */
+    public void printHotelEconomics()
+    {
         double grandTotal = 0;
         double payForOneShift = 0;
-        for(int key : payments.keySet()){
+        for(int key : payments.keySet())
+        {
             Payment payment = payments.get(key);
             grandTotal += payment.getAmountPaid();
         }
-        for(int employeeID : employees.keySet()){
+        for(int employeeID : employees.keySet())
+        {
             Employee employee = employees.get(employeeID);
             payForOneShift = employee.getPayRate() * employee.getShift();
         }

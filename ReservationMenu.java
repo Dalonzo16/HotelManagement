@@ -8,6 +8,14 @@ import java.util.Scanner;
 public class ReservationMenu
 {
     private byte option;
+
+    /**
+     * Constructor for objects of class ReservationsMenu
+     */
+    public ReservationMenu()
+    {
+        option = 0;
+    }
     /**
      * this is the add reservation option
      * @param hotel

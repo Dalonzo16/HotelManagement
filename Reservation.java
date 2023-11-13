@@ -85,22 +85,42 @@ public class Reservation
     {
         this.durationInNights = durationInNights;
     }
+    /**
+     * sets guest name
+     * @param guestName
+     */
     public void setGuestName(String guestName)
     {
         this.guestName = guestName;
     }
+    /**
+     * sets number of guests
+     * @param numberOfGuests
+     */
     public void setNumberOfGuests(byte numberOfGuests)
     {
         this.numberOfGuests = numberOfGuests;
     }
+    /**
+     * gets number of guests
+     * @return
+     */
     public byte getNumberOfGuests()
     {
         return numberOfGuests;
     }
+    /**
+     * sets rooms
+     * @param rooms
+     */
     public void setRooms(Map<Integer, Room> rooms)
     {
         this.rooms = rooms;
     }
+    /**
+     * sets reservation number
+     * @param reservationNumber
+     */
     public void setReservationNumber(int reservationNumber)
     {
         this.reservationNumber = reservationNumber;

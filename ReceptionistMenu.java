@@ -7,29 +7,56 @@ import java.util.Scanner;
 public class ReceptionistMenu
 {
     private byte option;
-    private byte classification = 2;
-    
+    private byte classification;
+
+    /**
+     * Constructor for objects of class ReceptionistMenu
+     */
+    public ReceptionistMenu()
+    {
+        option = 0;
+        classification = 2;
+    }
+    /**
+     * This method takes the user to the guests menu
+     * @param hotel
+     */
     public void option1(Hotel hotel)
     {
         GuestsMenu guestsMenu = new GuestsMenu();
         guestsMenu.displayMenu(hotel, classification);
     }
+    /**
+     * This method takes the user to the rooms menu
+     * @param hotel
+     */
     public void option2(Hotel hotel)
     {
         RoomsMenu roomsMenu = new RoomsMenu();
         roomsMenu.displayMenu(hotel, classification);
     }
+    /**
+     * This method takes the user to the reservations menu
+     * @param hotel
+     */
     public void option3(Hotel hotel)
     {
         ReservationMenu reservationsMenu = new ReservationMenu();
         reservationsMenu.displayMenu(hotel, classification);
     }
+    /**
+     * This method takes the user back to the initial login menu
+     * @param hotel
+     */
     public void option4(Hotel hotel)
     {
         InitialLogin initialLoginMenu = new InitialLogin();
         initialLoginMenu.displayMenu(hotel);
     }
-
+    /**
+     * This method displays the receptionist menu
+     * @param hotel
+     */
     public void displayMenu(Hotel hotel) 
     {
         while(true)

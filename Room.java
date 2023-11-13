@@ -54,18 +54,30 @@ public class Room
     {
         return isClean;
     }
+    /**
+     * sets cleanliness to false
+     */
     public void setDirty()
     {
         isClean = false;
     }
+    /**
+     * sets availability
+     */
     public void setUnavailable()
     {
         isAvailable = false;
     }
+    /**
+     * sets cleanliness to true
+     */
     public void clean()
     {
         isClean = true;
     }
+    /**
+     * sets availability
+     */
     public void setAvailable()
     {
         isAvailable = true;

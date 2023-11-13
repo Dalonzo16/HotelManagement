@@ -1,4 +1,4 @@
-1import java.util.Scanner;
+import java.util.Scanner;
 
 /**
  *This is the ReportsMenu another child class of Menu
@@ -8,8 +8,16 @@
 public class ReportsMenu
 {
     private byte option;
+
     /**
-     * this method shows the hotel economics
+     * Constructor for objects of class ReportsMenu
+     */
+    public ReportsMenu()
+    {
+        option = 0;
+    }
+    /**
+     * this method calls the printHotelEconomics method from the hotel class
      */
     public void option1(Hotel hotel)
     {
@@ -34,6 +42,10 @@ public class ReportsMenu
         InitialLogin initialLogin = new InitialLogin();
         initialLogin.displayMenu(hotel);
     }
+    /**
+     * This method displays the reports menu
+     * @param hotel
+     */
     public void displayMenu(Hotel hotel)
     {
         while(true)
