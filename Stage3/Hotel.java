@@ -468,7 +468,7 @@ public class Hotel
         {
             occupiedRooms = "There are no occupied rooms";
         }
-        System.out.println(occupiedRooms);
+        System.out.println(occupiedRooms + "\n");
     }
     /**
      * this method checks in a guest by getting the reservation number from the user and calling 
@@ -499,7 +499,7 @@ public class Hotel
             {
                 currentRoom = reservedRooms.get(key);
                 totalRoomPrice += currentRoom.getPricePerNight();
-                rooms.get(currentRoom.getRoomNumber()).setUnavailable();
+                rooms.get(key).setUnavailable();
             }
             double grandTotal = totalRoomPrice * reservation.getDuration();
             Payment payment = new Payment(grandTotal, guest.getCreditCardNumber());

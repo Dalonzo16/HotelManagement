@@ -58,8 +58,12 @@ public class HotelManagement
         Guest guest1 = new Guest("Devon", "Alonzo", "(555) 5555-555", "hello@gmail.com", "4587345160345", reservation1);//created guests
         Guest guest2 = new Guest("Ludwig", "Scherer", "(555) 5555-555", "bye@yahoo.com", "8924572371430", reservation2);
         
-        mainHotel.addGuest(guest1);//added guests
+        mainHotel.addGuest(guest1);//added guests to hotel
         mainHotel.addGuest(guest2);
+        room1.setUnavailable(); // sets room unavaiable since hard coded guests "skip" the check in
+        room2.setUnavailable();
+        room3.setUnavailable();
+        room4.setUnavailable();
 
         InitialLogin initialLogin = new InitialLogin();//created initial login object
         initialLogin.displayMenu(mainHotel);//displayed initial login menu
