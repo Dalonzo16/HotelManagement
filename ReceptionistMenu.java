@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 /**
  * This is the ReceptionistMenu class

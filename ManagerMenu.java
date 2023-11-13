@@ -1,5 +1,3 @@
-
-import java.util.Map;
 import java.util.Scanner;
 /**
  * This is the ManagerMenu class another child class of Menu

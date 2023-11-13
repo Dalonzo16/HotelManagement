@@ -1,7 +1,4 @@
 import java.util.Random;
-
-import javax.swing.text.html.HTMLEditorKit.LinkController;
-
 /**
  *This program is a hotel management program
  * @author Devon

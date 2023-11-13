@@ -1,6 +1,4 @@
-import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 /**
  *This is the GuestsMenu class a child class of Menu
  * @author Devon Alonzo
@@ -17,21 +15,33 @@ public class GuestsMenu
     {
         option = 0;
     }
+    /**
+     * this method calls the check-in guest method from the hotel class
+     * @param hotel
+     */
     public void option1(Hotel hotel) //check-in guest
     {
         hotel.checkInGuest();
     }
+    /**
+     * this method calls the check-out guest method from the hotel class
+     * @param hotel
+     */
     public void option2(Hotel hotel) //check-out guest
     {
         hotel.checkOutGuest();
     }
+    /**
+     * this method calls the edit guest info method from the hotel class
+     * @param hotel
+     */
     public void option3(Hotel hotel) // edit guest info
     {
         hotel.editGuestInfo();
     }
     /**
-     * This method displays all the guests in the hotel
-     * @param guests
+     * this method calls the print all guests method from the hotel class
+     * @param hotel
      */
     public void option4(Hotel hotel)
     {
@@ -58,6 +68,10 @@ public class GuestsMenu
      * This method logs the user out and takes them back to the initial login menu
      */
     }
+    /**
+     * This method takes the user back to the initial login menu
+     * @param hotel
+     */
     public void option6(Hotel hotel) //logout
     {
         InitialLogin initialLogin = new InitialLogin();

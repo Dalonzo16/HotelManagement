@@ -1,4 +1,3 @@
-
 /**
  * @author Ludwig Scherer
  * @date 11-02-2023

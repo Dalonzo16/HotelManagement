@@ -1,8 +1,7 @@
-
 import java.util.Map;
 /**
  * @author Ludwig Scherer
- * @date 10-30-2023
+ * @date 11-12-2023
  */
 
 public class Reservation 
@@ -28,6 +27,7 @@ public class Reservation
         this.rooms = rooms;
         this.durationInNights = duration;
         this.numberOfGuests = numberOfGuests;
+        System.out.println("The new reservation for " + guestName + " was created with reservation number: " + reservationNumber + " and duration: " + duration + " nights.");
     }
     /**
      * gets reservation number

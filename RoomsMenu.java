@@ -1,4 +1,3 @@
-import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -83,7 +82,7 @@ public class RoomsMenu
     /**
      * This method logs the user out and takes them back to the initial login menu
      */
-    public void option7(Hotel hotel, Map<Integer, Room> rooms)
+    public void option7(Hotel hotel)
     {
         InitialLogin initialLogin = new InitialLogin();
         initialLogin.displayMenu(hotel);
@@ -97,7 +96,6 @@ public class RoomsMenu
     {
         while(true)
         {
-            Map<Integer, Room> rooms = hotel.getRooms();
             Scanner in = new Scanner(System.in);
             System.out.println("Rooms menu, please select an option:\n(1) Show available rooms\n(2) Show occupied rooms\n(3) Look up info about room #\n(4) Clean a room #\n(5) Clean all rooms\n(6) Back to main menu\n(7) Logout\n(8) Quit\n");
             this.option = in.nextByte();
@@ -109,7 +107,7 @@ public class RoomsMenu
                 case 4: option4(hotel);  break; // clean a room option
                 case 5: option5(hotel);  break; // clean all rooms option
                 case 6: option6(hotel, classification);  break; // back to main menu option
-                case 7: option7(hotel, rooms);  break; // logout option
+                case 7: option7(hotel);  break; // logout option
                 case 8: System.out.println("Bye..."); // quit option
                         System.exit(0);
                                     break;

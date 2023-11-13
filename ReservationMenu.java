@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.Map;
 
 /**
  *This is the ReservationsMenu class another child class of Menu

@@ -1,4 +1,3 @@
-import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -26,8 +25,7 @@ public class EmployeesMenu
         hotel.addEmployee();
     }
     /**
-     * This method removes an employee by asking the user for the employee ID and 
-     * then calls the removeEmployee method from the Hotel class
+     * This method calls the removeEmployee method from the Hotel class
      * @param hotel
      */
     public void option2(Hotel hotel)
@@ -35,8 +33,7 @@ public class EmployeesMenu
         hotel.removeEmployee();
     }
     /**
-     * This method looks up an employee by asking the user for the employee ID and 
-     * then calls the getEmployee method from the Hotel class
+     * This method calls the lookUpEmployee method from the Hotel class
      * @param hotel
      */
     public void option3(Hotel hotel)
@@ -44,7 +41,7 @@ public class EmployeesMenu
         hotel.lookUpEmployee();
     }
     /**
-     * This method displays all the employees in the hotel
+     * This method calls the printAllEmployees method from the Hotel class
      * @param hotel
      */
     public void option4(Hotel hotel)

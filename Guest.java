@@ -21,6 +21,7 @@ public class Guest
      * @param lastName
      * @param phoneNumber
      * @param email
+     * @param creditCardNumber
      * @param reservation
      */
     public Guest(String firstName, String lastName, String phoneNumber, String email, String creditCardNumber, Reservation reservation) 
@@ -132,17 +133,25 @@ public class Guest
         this.guestID = guestID;
     }
     /**
-     * sets credit card number
-     * @param creditCardNumber
+     * sets reservation
+     * @param reservation
      */
     public void setReservation(Reservation reservation)
     {
         this.reservation = reservation;
     }
+    /**
+     * sets credit card number
+     * @param creditCardNumber
+     */
     public void setCreditCardNumber(String creditCardNumber)
     {
         this.creditCardNumber = creditCardNumber;
     }
+    /**
+     * gets reservation number
+     * @return
+     */
     public int getReservationNumber()
     {
         return reservation.getReservationNumber();
