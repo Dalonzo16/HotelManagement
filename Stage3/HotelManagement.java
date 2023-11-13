@@ -45,6 +45,7 @@ public class HotelManagement
         Reservation reservation2 = new Reservation("Scherer", numberOfGuests, reservedRooms2, duration);
         
         mainHotel.addReservation(reservation1); //add objects to hotel
+        mainHotel.addReservation(reservation2);
         mainHotel.addEmployee(employee1);
         mainHotel.addEmployee(employee2);
         mainHotel.addEmployee(employee3);
