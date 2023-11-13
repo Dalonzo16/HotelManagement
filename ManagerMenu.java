@@ -4,7 +4,7 @@ import java.util.Scanner;
  * @author Devon Alonzo
  * @date 2023-11-09 20:06:42
  */
-public class ManagerMenu
+public class ManagerMenu extends InitialLogin
 {
     private byte option;
     private byte classification;

@@ -5,7 +5,7 @@ import java.util.Scanner;
  * @author Devon Alonzo
  * @date 11-8-2023
  */
-public class ReportsMenu
+public class ReportsMenu extends InitialLogin
 {
     private byte option;
 
