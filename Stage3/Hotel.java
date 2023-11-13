@@ -681,10 +681,11 @@ public class Hotel
             {
                 System.out.println("# " + key);
             }
+            System.out.println();
         }
         else
         {
-            System.out.println("Reservation number does not exist.");
+            System.out.println("Reservation number does not exist.\n");
         }
     }
     /**
