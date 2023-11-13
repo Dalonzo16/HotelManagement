@@ -404,7 +404,7 @@ public class Hotel
     /**
      * This method prints all the available rooms in the hotel
      */
-    public String printAvailableRooms()
+    public void printAvailableRooms()
     {
         Room currentRoom;
         String availableRooms = "";
@@ -421,7 +421,7 @@ public class Hotel
         {
             availableRooms = "There are no available rooms";
         }
-        return availableRooms;
+        System.out.println(availableRooms);
     }
     /**
      * This method displays the info about a specific room by getting the room number from the user and 
