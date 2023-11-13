@@ -28,6 +28,7 @@ public class Reservation
         this.durationInNights = duration;
         this.numberOfGuests = numberOfGuests;
         System.out.println("The new reservation for " + guestName + " was created with reservation number: " + reservationNumber + " and duration: " + duration + " nights.");
+        counter++;
     }
     /**
      * gets reservation number

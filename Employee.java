@@ -33,7 +33,7 @@ public class Employee
         address = "";
         shiftDuration = 0;
         counter++;
-        System.out.println("The new employee" + firstName + " " + lastName + " was created with ID number: " + employeeId + " and password: " + password + 
+        System.out.println("The new employee " + firstName + " " + lastName + " was created with ID number: " + employeeId + " and password: " + password + 
             " ; His pay rate per hour is: $" + payRate);
     }
    /**
