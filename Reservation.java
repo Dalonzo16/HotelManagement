@@ -1,30 +1,34 @@
-
-import java.util.ArrayList
+import java.util.Map;
 /**
  * @author Ludwig Scherer
- * @date 10-30-2023
+ * @date 11-12-2023
  */
 
 public class Reservation 
 {
     private int reservationNumber;
     private String guestName;
-    private ArrayList<Room> rooms;
-    private int duration;
+    private Map<Integer, Room> rooms;
+    private byte durationInNights;
+    private byte numberOfGuests;
+    private static int counter = 1;
 
     /**
      * Constructor for objects of class Reservation
-     * @param reservationNumber
+     * @param numberOfGuests
      * @param guestName
      * @param rooms
      * @param duration
      */
-    public Reservation(int reservationNumber, String guestName, ArrayList<Room> rooms, int duration)
+    public Reservation(String guestName, byte numberOfGuests, Map<Integer, Room> rooms, byte duration)
     {
-        this.reservationNumber = reservationNumber;
+        this.reservationNumber = counter;
         this.guestName = guestName;
         this.rooms = rooms;
-        this.duration = duration;
+        this.durationInNights = duration;
+        this.numberOfGuests = numberOfGuests;
+        System.out.println("The new reservation for " + guestName + " was created with reservation number: " + reservationNumber + " and duration: " + duration + " nights.");
+        counter++;
     }
     /**
      * gets reservation number
@@ -46,7 +50,7 @@ public class Reservation
      * gets rooms
      * @return
      */
-    public ArrayList<Room> getRooms()
+    public Map<Integer, Room> getRooms()
     {
         return rooms;
     }
@@ -56,7 +60,7 @@ public class Reservation
      */
     public int getDuration()
     {
-        return duration;
+        return durationInNights;
     }
     /**
      * adds room to rooms
@@ -64,7 +68,7 @@ public class Reservation
      */
     public void addRoom(Room room)
     {
-        rooms.add(room);
+        rooms.put(room.getRoomNumber(), room);
     }
     /**
      * removes room from rooms
@@ -72,14 +76,54 @@ public class Reservation
      */
     public void removeRoom(Room room)
     {
-        rooms.remove(room);
+        rooms.remove(room.getRoomNumber());
     }
     /**
      * changes duration
      * @param duration
      */
-    public void changeDuration(int duration)
+    public void setDuration(byte durationInNights)
     {
-        this.duration = duration;
+        this.durationInNights = durationInNights;
+    }
+    /**
+     * sets guest name
+     * @param guestName
+     */
+    public void setGuestName(String guestName)
+    {
+        this.guestName = guestName;
+    }
+    /**
+     * sets number of guests
+     * @param numberOfGuests
+     */
+    public void setNumberOfGuests(byte numberOfGuests)
+    {
+        this.numberOfGuests = numberOfGuests;
+    }
+    /**
+     * gets number of guests
+     * @return
+     */
+    public byte getNumberOfGuests()
+    {
+        return numberOfGuests;
+    }
+    /**
+     * sets rooms
+     * @param rooms
+     */
+    public void setRooms(Map<Integer, Room> rooms)
+    {
+        this.rooms = rooms;
+    }
+    /**
+     * sets reservation number
+     * @param reservationNumber
+     */
+    public void setReservationNumber(int reservationNumber)
+    {
+        this.reservationNumber = reservationNumber;
     }
 }

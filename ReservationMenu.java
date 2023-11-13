@@ -5,43 +5,100 @@ import java.util.Scanner;
  * @author Devon Alonzo
  * @date 11-8-2023
  */
-public class ReservationMenu extends Menu {
-    private byte userSelection;
-    @Override
-    public void displayMenu(){
-        Scanner in = new Scanner(System.in);
-        System.out.println("=========================");
-        System.out.println("| 1. Create Reservation |");
-        System.out.println("| 2. Edit Reservation   |");
-        System.out.println("| 3. Cancel Reservation |");
-        System.out.println("| 4. Search Reservation |");
-        System.out.println("| 5. Back to main menu  |");
-        System.out.println("=========================");
-        this.userSelection = in.nextByte();
+public class ReservationMenu extends InitialLogin
+{
+    private byte option;
+
+    /**
+     * Constructor for objects of class ReservationsMenu
+     */
+    public ReservationMenu()
+    {
+        option = 0;
     }
     /**
-     * This is eh checkInput method there is no computations yet
+     * this is the add reservation option
+     * @param hotel
      */
-    public void checkInput(){
-        switch(userSelection){
-            case 1:
-                System.out.println("created");
-            break;
-            case 2:
-                System.out.println("edited");
-            break;
-            case 3:
-                System.out.println("canceled");
-            break;
-            case 4:
-                System.out.println("searched");
-            break;
+    public void option1(Hotel hotel)
+    {
+        hotel.addReservation();
+    }
+    /**
+     * this is the edit reservation option
+     * @param hotel
+     */
+    public void option2(Hotel hotel)
+    {
+        hotel.editReservation();
+    }
+    /**
+     * this is the remove reservation option
+     * @param hotel
+     */
+    public void option3(Hotel hotel)
+    {
+        hotel.removeReservation();
+    }
+    /**
+     * this is the look up reservation option
+     * @param hotel
+     */
+    public void option4(Hotel hotel)
+    {
+        hotel.lookUpReservation();
+    }
+    /**
+     * this is the back to main menu option
+     * @param hotel
+     * @param classification
+     */
+    public void option5(Hotel hotel, byte classification)
+    {
+        if(classification == 2)
+        {
+            ReceptionistMenu receptionistMenu = new ReceptionistMenu();
+            receptionistMenu.displayMenu(hotel);
         }
+        else
+        {
+            ManagerMenu managerMenu = new ManagerMenu();
+            managerMenu.displayMenu(hotel);
+        }  
     }
-    
-    @Override
-    public byte getUserSelection() {
-        return userSelection;
+    /**
+     * this is the logout option
+     * @param hotel
+     */
+    public void option6(Hotel hotel)
+    {
+        InitialLogin initialLogin = new InitialLogin();
+        initialLogin.displayMenu(hotel);
     }
-    
+    /**
+     * this is the quit option
+     * @param hotel
+     */
+    public void displayMenu(Hotel hotel, byte classification)
+    {
+        while(true)
+        {
+            System.out.printf("%nWhat do you want to do?%n(1) Create Reservation %n(2) Edit Reservation %n(3) Cancel Reservation %n(4) Look up reservation %n(5) Back to main menu%n (6) Logout%n (7) Quit%n");
+            Scanner in = new Scanner(System.in);
+            option = in.nextByte();
+            switch (option)
+            {
+                case 1: option1(hotel);  break; // add reservation
+                case 2: option2(hotel);  break; // edit reservation 
+                case 3: option3(hotel);  break; // cancel reservation  
+                case 4: option4(hotel);  break; // look up reservation 
+                case 5: option5(hotel, classification);  break; // back to main menu
+                case 6: option6(hotel);  break; // logout 
+                case 7: System.out.println("Bye..."); // quit 
+                        System.exit(0);
+                                    break;
+                default:System.out.println("Please select a valid option.");
+            }
+        } 
+    }
 }

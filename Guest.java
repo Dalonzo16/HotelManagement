@@ -11,8 +11,9 @@ public class Guest
     private String phoneNumber;
     private String email;
     private String creditCardNumber;
-    private int GuestID;
-    Reservation reservation;
+    private int guestID;
+    private Reservation reservation;
+    private static int counter = 1;
 
     /**
      * Constructor for objects of class Guest
@@ -20,15 +21,20 @@ public class Guest
      * @param lastName
      * @param phoneNumber
      * @param email
+     * @param creditCardNumber
      * @param reservation
      */
-    public Guest(String firstName, String lastName, String phoneNumber, String email, Reservation reservation) 
+    public Guest(String firstName, String lastName, String phoneNumber, String email, String creditCardNumber, Reservation reservation) 
     {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.reservation = reservation;
+        this.creditCardNumber = creditCardNumber;
+        this.guestID = counter;
+        System.out.println("The guest " + firstName + " " + lastName + " was added with guest ID: " + guestID);
+        counter++;
     }
     /**
      * gets first name
@@ -76,13 +82,13 @@ public class Guest
      */
     public int getGuestID()
     {
-        return GuestID;
+        return guestID;
     }
     /**
      * gets reservation info
      * @return
      */
-    public Reservation getReservationInfo()
+    public Reservation getReservation()
     {
         return reservation;
     }
@@ -119,12 +125,20 @@ public class Guest
         this.email = email;
     }
     /**
-     * sets GuestID
-     * @param GuestID
+     * sets guestID
+     * @param guestID
      */
-    public void setGuestID(int GuestID)
+    public void setGuestID(int guestID)
     {
-        this.GuestID = GuestID;
+        this.guestID = guestID;
+    }
+    /**
+     * sets reservation
+     * @param reservation
+     */
+    public void setReservation(Reservation reservation)
+    {
+        this.reservation = reservation;
     }
     /**
      * sets credit card number
@@ -133,5 +147,13 @@ public class Guest
     public void setCreditCardNumber(String creditCardNumber)
     {
         this.creditCardNumber = creditCardNumber;
+    }
+    /**
+     * gets reservation number
+     * @return
+     */
+    public int getReservationNumber()
+    {
+        return reservation.getReservationNumber();
     }
 }

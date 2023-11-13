@@ -1,4 +1,3 @@
-
 /**
  * @author Ludwig Scherer
  * @date 11-02-2023
@@ -9,6 +8,8 @@ public class Payment
     private double amountDue;
     private double amountPaid;
     private String creditCardNumber;
+    private int paymentID;
+    private static int counter = 1;
 
     /**
      * Constructor for objects of class Payment
@@ -20,6 +21,8 @@ public class Payment
         this.amountDue = amountDue;
         this.creditCardNumber = creditCardNumber;
         amountPaid = 0;
+        paymentID = counter;
+        counter++;
     }
     /**
      * gets amount due
@@ -44,6 +47,10 @@ public class Payment
     public double getAmountPaid()
     {
         return amountPaid;
+    }
+    public int getPaymentID()
+    {
+        return paymentID;
     }
     /**
      * sets amount due
