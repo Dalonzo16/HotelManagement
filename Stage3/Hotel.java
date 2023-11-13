@@ -399,7 +399,7 @@ public class Hotel
         {
             rooms.get(key).clean();
         }
-        System.out.println("All rooms have been cleaned");
+        System.out.println("All rooms have been cleaned \n");
     }
     /**
      * This method prints all the available rooms in the hotel
