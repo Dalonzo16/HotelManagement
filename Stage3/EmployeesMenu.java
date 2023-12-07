@@ -41,10 +41,18 @@ public class EmployeesMenu extends InitialLogin
         hotel.lookUpEmployee();
     }
     /**
-     * This method calls the printAllEmployees method from the Hotel class
+     * This method calls the editEmployee method from the Hotel class
      * @param hotel
      */
     public void option4(Hotel hotel)
+    {
+        hotel.editEmployee();
+    }
+    /**
+     * This method calls the printAllEmployees method from the Hotel class
+     * @param hotel
+     */
+    public void option5(Hotel hotel)
     {
         hotel.printAllEmployees();
     }
@@ -52,7 +60,7 @@ public class EmployeesMenu extends InitialLogin
      * This method takes the manager back to the main menu
      * @param hotel
      */
-    public void option5(Hotel hotel)
+    public void option6(Hotel hotel)
     {
         ManagerMenu managerMenu = new ManagerMenu();
         managerMenu.displayMenu(hotel);
@@ -61,7 +69,7 @@ public class EmployeesMenu extends InitialLogin
      * This method logs the user out and takes them back to the initial login menu
      * @param hotel
      */
-    public void option6(Hotel hotel)
+    public void option7(Hotel hotel)
     {
         InitialLogin initialLogin = new InitialLogin();
         initialLogin.displayMenu(hotel);
@@ -75,17 +83,18 @@ public class EmployeesMenu extends InitialLogin
         while(true)
         {
             Scanner in = new Scanner(System.in);
-            System.out.printf("%nWhat do you want to do?%n(1) Create new employee %n(2) Remove employee %n(3) Look up employee info %n(4) View all employees%n(5) Back to main menu%n(6) Logout%n(7) Quit%n");
+            System.out.printf("%nWhat do you want to do?%n(1) Create new employee %n(2) Remove employee %n(3) Look up employee info %n(4) Edit employee info%n (5)View all employees%n(6) Back to main menu%n(7) Logout%n(8) Quit%n");
             option = in.nextByte();
             switch (option) // switch statement for the different menu options defined above
             {
                 case 1: option1(hotel);  break; //create new employee
                 case 2: option2(hotel);  break; //remove employee
                 case 3: option3(hotel);  break; //look up employee info
-                case 4: option4(hotel);  break; //view all employees
-                case 5: option5(hotel);  break; //back to main menu
-                case 6: option6(hotel);  break; //logout
-                case 7: System.out.println("Bye..."); //quit
+                case 4: option4(hotel);  break; //edit employee info
+                case 5: option5(hotel);  break; //view all employees
+                case 6: option6(hotel);  break; //back to main menu
+                case 7: option7(hotel);  break; //logout
+                case 8: System.out.println("Bye..."); //quit
                         System.exit(0);
                                     break;
                 default:System.out.println("Please select a valid option.");

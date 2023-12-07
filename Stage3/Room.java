@@ -82,4 +82,20 @@ public class Room
     {
         isAvailable = true;
     }
+    /**
+     * sets price per night
+     * @param pricePerNight
+     */
+    public void setPricePerNight(double pricePerNight)
+    {
+        this.pricePerNight = pricePerNight;
+    }
+    /**
+     * sets room number
+     * @param roomNumber
+     */
+    public void setRoomNumber(int roomNumber)
+    {
+        this.roomNumber = roomNumber;
+    }  
 }
