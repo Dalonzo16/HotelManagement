@@ -14,7 +14,7 @@ public class HotelManagement
 
         for(int i = 0; i < 20; i++)
         {
-            Room room = new Room(random.nextInt(100, 400), (double) Math.round(random.nextDouble(40, 200)*100)/100);
+            Room room = new Room(random.nextInt(100), (double) Math.round(random.nextInt(40)*100)/100);
             mainHotel.addRoom(room);
         }
         
@@ -62,11 +62,11 @@ public class HotelManagement
         mainHotel.addRoom(room3);
         mainHotel.addRoom(room4);
 
-        Guest guest1 = new Guest("Devon", "Alonzo", "(555) 5555-555", "hello@gmail.com", "4587345160345", reservation1);//created guests
-        Guest guest2 = new Guest("Ludwig", "Scherer", "(555) 5555-555", "bye@yahoo.com", "8924572371430", reservation2);
+        //Guest guest1 = new Guest("Devon", "Alonzo", "(555) 5555-555", "hello@gmail.com", "4587345160345", reservation1);//created guests
+        //Guest guest2 = new Guest("Ludwig", "Scherer", "(555) 5555-555", "bye@yahoo.com", "8924572371430", reservation2);
         
-        mainHotel.addGuest(guest1);//added guests to hotel
-        mainHotel.addGuest(guest2);
+        //mainHotel.addGuest(guest1);//added guests to hotel
+        //mainHotel.addGuest(guest2);
         room1.setUnavailable(); // sets room unavailable since hard coded guests "skip" the check in
         room2.setUnavailable();
         room3.setUnavailable();
@@ -77,8 +77,13 @@ public class HotelManagement
         payment2.setAmountPaid(660);
         mainHotel.addPayment(payment1); //added payments to hotel
         mainHotel.addPayment(payment2);
+        
+        Sign_in_GUI GUI = new Sign_in_GUI(mainHotel);
+        GUI.setVisible(true);
 
         InitialLogin initialLogin = new InitialLogin();//created initial login object
         initialLogin.displayMenu(mainHotel);//displayed initial login menu
+        
+        
     }
 }

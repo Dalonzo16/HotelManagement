@@ -898,6 +898,7 @@ public class Hotel
      * this method calculates and prints the hotel economics 
      * i.e. the total weekly payroll expenses and the total earnings from reservations
      */
+    
     public void printHotelEconomics()
     {
         double grandTotal = 0;
