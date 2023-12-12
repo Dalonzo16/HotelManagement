@@ -658,7 +658,7 @@ public class Hotel
                 int roomNumber = in.nextInt();
                 if(rooms.containsKey(roomNumber))
                 {
-                    if(rooms.get(roomNumber).getReservationNumber() == 0)
+                    if(rooms.get(roomNumber).getReservationNumber() == 0 || rooms.get(roomNumber).getReservationNumber() == reservationNumber)
                     {
                         rooms.get(roomNumber).setReservationNumber(reservationNumber);
                         roomsToReserve.put(roomNumber, rooms.get(roomNumber));
