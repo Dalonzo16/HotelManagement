@@ -261,7 +261,15 @@ public class Hotel
             int roomNumber = in.nextInt();
             if(rooms.containsKey(roomNumber))
             {
-                roomsToReserve.put(roomNumber, rooms.get(roomNumber));
+                if(rooms.get(roomNumber).getReservationNumber() == 0)
+                {
+                    roomsToReserve.put(roomNumber, rooms.get(roomNumber));
+                }
+                else
+                {
+                    System.out.println("Room " + roomNumber + " is already reserved, please select a different one.");
+                    i--;
+                }
             }
             else
             {
@@ -299,6 +307,11 @@ public class Hotel
     {
         if(reservations.containsKey(reservationNumber))
         {
+            Map<Integer, Room> reservedRooms = reservations.get(reservationNumber).getRooms();
+            for(Integer key : reservedRooms.keySet())
+            {
+                reservedRooms.get(key).resetReservationNumber();
+            }
             reservations.remove(reservationNumber);
         }
         else
@@ -454,7 +467,14 @@ public class Hotel
         }
         Room roomToSearch;
         roomToSearch = rooms.get(roomNumber);
-        return "Floor: " + (int) roomToSearch.getRoomNumber()/100 + " | Room Number: " + roomToSearch.getRoomNumber() + " | $"+ roomToSearch.getPricePerNight() + " per night | Is it available? " + roomToSearch.isAvailable() + " | Is it clean? " + roomToSearch.isClean();
+        if(roomToSearch.getReservationNumber() == 0)
+        {
+            return "Floor: " + (int) roomToSearch.getRoomNumber()/100 + " | Room Number: " + roomToSearch.getRoomNumber() + " | $"+ roomToSearch.getPricePerNight() + " per night | Is it available? " + roomToSearch.isAvailable() + " | Is it clean? " + roomToSearch.isClean();
+        }
+        else
+        {
+            return "Floor: " + (int) roomToSearch.getRoomNumber()/100 + " | Room Number: " + roomToSearch.getRoomNumber() + " | $"+ roomToSearch.getPricePerNight() + " per night | The room is booked for reservation number: " + roomToSearch.getReservationNumber() + " | Is it clean? " + roomToSearch.isClean();
+        }
     }
     /**
      * This method prints all the occupied rooms in the hotel
@@ -508,6 +528,7 @@ public class Hotel
                 currentRoom = reservedRooms.get(key);
                 totalRoomPrice += currentRoom.getPricePerNight();
                 rooms.get(key).setUnavailable();
+                rooms.get(key).setReservationNumber(reservationNumber);
             }
             double grandTotal = totalRoomPrice * reservation.getDuration();
             Payment payment = new Payment(grandTotal, guest.getCreditCardNumber());
@@ -557,6 +578,7 @@ public class Hotel
             {
                 rooms.get(key).setAvailable();
                 rooms.get(key).setDirty();
+                rooms.get(key).resetReservationNumber();
             }
             reservations.remove(reservation.getReservationNumber());
             allGuests.remove(guestID);
@@ -636,7 +658,7 @@ public class Hotel
             System.out.println("Please enter the duration of stay:");
             byte duration = in.nextByte();
             Map<Integer, Room> roomsToReserve = new HashMap<>();
-            System.out.println("Please enter the amount of room you want to reserve:");
+            System.out.println("Please enter the amount of rooms you want to reserve:");
             int amountOfRooms = in.nextInt();
             for(int i = 0; i < amountOfRooms; i++)
             {
@@ -644,7 +666,16 @@ public class Hotel
                 int roomNumber = in.nextInt();
                 if(rooms.containsKey(roomNumber))
                 {
-                    roomsToReserve.put(roomNumber, rooms.get(roomNumber));
+                    if(rooms.get(roomNumber).getReservationNumber() == 0 || rooms.get(roomNumber).getReservationNumber() == reservationNumber)
+                    {
+                        rooms.get(roomNumber).setReservationNumber(reservationNumber);
+                        roomsToReserve.put(roomNumber, rooms.get(roomNumber));
+                    }
+                    else
+                    {
+                        System.out.println("This room is already reserved.");
+                        i--;
+                    }
                 }
                 else
                 {
@@ -686,11 +717,35 @@ public class Hotel
             Scanner in = new Scanner(System.in);
             System.out.println("Please enter the new room number:");
             int newRoomNumber = in.nextInt();
-            System.out.println("Please enter the new price per night:");
-            double pricePerNight = in.nextDouble();
-            roomToEdit.setRoomNumber(newRoomNumber);
-            roomToEdit.setPricePerNight(pricePerNight);
-            System.out.println("Room info has been updated");
+            if(rooms.containsKey(roomNumber))
+            {
+                System.out.println("A room with this number already exists, would you like to overwrite it?\n(1) Yes\n(2) No\n");
+                int option = in.nextByte();
+                switch(option)
+                {
+                    case 1: 
+                        System.out.println("Please enter the new price per night:");
+                        double pricePerNight = in.nextDouble();
+                        roomToEdit.setRoomNumber(newRoomNumber);
+                        roomToEdit.setPricePerNight(pricePerNight);
+                        rooms.put(newRoomNumber, roomToEdit);
+                        System.out.println("Room info has been overwritten");
+                        break;
+                    case 2: 
+                        System.out.println("Cancelled.");
+                        break;
+                    default: System.out.println("Please select a valid option");
+                        break;
+                }
+            }
+            else
+            {
+                System.out.println("Please enter the new price per night:");
+                double pricePerNight = in.nextDouble();
+                roomToEdit.setRoomNumber(newRoomNumber);
+                roomToEdit.setPricePerNight(pricePerNight);
+                System.out.println("Room info has been updated");
+            }
         }
         else
         {
