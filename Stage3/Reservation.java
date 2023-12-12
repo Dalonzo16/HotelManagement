@@ -7,7 +7,8 @@ import java.util.Map;
 public class Reservation 
 {
     private int reservationNumber;
-    private String guestName;
+    private String guestFirstName;
+    private String guestLastName;
     private Map<Integer, Room> rooms;
     private byte durationInNights;
     private byte numberOfGuests;
@@ -15,19 +16,21 @@ public class Reservation
 
     /**
      * Constructor for objects of class Reservation
+     * @param firstName
+     * @param lastName
      * @param numberOfGuests
-     * @param guestName
      * @param rooms
      * @param duration
      */
-    public Reservation(String guestName, byte numberOfGuests, Map<Integer, Room> rooms, byte duration)
+    public Reservation(String firstName, String lastName, byte numberOfGuests, Map<Integer, Room> rooms, byte duration)
     {
         this.reservationNumber = counter;
-        this.guestName = guestName;
+        this.guestFirstName = firstName;
+        this.guestLastName = lastName;
         this.rooms = rooms;
         this.durationInNights = duration;
         this.numberOfGuests = numberOfGuests;
-        System.out.println("The new reservation for " + guestName + " was created with reservation number: " + reservationNumber + " and duration: " + duration + " nights.");
+        System.out.println("The new reservation for " + guestFirstName + " was created with reservation number: " + reservationNumber + " and duration: " + duration + " nights.");
         counter++;
     }
     /**
@@ -42,9 +45,12 @@ public class Reservation
      * gets guest name
      * @return
      */
-    public String getGuestName()
+    public String getGuestFirstName()
     {
-        return guestName;
+        return guestFirstName;
+    }
+    public String getGuestLastName(){
+        return guestLastName;
     }
     /**
      * gets rooms
@@ -90,9 +96,12 @@ public class Reservation
      * sets guest name
      * @param guestName
      */
-    public void setGuestName(String guestName)
+    public void setfirstName(String firstName)
     {
-        this.guestName = guestName;
+        this.guestFirstName = firstName;
+    }
+    public void setLastName(String lastName){
+        this.guestLastName = lastName;
     }
     /**
      * sets number of guests

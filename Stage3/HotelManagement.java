@@ -35,23 +35,23 @@ public class HotelManagement
         Room room3 = new Room(305, 70.00);
         Room room4 = new Room(203, 150.00);
 
-        Map<Integer, Room> reservedRooms = new HashMap<Integer, Room>(); //created maps for reserved rooms for guest objects
-        Map<Integer, Room> reservedRooms2 = new HashMap<Integer, Room>();
+        //Map<Integer, Room> reservedRooms = new HashMap<Integer, Room>(); //created maps for reserved rooms for guest objects
+        //Map<Integer, Room> reservedRooms2 = new HashMap<Integer, Room>();
 
-        reservedRooms.put(204, room1);
-        reservedRooms.put(204, room2);
-        reservedRooms2.put(305, room3);
-        reservedRooms2.put(203, room4);
+        mainHotel.addReservedRoom( room1);
+        mainHotel.addReservedRoom( room2);
+        mainHotel.addReservedRoom( room3);
+        mainHotel.addReservedRoom( room4);
         
 
         byte duration = 3;
         byte numberOfGuests = 2;
 
-        Reservation reservation1 = new Reservation("Alonzo", numberOfGuests, reservedRooms, duration); //created reservations
-        Reservation reservation2 = new Reservation("Scherer", numberOfGuests, reservedRooms2, duration);
+       // Reservation reservation1 = new Reservation("Alonzo", numberOfGuests, reservedRooms, duration); //created reservations
+        //Reservation reservation2 = new Reservation("Scherer", numberOfGuests, reservedRooms2, duration);
         
-        mainHotel.addReservation(reservation1); //add objects to hotel
-        mainHotel.addReservation(reservation2);
+        //mainHotel.addReservation(reservation1); //add objects to hotel
+        //mainHotel.addReservation(reservation2);
         mainHotel.addEmployee(employee1);
         mainHotel.addEmployee(employee2);
         mainHotel.addEmployee(employee3);

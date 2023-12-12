@@ -1,4 +1,16 @@
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -18,20 +30,31 @@ public class GuestMenuGUI extends javax.swing.JFrame {
     public GuestMenuGUI() {
         initComponents();
         populateTable();
+        checkInBtn.setEnabled(false);
+        checkOutBtn.setEnabled(false);
+        paymentPanel.setVisible(false);
+        updateBtn.setEnabled(false);
+        //hotel.getAllGuests().get(2).setCheckedIn(false);
     }
     public GuestMenuGUI(Hotel hotel) {
         initComponents();
         this.hotel = hotel;
         populateTable();
+        checkInBtn.setEnabled(false);
+        checkOutBtn.setEnabled(false);
+        paymentPanel.setVisible(false);
+        updateBtn.setEnabled(false);
+        //hotel.getAllGuests().get(2).setCheckedIn(false);
     }
-    public void populateTable(){
+    public DefaultTableModel populateTable(){
         DefaultTableModel model = (DefaultTableModel)GuestTable.getModel();
 
         for(int key : hotel.getAllGuests().keySet()){
             Guest guest = hotel.getAllGuests().get(key);
-            model.addRow(new String[]{guest.getFirstName(), guest.getLastName(), guest.getPhoneNumber(), guest.getEmail(), guest.getCreditCardNumber()});
+            model.addRow(new String[]{Integer.toString(guest.getGuestID()),guest.getFirstName(), guest.getLastName(), guest.getPhoneNumber(), guest.getEmail(), Integer.toString(guest.getReservationNumber())});
         }
         GuestTable.setModel(model);
+        return model;
     }
 
     /**
@@ -45,35 +68,450 @@ public class GuestMenuGUI extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        guestIdTxt = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        firstNameChkIn = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        lastNameChkIn = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        phoneNumChkIn = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        emailChkIn = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        reservationChkIn = new javax.swing.JTextField();
+        enterBtnChkIn = new javax.swing.JButton();
+        paymentPanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        reservationInfoTxt = new javax.swing.JTextArea();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        subTotalTxt = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        totalTxt = new javax.swing.JTextField();
+        payBtn = new javax.swing.JButton();
+        checkInBtn = new javax.swing.JButton();
+        checkOutBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        guestIdTxtEdit = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        firstNameEdit = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        lastNameEdit = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        phoneNumEdit = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        emailEdit = new javax.swing.JTextField();
+        searchEditBtn = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        creditCardNumEdit = new javax.swing.JTextField();
+        updateBtn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         GuestTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        firstNameTxt = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        lastNameTxt = new javax.swing.JTextField();
+        searchBtn = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jLabel3.setText("Guest ID:");
+
+        guestIdTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guestIdTxtActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("First Name:");
+
+        firstNameChkIn.setEditable(false);
+        firstNameChkIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                firstNameChkInActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Last Name:");
+
+        lastNameChkIn.setEditable(false);
+        lastNameChkIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lastNameChkInActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Phone Number:");
+
+        phoneNumChkIn.setEditable(false);
+        phoneNumChkIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                phoneNumChkInActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Email:");
+
+        emailChkIn.setEditable(false);
+        emailChkIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailChkInActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Reservation Number:");
+
+        reservationChkIn.setEditable(false);
+        reservationChkIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reservationChkInActionPerformed(evt);
+            }
+        });
+
+        enterBtnChkIn.setText("Enter");
+        enterBtnChkIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterBtnChkInActionPerformed(evt);
+            }
+        });
+
+        paymentPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        reservationInfoTxt.setEditable(false);
+        reservationInfoTxt.setColumns(20);
+        reservationInfoTxt.setRows(5);
+        jScrollPane2.setViewportView(reservationInfoTxt);
+
+        jLabel9.setText("Reservation Info:");
+
+        jLabel10.setText("Subtotal:");
+
+        subTotalTxt.setEditable(false);
+        subTotalTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subTotalTxtActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Total:");
+
+        totalTxt.setEditable(false);
+
+        payBtn.setText("Pay Now");
+        payBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                payBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout paymentPanelLayout = new javax.swing.GroupLayout(paymentPanel);
+        paymentPanel.setLayout(paymentPanelLayout);
+        paymentPanelLayout.setHorizontalGroup(
+            paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paymentPanelLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(paymentPanelLayout.createSequentialGroup()
+                        .addGap(118, 118, 118)
+                        .addGroup(paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(subTotalTxt)
+                            .addComponent(totalTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
+                        .addContainerGap(161, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paymentPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(payBtn)
+                        .addGap(39, 39, 39))))
+        );
+        paymentPanelLayout.setVerticalGroup(
+            paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paymentPanelLayout.createSequentialGroup()
+                .addGroup(paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(paymentPanelLayout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jLabel9))
+                    .addGroup(paymentPanelLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(paymentPanelLayout.createSequentialGroup()
+                                .addGroup(paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel10)
+                                    .addComponent(subTotalTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addGroup(paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(totalTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11)))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(48, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paymentPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(payBtn)
+                .addGap(36, 36, 36))
+        );
+
+        checkInBtn.setText("Check In");
+        checkInBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkInBtnActionPerformed(evt);
+            }
+        });
+
+        checkOutBtn.setText("Check Out");
+        checkOutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkOutBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 854, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(282, 282, 282)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(guestIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(77, 77, 77)
+                        .addComponent(enterBtnChkIn))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel8)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(reservationChkIn))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(emailChkIn, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(phoneNumChkIn, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(firstNameChkIn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                                        .addComponent(lastNameChkIn, javax.swing.GroupLayout.Alignment.LEADING)))))
+                        .addGap(56, 56, 56)
+                        .addComponent(checkInBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(checkOutBtn)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(paymentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 474, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(guestIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(enterBtnChkIn))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(firstNameChkIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(lastNameChkIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(phoneNumChkIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(emailChkIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(reservationChkIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkInBtn)
+                    .addComponent(checkOutBtn))
+                .addGap(18, 18, 18)
+                .addComponent(paymentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Check in /out", jPanel1);
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel12.setText("Guest ID:");
+
+        guestIdTxtEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guestIdTxtEditActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel13.setText("First Name:");
+
+        firstNameEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                firstNameEditActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel14.setText("Last Name:");
+
+        lastNameEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lastNameEditActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel15.setText("Phone Number:");
+
+        phoneNumEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                phoneNumEditActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel16.setText("Email:");
+
+        emailEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailEditActionPerformed(evt);
+            }
+        });
+
+        searchEditBtn.setText("Search");
+        searchEditBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchEditBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel17.setText("Credit Card Number on File:");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(253, 253, 253)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(guestIdTxtEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(106, 106, 106)
+                        .addComponent(searchEditBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(239, 239, 239)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addGap(18, 18, 18)
+                                .addComponent(phoneNumEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addGap(18, 18, 18)
+                                .addComponent(emailEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lastNameEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(firstNameEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(creditCardNumEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(70, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchEditBtn)
+                    .addComponent(jLabel12)
+                    .addComponent(guestIdTxtEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(firstNameEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(lastNameEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(phoneNumEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(emailEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(creditCardNumEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+
+        updateBtn.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        updateBtn.setText("Update");
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 854, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(354, 354, 354)
+                        .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 474, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(updateBtn)
+                .addGap(34, 34, 34))
         );
 
         jTabbedPane1.addTab("Edit Guest", jPanel2);
@@ -83,44 +521,373 @@ public class GuestMenuGUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "First Name", "Last Name", "Phone Number", "Email", "Credit Card Number"
+                "Guest ID", "First Name", "Last Name", "Phone Number", "Email", "Reservation ID"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         GuestTable.setShowGrid(true);
         jScrollPane1.setViewportView(GuestTable);
+        if (GuestTable.getColumnModel().getColumnCount() > 0) {
+            GuestTable.getColumnModel().getColumn(0).setResizable(false);
+            GuestTable.getColumnModel().getColumn(1).setResizable(false);
+            GuestTable.getColumnModel().getColumn(2).setResizable(false);
+            GuestTable.getColumnModel().getColumn(3).setResizable(false);
+            GuestTable.getColumnModel().getColumn(4).setResizable(false);
+            GuestTable.getColumnModel().getColumn(5).setResizable(false);
+        }
+
+        jLabel1.setText("First Name:");
+
+        firstNameTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                firstNameTxtActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Last Name:");
+
+        lastNameTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lastNameTxtActionPerformed(evt);
+            }
+        });
+
+        searchBtn.setText("Search");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addGap(187, 187, 187)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(firstNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lastNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
+                .addComponent(searchBtn)
+                .addContainerGap(195, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(firstNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(lastNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchBtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane1.addTab("Guest List", jPanel3);
+
+        backBtn.setText("Back to Menu");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(691, Short.MAX_VALUE)
+                .addComponent(backBtn)
+                .addGap(77, 77, 77))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 858, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addComponent(backBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void firstNameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_firstNameTxtActionPerformed
+
+    private void lastNameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lastNameTxtActionPerformed
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        int flag = 0;
+        int i = 0;
+        
+        for(i = 0; GuestTable.getRowCount() > i; i++){
+            if(GuestTable.getValueAt(i,1).equals(firstNameTxt.getText()) && GuestTable.getValueAt(i,2).equals(lastNameTxt.getText())){
+                GuestTable.setRowSelectionInterval(i, i);
+                flag++;
+            }
+        }
+        if(i == GuestTable.getRowCount() && flag == 0){
+            confirmationMessageAction();
+        }
+    }//GEN-LAST:event_searchBtnActionPerformed
+
+    private void guestIdTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guestIdTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_guestIdTxtActionPerformed
+
+    private void lastNameChkInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameChkInActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lastNameChkInActionPerformed
+
+    private void firstNameChkInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameChkInActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_firstNameChkInActionPerformed
+
+    private void phoneNumChkInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneNumChkInActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phoneNumChkInActionPerformed
+
+    private void emailChkInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailChkInActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailChkInActionPerformed
+
+    private void reservationChkInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservationChkInActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reservationChkInActionPerformed
+
+    private void enterBtnChkInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterBtnChkInActionPerformed
+        int guestId = Integer.parseInt(guestIdTxt.getText());
+        
+        if(hotel.getAllGuests().containsKey(guestId)){
+            Guest guest = hotel.getAllGuests().get(guestId);
+            firstNameChkIn.setText(guest.getFirstName());
+            lastNameChkIn.setText(guest.getLastName());
+            phoneNumChkIn.setText(guest.getPhoneNumber());
+            emailChkIn.setText(guest.getEmail());
+            reservationChkIn.setText(String.valueOf(guest.getReservationNumber()));
+            checkInBtn.setEnabled(true);
+            checkOutBtn.setEnabled(true);
+            
+        }
+        else{
+            confirmationMessageAction();
+        }
+    }//GEN-LAST:event_enterBtnChkInActionPerformed
+
+    private void checkInBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkInBtnActionPerformed
+        int guestId = Integer.parseInt(guestIdTxt.getText());
+        Guest guest = hotel.getAllGuests().get(guestId);
+        if(!guest.isCheckedIn()){
+            paymentPanel.setVisible(true);
+            reservationInfoTxt.setText("Rooms: " + guest.getReservation().getRooms().keySet() + "\nGuests: " + guest.getReservation().getNumberOfGuests() + "\nStay Duration: " + guest.getReservation().getDuration() + " nights");
+            double subtotal = 0;
+            Room room;
+            for(int key : guest.getReservation().getRooms().keySet()){
+                room = guest.getReservation().getRooms().get(key);
+                subtotal += room.getPricePerNight();
+            }
+            subtotal = subtotal * guest.getReservation().getDuration();
+            subTotalTxt.setText("$" + String.format("%.2f", subtotal));
+            double total = subtotal +(0.0772 + subtotal);
+            totalTxt.setText("$" + String.format("%.2f", total));
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "This guest is already checked in");
+        }
+    }//GEN-LAST:event_checkInBtnActionPerformed
+    
+    private void subTotalTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subTotalTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_subTotalTxtActionPerformed
+
+    private void payBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payBtnActionPerformed
+        Guest guest = hotel.getAllGuests().get(Integer.valueOf(guestIdTxt.getText()));
+        Payment payment = new Payment(Double.parseDouble(totalTxt.getText().substring(1)),guest.getCreditCardNumber());
+        hotel.addPayment(payment);
+        JOptionPane.showMessageDialog(this,"Guest Checked In");
+        paymentPanel.setVisible(false);
+        guestIdTxt.setText("");
+        firstNameChkIn.setText("");
+        lastNameChkIn.setText("");
+        phoneNumChkIn.setText("");
+        emailChkIn.setText("");
+        reservationChkIn.setText("");
+        checkInBtn.setEnabled(false);
+        checkOutBtn.setEnabled(false);
+        guest.setCheckedIn(true);
+        
+        
+    }//GEN-LAST:event_payBtnActionPerformed
+
+    private void checkOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkOutBtnActionPerformed
+       Guest guest =  hotel.getAllGuests().get(Integer.valueOf(guestIdTxt.getText()));
+       File oldFile = new File("Guests.csv");
+       File newFile = new File("temp.csv");
+       int line = 0;
+       String currentLine;
+       if(guest.isCheckedIn()){
+           int option = JOptionPane.showConfirmDialog(this,"Check out this guest?");
+           if(option == 0){
+               try {
+                   hotel.getAllGuests().remove(Integer.valueOf(guestIdTxt.getText()));
+                   FileWriter fw = new FileWriter("temp.csv", true);
+                   BufferedWriter bw = new BufferedWriter(fw);
+                   PrintWriter pw = new PrintWriter(bw);
+                   
+                   FileReader fr = new FileReader("Guests.csv");
+                   BufferedReader br = new BufferedReader(fr);
+                   
+                   while((currentLine = br.readLine()) != null){
+                       line++;
+                       
+                       if(!currentLine.contains(guest.getLastName())){
+                           pw.println(currentLine);
+                       }
+                   }
+                   pw.flush();
+                   pw.close();
+                   fr.close();
+                   br.close();
+                   bw.close();
+                   fw.close();
+                   
+                   oldFile.delete();
+                   File dump = new File("Guests.csv");
+                   newFile.renameTo(dump);
+               } catch (IOException ex) {
+                   JOptionPane.showMessageDialog(this, "Error reading file");
+               }
+               JOptionPane.showMessageDialog(this,"Guest checked out");
+                guestIdTxt.setText("");
+                firstNameChkIn.setText("");
+                lastNameChkIn.setText("");
+                phoneNumChkIn.setText("");
+                emailChkIn.setText("");
+                reservationChkIn.setText("");
+                checkInBtn.setEnabled(false);
+                checkOutBtn.setEnabled(false);
+           }
+       }
+    }//GEN-LAST:event_checkOutBtnActionPerformed
+
+    private void searchEditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchEditBtnActionPerformed
+        int guestId = Integer.parseInt(guestIdTxtEdit.getText());
+        Guest guest = hotel.getAllGuests().get(guestId);
+        if(hotel.getAllGuests().containsKey(guestId)){
+            firstNameEdit.setText(guest.getFirstName());
+            lastNameEdit.setText(guest.getLastName());
+            phoneNumEdit.setText(guest.getPhoneNumber());
+            emailEdit.setText(guest.getEmail());
+            creditCardNumEdit.setText(guest.getCreditCardNumber());
+            updateBtn.setEnabled(true);
+        }
+        else{
+            confirmationMessageAction();
+        }
+    }//GEN-LAST:event_searchEditBtnActionPerformed
+    private void confirmationMessageAction(){
+        int option = JOptionPane.showConfirmDialog(this,"This guest does not have a reservation. Create one?");
+        
+        if(option == 0){
+            JOptionPane.showMessageDialog(this,"Creating Reservation");
+        }
+        
+    }
+    private void emailEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailEditActionPerformed
+
+    private void phoneNumEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneNumEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phoneNumEditActionPerformed
+
+    private void lastNameEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lastNameEditActionPerformed
+
+    private void firstNameEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_firstNameEditActionPerformed
+
+    private void guestIdTxtEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guestIdTxtEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_guestIdTxtEditActionPerformed
+
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+        String fileName = "Guests.csv";
+        Guest guest = hotel.getAllGuests().get(Integer.valueOf(guestIdTxtEdit.getText()));
+        File file = new File(fileName);
+        try {
+            BufferedWriter br = new BufferedWriter(new FileWriter(file));
+            Map<Integer, Guest> guests = hotel.getAllGuests();
+            
+                String row = "";
+                String firstName = firstNameEdit.getText();
+                String lastName = lastNameEdit.getText();
+                String phoneNumber = phoneNumEdit.getText();
+                String email = emailEdit.getText();
+                String creditCardNum = creditCardNumEdit.getText();
+                //Setting all these here so the guest list table updates in real time
+                guest.setFirstName(firstName);
+                guest.setLastName(lastName);
+                guest.setPhoneNumber(phoneNumber);
+                guest.setEmail(email);
+                guest.setCreditCardNumber(creditCardNum);
+                row = String.valueOf(guest.getGuestID()) + "," + firstName + "," + lastName +
+                        "," + phoneNumber + "," + email + "," + creditCardNum + "," + String.valueOf(guest.getReservationNumber());
+                br.write(row);
+            br.close();
+            guestIdTxtEdit.setText("");
+            firstNameEdit.setText("");
+            lastNameEdit.setText("");
+            phoneNumEdit.setText("");
+            emailEdit.setText("");
+            creditCardNumEdit.setText("");
+            updateBtn.setEnabled(false);
+            JOptionPane.showMessageDialog(this,"Guest Updated");
+            
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this,"Error reading this file");
+        }
+        
+    }//GEN-LAST:event_updateBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,10 +926,55 @@ public class GuestMenuGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable GuestTable;
+    private javax.swing.JButton backBtn;
+    private javax.swing.JButton checkInBtn;
+    private javax.swing.JButton checkOutBtn;
+    private javax.swing.JTextField creditCardNumEdit;
+    private javax.swing.JTextField emailChkIn;
+    private javax.swing.JTextField emailEdit;
+    private javax.swing.JButton enterBtnChkIn;
+    private javax.swing.JTextField firstNameChkIn;
+    private javax.swing.JTextField firstNameEdit;
+    private javax.swing.JTextField firstNameTxt;
+    private javax.swing.JTextField guestIdTxt;
+    private javax.swing.JTextField guestIdTxtEdit;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField lastNameChkIn;
+    private javax.swing.JTextField lastNameEdit;
+    private javax.swing.JTextField lastNameTxt;
+    private javax.swing.JButton payBtn;
+    private javax.swing.JPanel paymentPanel;
+    private javax.swing.JTextField phoneNumChkIn;
+    private javax.swing.JTextField phoneNumEdit;
+    private javax.swing.JTextField reservationChkIn;
+    private javax.swing.JTextArea reservationInfoTxt;
+    private javax.swing.JButton searchBtn;
+    private javax.swing.JButton searchEditBtn;
+    private javax.swing.JTextField subTotalTxt;
+    private javax.swing.JTextField totalTxt;
+    private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }

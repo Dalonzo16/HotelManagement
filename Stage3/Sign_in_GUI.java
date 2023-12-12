@@ -52,19 +52,18 @@ public class Sign_in_GUI extends javax.swing.JFrame {
             String[] temp;
             
             while((line = br.readLine()) != null){
-                int counter = 1;
                 temp = line.split(delimiter);
                 for(String filed : temp){
                     
                 }
-                Reservation reservation = hotel.getAllReservations().get(counter);
-                String firstName = temp[0];
-                String lastName = temp[1];
-                String phoneNumber = temp[2];
-                String email = temp[3];
-                String creditCardNum = temp[4];
+                String firstName = temp[1];
+                String lastName = temp[2];
+                String phoneNumber = temp[3];
+                String email = temp[4];
+                String creditCardNum = temp[5];
+                Reservation reservation = new Reservation(firstName,lastName,(byte)2,hotel.getReservedRooms(),(byte)4);
                 Guest guest = new Guest(firstName,lastName,phoneNumber,email, creditCardNum, reservation);
-                counter++;
+                hotel.addReservation(reservation);
                 hotel.addGuest(guest);
                 System.out.println(hotel.getAllGuests());
             }
@@ -74,6 +73,10 @@ public class Sign_in_GUI extends javax.swing.JFrame {
         }
         
     }
+    
+    //private Reservation writeGuestInfoToRes(Guest guest){
+        
+    //}
     
 
     /**
