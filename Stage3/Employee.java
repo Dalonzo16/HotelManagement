@@ -7,11 +7,10 @@ public class Employee
 {
     private String firstName;
     private String lastName;
-    private String phoneNumber;
     private String password;
     private int employeeId;
     public static int counter = 1;
-    private String address;
+    private String email;
     public double shiftDuration;
     public double payRate;
     
@@ -29,8 +28,7 @@ public class Employee
         this.payRate = payRate;
         this.password = password;
         employeeId = counter; // ID is automatically incremented by 1 by using the public variable counter everytime a new employee is created
-        phoneNumber = "";
-        address = "";
+        email = "";
         shiftDuration = 0;
         counter++;
         System.out.println("The new employee " + firstName + " " + lastName + " was created with ID number: " + employeeId + " and password: " + password + 
@@ -56,17 +54,9 @@ public class Employee
      * This method gets the employees address
      * @return the employees address
      */
-    public String getAddress()
+    public String getEmail()
     {
-        return address;
-    }
-    /**
-     * This method gets the employees phone number
-     * @return the employees phone number
-     */
-    public String getPhoneNumber()
-    {
-        return phoneNumber;
+        return email;
     }
     /**
      * This method gets the employees ID
@@ -125,14 +115,6 @@ public class Employee
         this.lastName = lastName;
     }
     /**
-     * This method sets the employees phone number
-     * @param phoneNumber the employees phone number
-     */
-    public void setPhoneNumber(String phoneNumber)
-    {
-        this.phoneNumber = phoneNumber;
-    }
-    /**
      * This method sets the employees password
      * @param password the employees password
      */
@@ -142,11 +124,11 @@ public class Employee
     }
     /**
      * This method sets the employees address
-     * @param address the employees address
+     * @param email the employees address
      */
-    public void setAddress(String address)
+    public void setEmail(String email)
     {
-        this.address = address;
+        this.email = email;
     }
     /**
      * This method sets the employees shift duration

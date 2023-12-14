@@ -14,7 +14,7 @@ public class HotelManagement
 
         for(int i = 0; i < 20; i++)
         {
-            Room room = new Room(random.nextInt(100, 400), (double) Math.round(random.nextDouble(40, 200)*100)/100);
+            Room room = new Room(random.nextInt(100), (double) Math.round(random.nextInt(40)*100)/100);
             mainHotel.addRoom(room);
         }
         
@@ -35,23 +35,23 @@ public class HotelManagement
         Room room3 = new Room(305, 70.00);
         Room room4 = new Room(203, 150.00);
 
-        Map<Integer, Room> reservedRooms = new HashMap<Integer, Room>(); //created maps for reserved rooms for guest objects
-        Map<Integer, Room> reservedRooms2 = new HashMap<Integer, Room>();
+        //Map<Integer, Room> reservedRooms = new HashMap<Integer, Room>(); //created maps for reserved rooms for guest objects
+        //Map<Integer, Room> reservedRooms2 = new HashMap<Integer, Room>();
 
-        reservedRooms.put(204, room1);
-        reservedRooms.put(204, room2);
-        reservedRooms2.put(305, room3);
-        reservedRooms2.put(203, room4);
+        mainHotel.addReservedRoom( room1);
+        mainHotel.addReservedRoom( room2);
+        mainHotel.addReservedRoom( room3);
+        mainHotel.addReservedRoom( room4);
         
 
         byte duration = 3;
         byte numberOfGuests = 2;
 
-        Reservation reservation1 = new Reservation("Alonzo", numberOfGuests, reservedRooms, duration); //created reservations
-        Reservation reservation2 = new Reservation("Scherer", numberOfGuests, reservedRooms2, duration);
+       // Reservation reservation1 = new Reservation("Alonzo", numberOfGuests, reservedRooms, duration); //created reservations
+        //Reservation reservation2 = new Reservation("Scherer", numberOfGuests, reservedRooms2, duration);
         
-        mainHotel.addReservation(reservation1); //add objects to hotel
-        mainHotel.addReservation(reservation2);
+        //mainHotel.addReservation(reservation1); //add objects to hotel
+        //mainHotel.addReservation(reservation2);
         mainHotel.addEmployee(employee1);
         mainHotel.addEmployee(employee2);
         mainHotel.addEmployee(employee3);
@@ -62,11 +62,11 @@ public class HotelManagement
         mainHotel.addRoom(room3);
         mainHotel.addRoom(room4);
 
-        Guest guest1 = new Guest("Devon", "Alonzo", "(555) 5555-555", "hello@gmail.com", "4587345160345", reservation1);//created guests
-        Guest guest2 = new Guest("Ludwig", "Scherer", "(555) 5555-555", "bye@yahoo.com", "8924572371430", reservation2);
+        //Guest guest1 = new Guest("Devon", "Alonzo", "(555) 5555-555", "hello@gmail.com", "4587345160345", reservation1);//created guests
+        //Guest guest2 = new Guest("Ludwig", "Scherer", "(555) 5555-555", "bye@yahoo.com", "8924572371430", reservation2);
         
-        mainHotel.addGuest(guest1);//added guests to hotel
-        mainHotel.addGuest(guest2);
+        //mainHotel.addGuest(guest1);//added guests to hotel
+        //mainHotel.addGuest(guest2);
         room1.setUnavailable(); // sets room unavailable since hard coded guests "skip" the check in
         room2.setUnavailable();
         room3.setUnavailable();
@@ -77,8 +77,13 @@ public class HotelManagement
         payment2.setAmountPaid(660);
         mainHotel.addPayment(payment1); //added payments to hotel
         mainHotel.addPayment(payment2);
+        
+        Sign_in_GUI GUI = new Sign_in_GUI(mainHotel);
+        GUI.setVisible(true);
 
         InitialLogin initialLogin = new InitialLogin();//created initial login object
         initialLogin.displayMenu(mainHotel);//displayed initial login menu
+        
+        
     }
 }

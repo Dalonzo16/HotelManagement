@@ -13,6 +13,7 @@ public class Guest
     private int guestID;
     private Reservation reservation;
     private static int counter = 1;
+    private boolean checkedIn;
 
     /**
      * Constructor for objects of class Guest
@@ -32,6 +33,7 @@ public class Guest
         this.reservation = reservation;
         this.creditCardNumber = creditCardNumber;
         this.guestID = counter;
+        checkedIn = true;
         System.out.println("The guest " + firstName + " " + lastName + " was added with guest ID: " + guestID);
         counter++;
     }
@@ -83,6 +85,21 @@ public class Guest
     {
         return guestID;
     }
+    /**
+     * Sets the check in status of guest
+     * @param checkedIn 
+     */
+    public void setCheckedIn(boolean checkedIn) {
+        this.checkedIn = checkedIn;
+    }
+    /**
+     * gets the check in status of guest
+     * @return 
+     */
+    public boolean isCheckedIn() {
+        return checkedIn;
+    }
+    
     /**
      * gets reservation info
      * @return

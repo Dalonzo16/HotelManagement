@@ -18,6 +18,7 @@ public class ReportsMenu extends InitialLogin
     }
     /**
      * this method calls the printHotelEconomics method from the hotel class
+     * @param hotel
      */
     public void option1(Hotel hotel)
     {
@@ -26,6 +27,7 @@ public class ReportsMenu extends InitialLogin
     }
     /**
      * this method calls the printAllPayments method from the hotel class
+     * @param hotel
      */
     public void option2(Hotel hotel)
     {
@@ -53,6 +55,7 @@ public class ReportsMenu extends InitialLogin
      * This method displays the reports menu
      * @param hotel
      */
+    @Override
     public void displayMenu(Hotel hotel)
     {
         while(true)

@@ -9,6 +9,7 @@ public class Room
     private double pricePerNight;
     private boolean isAvailable;
     private boolean isClean;
+    private int reservationNumber;
     
     /**
      * Constructor for objects of class Room
@@ -20,6 +21,7 @@ public class Room
         this.roomNumber = roomNumber;
         this.pricePerNight = pricePerNight;
         isAvailable = true;
+        reservationNumber = 0;
         System.out.println("The room " + roomNumber + " was successfully created. Its price per night is: " + pricePerNight);
     }
     /**
@@ -97,5 +99,24 @@ public class Room
     public void setRoomNumber(int roomNumber)
     {
         this.roomNumber = roomNumber;
-    }  
+    }
+    /**
+     * sets the reservation number of the room
+     * @param reservationNumber
+     */
+    public void setReservationNumber(int reservationNumber)
+    {
+        this.reservationNumber = reservationNumber;
+    }
+    /**
+     * resets the reservation number to 0
+     */
+    public void resetReservationNumber()
+    {
+        reservationNumber = 0;
+    }
+    public int getReservationNumber()
+    {
+        return reservationNumber;
+    }
 }
