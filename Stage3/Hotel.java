@@ -124,6 +124,7 @@ public class Hotel
     /**
      * adds guest to allGuests by getting the guest info from the user and calling the other 
      * addGuest method with the Guest object as parameter and then returning the added Guest object
+     * @return added guest
      */
     public Guest addGuestWithReturn()
     {
@@ -868,10 +869,8 @@ public class Hotel
             String firstName = in.next();
             System.out.println("Please enter the desired employee's last name:");
             String lastName = in.next();
-            System.out.println("Please enter the desired employee's address:");
-            String address = in.next();
-            System.out.println("Please enter the desired employee's phone number:");
-            String phoneNumber = in.next();
+            System.out.println("Please enter the desired employee's email:");
+            String email = in.next();
             System.out.println("Please enter the desired employee's pay rate:");
             double payRate = in.nextDouble();
             System.out.println("Please enter the desired employee's shift duration:");
@@ -880,8 +879,7 @@ public class Hotel
             String password = in.next();
             employeeToEdit.setFirstName(firstName);
             employeeToEdit.setLastName(lastName);
-            employeeToEdit.setAddress(address);
-            employeeToEdit.setPhoneNumber(phoneNumber);
+            employeeToEdit.setEmail(email);
             employeeToEdit.setPayRate(payRate);
             employeeToEdit.setShift(shiftDuration);
             employeeToEdit.setPassword(password);
@@ -891,6 +889,27 @@ public class Hotel
         {
             System.out.println("Employee ID does not exist.");
         }
+    }
+    /**
+     * edit employee method, receiving all necessary parameters
+     * @param employeeID
+     * @param firstname
+     * @param lastname
+     * @param email
+     * @param password
+     * @param payrate
+     * @param shiftDuration 
+     */
+    public void editEmployee(int employeeID, String firstname, String lastname, String email, String password, double payrate, double shiftDuration)
+    {
+        Employee employeeToEdit = employees.get(employeeID);
+        
+        employeeToEdit.setFirstName(firstname);
+        employeeToEdit.setLastName(lastname);
+        employeeToEdit.setEmail(email);
+        employeeToEdit.setPassword(password);
+        employeeToEdit.setPayRate(payrate);
+        employeeToEdit.setShift(shiftDuration);
     }
     /**
      * this method looks up an employee by getting the employee ID from the user and 
@@ -912,11 +931,31 @@ public class Hotel
         if(employees.containsKey(employeeID)) // if the employee ID exists
         {
             Employee employee = employees.get(employeeID);
-            System.out.println("Employee " + employeeID + ": " + employee.getFirstName() + " " + employee.getLastName() + "\nAddress: " + employee.getAddress() + "\nPhone number: " + employee.getPhoneNumber() + "\nPay Rate: " + employee.getPayRate() +  "\nShift: " + employee.getShift() + "\n");
+            System.out.println("Employee " + employeeID + ": " + employee.getFirstName() + " " + employee.getLastName() + "\nEmail: " + employee.getEmail() + "\nPay Rate: " + employee.getPayRate() +  "\nShift: " + employee.getShift() + "\n");
         }
         else
         {
             System.out.println("Employee ID does not exist.");
+        }
+    }
+    /**
+     * this method looks up an employee and returns the information as a string
+     * @param employeeID
+     * @return output string with employee information 
+     */
+    public String lookUpEmployeeWithReturn(int employeeID)
+    {
+        String output = "";
+        if(employees.containsKey(employeeID)) // if the employee ID exists
+        {
+            Employee employee = employees.get(employeeID);
+            output = "Employee: " + employee.getFirstName() + " " + employee.getLastName() + "\nID: " + employeeID + "\nEmail: " + employee.getEmail() + "\nPay Rate: $" + employee.getPayRate() +  "\nShift: " + employee.getShift() + " hrs\n\n";
+            return output;
+        }
+        else
+        {
+            output = "Employee ID does not exist.";
+            return output;
         }
     }
     /**
@@ -982,7 +1021,7 @@ public class Hotel
         for(int employeeID : employees.keySet())
         {
             Employee employee = employees.get(employeeID);
-            payForOneShift = employee.getPayRate() * employee.getShift();
+            payForOneShift = employee.getPayRate() * (int) employee.getShift() + employee.getPayRate() * (employee.getShift() - (int) employee.getShift());
         }
         double totalWeeklyPay = payForOneShift * 5;
 

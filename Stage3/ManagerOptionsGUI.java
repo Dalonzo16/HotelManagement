@@ -163,6 +163,7 @@ public class ManagerOptionsGUI extends javax.swing.JFrame {
         reservationMenu.setVisible(true);
     }//GEN-LAST:event_reservationsOptionBtnActionPerformed
 
+
     private void roomsOptionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roomsOptionBtnActionPerformed
         RoomsMenuGUI rooms = new RoomsMenuGUI(hotel);
         rooms.setVisible(true);
@@ -175,6 +176,13 @@ public class ManagerOptionsGUI extends javax.swing.JFrame {
     private void reportsOptionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportsOptionBtnActionPerformed
 
     }//GEN-LAST:event_reportsOptionBtnActionPerformed
+
+
+    private void employeesOptionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeesOptionBtnActionPerformed
+        EmployeesMenuGUI employeeMenu = new EmployeesMenuGUI(hotel);
+        employeeMenu.setVisible(true);
+    }//GEN-LAST:event_employeesOptionBtnActionPerformed
+
 
     /**
      * @param args the command line arguments
