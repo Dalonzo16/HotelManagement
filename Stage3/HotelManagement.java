@@ -1,86 +1,194 @@
+import static java.awt.image.ImageObserver.HEIGHT;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Random;
 import java.util.HashMap;
+import java.util.HashSet;
+import javax.swing.JOptionPane;
 /**
  *This program is a hotel management program
  * @author Devon
  */
 public class HotelManagement 
 {
-    public static void main(String[] args) 
-    {    
-        Random random = new Random();
-        Hotel mainHotel = new Hotel("Best Hotel Ever"); //created hotel object
+    private static void readRooms(Hotel hotel, Sign_in_GUI gui){
+        String fileName = "Rooms.csv";
+        String delimiter = ",";
+        
+        try{
+            File file = new File(fileName);
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            
+            String line = "";
+            String[] temp;
+            
+            while((line = br.readLine()) != null){
+                temp = line.split(delimiter);
+                
+                String roomNumber = temp[0];
+                String floorNumber = temp[1];
+                String pricePerNight = temp[2];
+                String isClean = temp[3];
+                
+                Room room = new Room(Integer.parseInt(roomNumber),Integer.parseInt(floorNumber),Double.parseDouble(pricePerNight));
+                hotel.addRoom(room);
+                
+            }
+            br.close();
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(gui,"Error reading this file");
+        }
+    }
+    private static void readCSV(Hotel hotel, Sign_in_GUI gui){
+        String fileName = "Guests.csv";
+        String delimiter = ",";
+        try {
+            File file = new File(fileName);
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            
+            String line = "";
+            String[] temp;
+            
+            while((line = br.readLine()) != null){
+                temp = line.split(delimiter);
 
-        for(int i = 0; i < 20; i++)
-        {
-            Room room = new Room(random.nextInt(100), (double) Math.round(random.nextInt(40)*100)/100);
-            mainHotel.addRoom(room);
+                String firstName = temp[1];
+                String lastName = temp[2];
+                String phoneNumber = temp[3];
+                String email = temp[4];
+                String creditCardNum = temp[5];
+                Reservation reservation = new Reservation(firstName,lastName,3,4);
+                Guest guest = new Guest(firstName,lastName,phoneNumber,email, creditCardNum, reservation);
+                hotel.addReservation(reservation);
+                hotel.addGuest(guest);
+            }
+            br.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(gui,"Error reading this file");
         }
         
-        Employee employee1 = new Employee("Devon", "Alonzo", "hello", 20.34);//creating employees
-        Employee employee2 = new Employee("Ludwig", "Scherer", "hi", 15);
-        Employee employee3 = new Employee("Michael", "Phelps", "bye",15);
-        Employee reseptionist1 = new Receptionist("Lionel", "Messi", "goat", 100);
-        Employee manager1 = new Manager("Eduardo", "Ceh-Varela", "master",20);//created one manager
-
-        employee1.setShift(8);
-        employee2.setShift(8);
-        employee3.setShift(8);
-        reseptionist1.setShift(8);
-        manager1.setShift(8);
+    }
+    
+    private static void readFileReservations(Hotel hotel, Sign_in_GUI gui){
+        String fileName = "Reservations.txt";
+        Map<Integer, Guest> guests = hotel.getAllGuests(); 
         
-        Room room1 = new Room(100, 100.00);//created rooms for reserved rooms
-        Room room2 = new Room(204, 70.00);
-        Room room3 = new Room(305, 70.00);
-        Room room4 = new Room(203, 150.00);
-
-        //Map<Integer, Room> reservedRooms = new HashMap<Integer, Room>(); //created maps for reserved rooms for guest objects
-        //Map<Integer, Room> reservedRooms2 = new HashMap<Integer, Room>();
-
-        mainHotel.addReservedRoom( room1);
-        mainHotel.addReservedRoom( room2);
-        mainHotel.addReservedRoom( room3);
-        mainHotel.addReservedRoom( room4);
+        try {
+                
+                File file = new File(fileName);
+                BufferedWriter bf = new BufferedWriter(new FileWriter(file));
+                int counter = 1;
+                for(Map.Entry aguest : guests.entrySet()){
+                    String row = "";
+                    Reservation reservation = hotel.getAllGuests().get(counter).getReservation();
+                    HashSet<String> roomNumbers = new HashSet<>(); 
+                
+                    //filling set with rooms
+                    for(Integer number : reservation.getRooms().keySet()){
+                        String roomNumber = String.valueOf(number);
+                        roomNumbers.add(roomNumber);
+                    }
+                    row = String.valueOf(reservation.getReservationNumber()) + "." + reservation.getGuestFirstName() + "." + reservation.getGuestLastName() + "." + 
+                            roomNumbers.toString() + "." + String.valueOf(reservation.getNumberOfGuests()) + "." + String.valueOf(reservation.getDuration()) + "\n";
+                    bf.write(row);
+                    counter++;
+                        
+                }
+                bf.close();
+            } catch (IOException ex) {
+            JOptionPane.showMessageDialog(gui,"Error reading this file reservation");
+        }
+    }
+    private static void readEmployeesCSV(Hotel hotel, Sign_in_GUI gui)
+    {
+        try
+        {
+        String filename = "employees.csv";
+        String delimiter = ",";
+        File file = new File(filename);
+        FileReader fr = new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
         
-
-        byte duration = 3;
-        byte numberOfGuests = 2;
+        String line = "";
+        String[] tempArr;
+        while((line = br.readLine()) != null)
+        {
+            tempArr = line.split(delimiter);
+            for(String field : tempArr)
+            {
+                System.out.println(field + "");
+            }
+            String firstname = tempArr[0];
+            String lastname = tempArr[1];
+            String password = tempArr[2];
+            Double payrate = Double.valueOf(tempArr[3]);
+            
+            Employee employee = new Employee(firstname, lastname, password, payrate);
+            hotel.addEmployee(employee);
+        }
+        br.close();
+        }
+        catch(IOException e)
+        {
+            JOptionPane.showMessageDialog(gui, "Error reading the file.", "ERROR", HEIGHT);
+        }
+    }
+    public static void main(String[] args) 
+    {    
+        Hotel mainHotel = new Hotel("Best Hotel Ever"); //created hotel object
+ 
 
        // Reservation reservation1 = new Reservation("Alonzo", numberOfGuests, reservedRooms, duration); //created reservations
         //Reservation reservation2 = new Reservation("Scherer", numberOfGuests, reservedRooms2, duration);
         
         //mainHotel.addReservation(reservation1); //add objects to hotel
         //mainHotel.addReservation(reservation2);
-        mainHotel.addEmployee(employee1);
-        mainHotel.addEmployee(employee2);
-        mainHotel.addEmployee(employee3);
-        mainHotel.addEmployee(reseptionist1);
-        mainHotel.addEmployee(manager1);
-        mainHotel.addRoom(room1);
-        mainHotel.addRoom(room2);
-        mainHotel.addRoom(room3);
-        mainHotel.addRoom(room4);
+
+   
 
         //Guest guest1 = new Guest("Devon", "Alonzo", "(555) 5555-555", "hello@gmail.com", "4587345160345", reservation1);//created guests
         //Guest guest2 = new Guest("Ludwig", "Scherer", "(555) 5555-555", "bye@yahoo.com", "8924572371430", reservation2);
         
         //mainHotel.addGuest(guest1);//added guests to hotel
         //mainHotel.addGuest(guest2);
-        room1.setUnavailable(); // sets room unavailable since hard coded guests "skip" the check in
-        room2.setUnavailable();
-        room3.setUnavailable();
-        room4.setUnavailable();
-        Payment payment1 = new Payment(100, "4587345160345"); //created payments and set as paid also because hardcoded guests skip the check in
-        Payment payment2 = new Payment(100, "8924572371430");
-        payment1.setAmountPaid(510);
-        payment2.setAmountPaid(660);
-        mainHotel.addPayment(payment1); //added payments to hotel
-        mainHotel.addPayment(payment2);
         
         Sign_in_GUI GUI = new Sign_in_GUI(mainHotel);
         GUI.setVisible(true);
-
+        readEmployeesCSV(mainHotel, GUI);
+        readRooms(mainHotel,GUI);
+        readCSV(mainHotel,GUI);
+        readFileReservations(mainHotel,GUI);
+        Room room1 = mainHotel.getRooms().get(1);
+        Room room2 = mainHotel.getRooms().get(14);
+        Room room3 = mainHotel.getRooms().get(4);
+        System.out.println(room3);
+        System.out.println(room2);
+        System.out.println(room1);
+        mainHotel.getAllGuests().get(1).getReservation().addRoom(room1);
+        mainHotel.getAllGuests().get(2).getReservation().addRoom(room2);
+        mainHotel.getAllGuests().get(3).getReservation().addRoom(room3);
+        room1.setReservationNumber(1);
+        room2.setReservationNumber(2);
+        room3.setReservationNumber(3);
+        mainHotel.addReservedRoom(room1.getRoomNumber());
+        mainHotel.addReservedRoom(room2.getRoomNumber());
+        mainHotel.addReservedRoom(room3.getRoomNumber());
+        mainHotel.getRooms().get(1).setUnavailable();
+        mainHotel.getRooms().get(14).setUnavailable();
+        mainHotel.getRooms().get(4).setUnavailable();
+        mainHotel.removeRoom(1);
+        mainHotel.removeRoom(14);
+        mainHotel.removeRoom(4);
+        mainHotel.getAllGuests().get(1).setCheckedIn(true);
+        mainHotel.getAllGuests().get(2).setCheckedIn(true);
+        mainHotel.getAllGuests().get(3).setCheckedIn(true);
         InitialLogin initialLogin = new InitialLogin();//created initial login object
         initialLogin.displayMenu(mainHotel);//displayed initial login menu
         

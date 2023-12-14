@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
 /**
  *
  * @author Devon
@@ -34,9 +29,9 @@ public class ManagerOptionsGUI extends javax.swing.JFrame {
         guestOptionBtn = new javax.swing.JButton();
         roomsOptionBtn = new javax.swing.JButton();
         reservationsOptionBtn = new javax.swing.JButton();
-        employeesOptionBtn = new javax.swing.JButton();
         reportsOptionBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -48,7 +43,7 @@ public class ManagerOptionsGUI extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 5, Short.MAX_VALUE)
+            .addGap(0, 23, Short.MAX_VALUE)
         );
 
         guestOptionBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
@@ -61,6 +56,11 @@ public class ManagerOptionsGUI extends javax.swing.JFrame {
 
         roomsOptionBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         roomsOptionBtn.setText("Rooms");
+        roomsOptionBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                roomsOptionBtnActionPerformed(evt);
+            }
+        });
 
         reservationsOptionBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         reservationsOptionBtn.setText("Reservations");
@@ -70,22 +70,26 @@ public class ManagerOptionsGUI extends javax.swing.JFrame {
             }
         });
 
-        employeesOptionBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        employeesOptionBtn.setText("Employees");
-        employeesOptionBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                employeesOptionBtnActionPerformed(evt);
-            }
-        });
-
         reportsOptionBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         reportsOptionBtn.setText("Reports");
+        reportsOptionBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reportsOptionBtnActionPerformed(evt);
+            }
+        });
 
         logoutBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         logoutBtn.setText("Logout");
         logoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 logoutBtnActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Employees");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -105,14 +109,14 @@ public class ManagerOptionsGUI extends javax.swing.JFrame {
                                 .addComponent(reportsOptionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(roomsOptionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(72, 72, 72)
-                                .addComponent(employeesOptionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(guestOptionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(guestOptionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(roomsOptionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(reservationsOptionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(reservationsOptionBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -125,14 +129,14 @@ public class ManagerOptionsGUI extends javax.swing.JFrame {
                     .addComponent(guestOptionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(reservationsOptionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(72, 72, 72)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(employeesOptionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(roomsOptionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(roomsOptionBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
                 .addGap(74, 74, 74)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(reportsOptionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         pack();
@@ -153,10 +157,26 @@ public class ManagerOptionsGUI extends javax.swing.JFrame {
         reservationMenu.setVisible(true);
     }//GEN-LAST:event_reservationsOptionBtnActionPerformed
 
-    private void employeesOptionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeesOptionBtnActionPerformed
-        EmployeesMenuGUI employeeMenu = new EmployeesMenuGUI(hotel);
-        employeeMenu.setVisible(true);
-    }//GEN-LAST:event_employeesOptionBtnActionPerformed
+
+    private void roomsOptionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roomsOptionBtnActionPerformed
+        RoomsMenuGUI rooms = new RoomsMenuGUI(hotel);
+        rooms.setVisible(true);
+    }//GEN-LAST:event_roomsOptionBtnActionPerformed
+
+    private void employeesOptionBtnActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+
+    }                                                  
+
+    private void reportsOptionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportsOptionBtnActionPerformed
+
+    }//GEN-LAST:event_reportsOptionBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        EmployeesMenuGUI emp = new EmployeesMenuGUI(hotel);
+        emp.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+
 
     /**
      * @param args the command line arguments
@@ -194,8 +214,8 @@ public class ManagerOptionsGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton employeesOptionBtn;
     private javax.swing.JButton guestOptionBtn;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JButton reportsOptionBtn;

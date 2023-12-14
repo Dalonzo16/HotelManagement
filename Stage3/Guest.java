@@ -33,7 +33,7 @@ public class Guest
         this.reservation = reservation;
         this.creditCardNumber = creditCardNumber;
         this.guestID = counter;
-        checkedIn = true;
+        checkedIn = false;
         System.out.println("The guest " + firstName + " " + lastName + " was added with guest ID: " + guestID);
         counter++;
     }

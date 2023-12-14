@@ -58,8 +58,11 @@ public class Hotel
     public Map<Integer, Room> getReservedRooms(){
         return reservedRooms;
     }
-    public void addReservedRoom(Room room){
-        reservedRooms.put(room.getRoomNumber(),room);
+    public void addReservedRoom(int roomNumber){
+        reservedRooms.put(roomNumber,this.getRooms().get(roomNumber));
+    }
+    public Map<Integer, Room> getReservedRoom(){
+        return reservedRooms;
     }
     /**
      * adds room to list of rooms by getting the room info from the user and calling the other addRoom method with the Room object as parameter
@@ -71,7 +74,9 @@ public class Hotel
         int roomNumber = in.nextInt();
         System.out.println("Please enter the price per night:");
         double pricePerNight = in.nextDouble();
-        Room room = new Room(roomNumber, pricePerNight);
+        System.out.println("Enter the floor number");
+        int floorNumber = in.nextInt();
+        Room room = new Room(roomNumber, floorNumber,pricePerNight);
         addRoom(room);
     }
     /**
@@ -81,6 +86,9 @@ public class Hotel
     public void addRoom(Room room)
     {
         rooms.put(room.getRoomNumber(), room);
+    }
+    public void removeReservedRoom(int room){
+        reservedRooms.remove(room);
     }
     /**
      * adds guest to allGuests by getting the guest info from the user and calling the other addGuest method with the Guest object as parameter
@@ -825,6 +833,26 @@ public class Hotel
         }
     }
     /**
+     * lookup payment with string return
+     * @param paymentID 
+     * @return String
+     */
+    public String lookUpPaymentWithReturn(int paymentID)
+    {
+        String output = "";
+        if(payments.containsKey(paymentID))
+        {
+            Payment payment = payments.get(paymentID);
+            output = "Payment " + paymentID + " with amount: $" + payment.getAmountPaid() + "\nPaid with Credit card: " + payment.getCreditCardNumber() + "\n";
+            return output;
+        }
+        else
+        {
+            output = "Payment ID does not exist.";
+            return output;
+        }
+    }
+    /**
      * this method prints all payments
      */
     public void printAllPayments()
@@ -834,6 +862,15 @@ public class Hotel
         {
             lookUpPayment(key);
         }
+    }
+    public String printAllPaymentsWithReturn()
+    {
+        String output = "";
+        for(Integer key : payments.keySet())
+        {
+            output += lookUpPaymentWithReturn(key);
+        }
+        return output;
     }
     /**
      * this method edits an employee by getting the employee ID from the user and 
@@ -1018,5 +1055,29 @@ public class Hotel
         double totalWeeklyPay = payForOneShift * 5;
 
         System.out.println("Weekly PayRoll Expenses: $" + totalWeeklyPay + " | Total earnings from bookings: $" + grandTotal + "\n");
+    }
+    /**
+     * print economics with return
+     * @return String
+     */
+    public String printHotelEconomicsWithReturn()
+    {
+        String output = "";
+        double grandTotal = 0;
+        double payForOneShift = 0;
+        for(int key : payments.keySet())
+        {
+            Payment payment = payments.get(key);
+            grandTotal += payment.getAmountPaid();
+        }
+        for(int employeeID : employees.keySet())
+        {
+            Employee employee = employees.get(employeeID);
+            payForOneShift = employee.getPayRate() * (int) employee.getShift() + employee.getPayRate() * (employee.getShift() - (int) employee.getShift());
+        }
+        double totalWeeklyPay = payForOneShift * 5;
+
+        output = "Weekly PayRoll Expenses: $" + totalWeeklyPay + " | Total earnings from bookings: $" + grandTotal + "\n";
+        return output;
     }
 }
