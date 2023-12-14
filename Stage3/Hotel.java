@@ -12,6 +12,7 @@ public class Hotel
 {
     private String hotelName;
     private Map<Integer, Room> rooms;
+    private Map<Integer, Room> reservedRooms;
     private Map<Integer, Employee> employees;
     private Map<Integer, Guest> allGuests;
     private Map<Integer, Reservation> reservations;
@@ -28,6 +29,7 @@ public class Hotel
         allGuests = new HashMap<>();
         reservations = new HashMap<>();
         payments = new HashMap<>();
+        reservedRooms = new HashMap<>();
     }
     /**
      * gets hotel name
@@ -52,6 +54,12 @@ public class Hotel
     public Map<Integer, Employee> getEmployees()
     {
         return employees;
+    }
+    public Map<Integer, Room> getReservedRooms(){
+        return reservedRooms;
+    }
+    public void addReservedRoom(Room room){
+        reservedRooms.put(room.getRoomNumber(),room);
     }
     /**
      * adds room to list of rooms by getting the room info from the user and calling the other addRoom method with the Room object as parameter
@@ -269,7 +277,7 @@ public class Hotel
                 i--;
             }
         }
-        Reservation reservation = new Reservation(lastName, numberOfGuests, roomsToReserve, duration);
+        Reservation reservation = new Reservation("bob",lastName, numberOfGuests, roomsToReserve, duration);
         addReservation(reservation);
     }
     /**
@@ -675,7 +683,7 @@ public class Hotel
                     i--;
                 }
             }
-            reservationToEdit.setGuestName(lastName);
+            reservationToEdit.setLastName(lastName);
             reservationToEdit.setNumberOfGuests(numberOfGuests);
             reservationToEdit.setDuration(duration);
             reservationToEdit.setRooms(roomsToReserve);
@@ -764,7 +772,7 @@ public class Hotel
         if(reservations.containsKey(reservationNumber))
         {
             Reservation reservation = reservations.get(reservationNumber);
-            System.out.println("Reservation " + reservationNumber + ": " + reservation.getGuestName() + "\nNumber of guests: " + reservation.getNumberOfGuests() + "\nDuration: " + reservation.getDuration() + " days");
+            System.out.println("Reservation " + reservationNumber + ": " + reservation.getGuestLastName() + "\nNumber of guests: " + reservation.getNumberOfGuests() + "\nDuration: " + reservation.getDuration() + " days");
             System.out.println("Rooms booked: ");
             for(Integer key : reservation.getRooms().keySet())
             {
@@ -953,6 +961,7 @@ public class Hotel
      * this method calculates and prints the hotel economics 
      * i.e. the total weekly payroll expenses and the total earnings from reservations
      */
+    
     public void printHotelEconomics()
     {
         double grandTotal = 0;
