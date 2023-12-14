@@ -1,4 +1,12 @@
+import static java.awt.image.ImageObserver.HEIGHT;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -8,18 +16,50 @@ import java.util.Map;
 public class ReportsMenuGUI extends javax.swing.JFrame {
 
     private Hotel hotel;
-    private Map<Integer, Employee> employees;
-    private static final String filename = "employees.csv";
+    private Map<Integer, Payment> payments;
+    private static final String filename = "payments.csv";
     private static final String delimiter = ",";
     /**
      * Creates new form ReportsMenuGUI
      */
     public ReportsMenuGUI() {
         initComponents();
+        readCSV();
     }
     public ReportsMenuGUI(Hotel hotel) {
         initComponents();
         this.hotel = hotel;
+        readCSV();
+    }
+    private void readCSV()
+    {
+        try
+        {
+        File file = new File(filename);
+        FileReader fr = new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
+        
+        String line = "";
+        String[] tempArr;
+        while((line = br.readLine()) != null)
+        {
+            tempArr = line.split(delimiter);
+            for(String field : tempArr)
+            {
+                System.out.println(field + "");
+            }
+            double amountDue = Double.parseDouble(tempArr[0]);
+            String creditCardNumber = tempArr[1];
+            
+            Payment payment = new Payment(amountDue, creditCardNumber);
+            hotel.addPayment(payment);
+        }
+        br.close();
+        }
+        catch(IOException e)
+        {
+            JOptionPane.showMessageDialog(this, "Error reading the file.", "ERROR", HEIGHT);
+        }
     }
 
     /**
@@ -46,6 +86,13 @@ public class ReportsMenuGUI extends javax.swing.JFrame {
 
         lblEconomics.setText("Economics:");
 
+        txtFieldEconomics.setEditable(false);
+        txtFieldEconomics.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFieldEconomicsActionPerformed(evt);
+            }
+        });
+
         btnShowEconomics.setText("Show All");
         btnShowEconomics.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,13 +106,14 @@ public class ReportsMenuGUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFieldEconomics, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblEconomics)
-                        .addGap(83, 83, 83)
-                        .addComponent(btnShowEconomics)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addComponent(lblEconomics)
+                .addGap(83, 83, 83)
+                .addComponent(btnShowEconomics)
+                .addContainerGap(129, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtFieldEconomics)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,6 +138,7 @@ public class ReportsMenuGUI extends javax.swing.JFrame {
             }
         });
 
+        txtFieldPayments.setEditable(false);
         txtFieldPayments.setColumns(20);
         txtFieldPayments.setRows(5);
         jScrollPane1.setViewportView(txtFieldPayments);
@@ -146,6 +195,7 @@ public class ReportsMenuGUI extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnShowEconomicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowEconomicsActionPerformed
@@ -155,6 +205,10 @@ public class ReportsMenuGUI extends javax.swing.JFrame {
     private void btnShowPaymentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowPaymentsActionPerformed
         txtFieldPayments.setText(hotel.printAllPaymentsWithReturn());
     }//GEN-LAST:event_btnShowPaymentsActionPerformed
+
+    private void txtFieldEconomicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldEconomicsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFieldEconomicsActionPerformed
 
     /**
      * @param args the command line arguments

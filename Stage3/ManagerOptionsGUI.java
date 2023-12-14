@@ -86,6 +86,7 @@ public class ManagerOptionsGUI extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jButton1.setText("Employees");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,7 +145,7 @@ public class ManagerOptionsGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_logoutBtnActionPerformed
 
     private void guestOptionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guestOptionBtnActionPerformed
@@ -164,11 +165,12 @@ public class ManagerOptionsGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_roomsOptionBtnActionPerformed
 
     private void employeesOptionBtnActionPerformed(java.awt.event.ActionEvent evt) {                                                   
-
+        
     }                                                  
 
     private void reportsOptionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportsOptionBtnActionPerformed
-
+        ReportsMenuGUI rep = new ReportsMenuGUI(hotel);
+        rep.setVisible(true);
     }//GEN-LAST:event_reportsOptionBtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

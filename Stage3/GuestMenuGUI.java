@@ -24,6 +24,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class GuestMenuGUI extends javax.swing.JFrame {
     private Hotel hotel;
+    private Map<Integer, Payment> payments;
+    private static final String filename = "payments.csv";
+    private static final String delimiter = ",";
     /**
      * Creates new form GuestMenuGUI
      */
@@ -34,6 +37,7 @@ public class GuestMenuGUI extends javax.swing.JFrame {
         checkOutBtn.setEnabled(false);
         paymentPanel.setVisible(false);
         updateBtn.setEnabled(false);
+        readPaymentsCSV();
         //hotel.getAllGuests().get(2).setCheckedIn(false);
     }
     public GuestMenuGUI(Hotel hotel) {
@@ -44,6 +48,7 @@ public class GuestMenuGUI extends javax.swing.JFrame {
         checkOutBtn.setEnabled(false);
         paymentPanel.setVisible(false);
         updateBtn.setEnabled(false);
+        readPaymentsCSV();
         //hotel.getAllGuests().get(2).setCheckedIn(false);
     }
     public DefaultTableModel populateTable(){
@@ -55,6 +60,62 @@ public class GuestMenuGUI extends javax.swing.JFrame {
         }
         GuestTable.setModel(model);
         return model;
+    }
+    private void updatePaymentCSV()
+    { //double amountDue, String creditCardNumber
+        try
+        {
+            File file = new File(filename);
+            BufferedWriter bf = new BufferedWriter(new FileWriter(file));
+            payments = hotel.getAllPayments();
+            for(Map.Entry payment : payments.entrySet())
+            {
+                String row = "";
+                int paymentID = (Integer)payment.getKey();
+                Payment pay = payments.get(paymentID);
+                
+                double amountDue = pay.getAmountDue();
+                String creditCardNumber = pay.getCreditCardNumber();
+                
+                row = Double.toString(amountDue) + "," + creditCardNumber + "\n";
+                bf.write(row); 
+            }
+            bf.close();
+        }
+        catch(IOException e)
+        {
+            JOptionPane.showMessageDialog(this, "Error reading the file.", "ERROR", HEIGHT);
+        }
+    }
+    private void readPaymentsCSV()
+    {
+        try
+        {
+        File file = new File(filename);
+        FileReader fr = new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
+        
+        String line = "";
+        String[] tempArr;
+        while((line = br.readLine()) != null)
+        {
+            tempArr = line.split(delimiter);
+            for(String field : tempArr)
+            {
+                System.out.println(field + "");
+            }
+            double amountDue = Double.parseDouble(tempArr[0]);
+            String creditCardNumber = tempArr[1];
+            
+            Payment payment = new Payment(amountDue, creditCardNumber);
+            hotel.addPayment(payment);
+        }
+        br.close();
+        }
+        catch(IOException e)
+        {
+            JOptionPane.showMessageDialog(this, "Error reading the file.", "ERROR", HEIGHT);
+        }
     }
 
     /**
@@ -696,7 +757,6 @@ public class GuestMenuGUI extends javax.swing.JFrame {
             reservationChkIn.setText(String.valueOf(guest.getReservationNumber()));
             checkInBtn.setEnabled(true);
             checkOutBtn.setEnabled(true);
-            
         }
         else{
             confirmationMessageAction();
@@ -745,8 +805,7 @@ public class GuestMenuGUI extends javax.swing.JFrame {
         checkInBtn.setEnabled(false);
         checkOutBtn.setEnabled(false);
         guest.setCheckedIn(true);
-        
-        
+        updatePaymentCSV();
     }//GEN-LAST:event_payBtnActionPerformed
 
     private void checkOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkOutBtnActionPerformed
