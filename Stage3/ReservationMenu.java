@@ -49,11 +49,19 @@ public class ReservationMenu extends InitialLogin
         hotel.lookUpReservation();
     }
     /**
+     * this is the show all reservations option
+     * @param hotel
+     */
+    public void option5(Hotel hotel)
+    {
+        hotel.printAllReservations();
+    }
+    /**
      * this is the back to main menu option
      * @param hotel
      * @param classification
      */
-    public void option5(Hotel hotel, byte classification)
+    public void option6(Hotel hotel, byte classification)
     {
         if(classification == 2)
         {
@@ -70,7 +78,7 @@ public class ReservationMenu extends InitialLogin
      * this is the logout option
      * @param hotel
      */
-    public void option6(Hotel hotel)
+    public void option7(Hotel hotel)
     {
         InitialLogin initialLogin = new InitialLogin();
         initialLogin.displayMenu(hotel);
@@ -83,7 +91,7 @@ public class ReservationMenu extends InitialLogin
     {
         while(true)
         {
-            System.out.printf("%nWhat do you want to do?%n(1) Create Reservation %n(2) Edit Reservation %n(3) Cancel Reservation %n(4) Look up reservation %n(5) Back to main menu%n (6) Logout%n (7) Quit%n");
+            System.out.printf("%nWhat do you want to do?%n(1) Create Reservation %n(2) Edit Reservation %n(3) Cancel Reservation %n(4) Look up reservation %n(5) Show all reservations%n(6) Back to main menu%n(7) Logout%n(8) Quit%n");
             Scanner in = new Scanner(System.in);
             option = in.nextByte();
             switch (option)
@@ -92,9 +100,10 @@ public class ReservationMenu extends InitialLogin
                 case 2: option2(hotel);  break; // edit reservation 
                 case 3: option3(hotel);  break; // cancel reservation  
                 case 4: option4(hotel);  break; // look up reservation 
-                case 5: option5(hotel, classification);  break; // back to main menu
-                case 6: option6(hotel);  break; // logout 
-                case 7: System.out.println("Bye..."); // quit 
+                case 5: option5(hotel); break; //show all reservations
+                case 6: option6(hotel, classification);  break; // back to main menu
+                case 7: option7(hotel);  break; // logout 
+                case 8: System.out.println("Bye..."); // quit 
                         System.exit(0);
                                     break;
                 default:System.out.println("Please select a valid option.");

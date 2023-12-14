@@ -12,6 +12,7 @@ public class Hotel
 {
     private String hotelName;
     private Map<Integer, Room> rooms;
+    private Map<Integer, Room> reservedRooms;
     private Map<Integer, Employee> employees;
     private Map<Integer, Guest> allGuests;
     private Map<Integer, Reservation> reservations;
@@ -28,6 +29,7 @@ public class Hotel
         allGuests = new HashMap<>();
         reservations = new HashMap<>();
         payments = new HashMap<>();
+        reservedRooms = new HashMap<>();
     }
     /**
      * gets hotel name
@@ -52,6 +54,12 @@ public class Hotel
     public Map<Integer, Employee> getEmployees()
     {
         return employees;
+    }
+    public Map<Integer, Room> getReservedRooms(){
+        return reservedRooms;
+    }
+    public void addReservedRoom(Room room){
+        reservedRooms.put(room.getRoomNumber(),room);
     }
     /**
      * adds room to list of rooms by getting the room info from the user and calling the other addRoom method with the Room object as parameter
@@ -108,6 +116,7 @@ public class Hotel
     /**
      * adds guest to allGuests by getting the guest info from the user and calling the other 
      * addGuest method with the Guest object as parameter and then returning the added Guest object
+     * @return added guest
      */
     public Guest addGuestWithReturn()
     {
@@ -253,7 +262,15 @@ public class Hotel
             int roomNumber = in.nextInt();
             if(rooms.containsKey(roomNumber))
             {
-                roomsToReserve.put(roomNumber, rooms.get(roomNumber));
+                if(rooms.get(roomNumber).getReservationNumber() == 0)
+                {
+                    roomsToReserve.put(roomNumber, rooms.get(roomNumber));
+                }
+                else
+                {
+                    System.out.println("Room " + roomNumber + " is already reserved, please select a different one.");
+                    i--;
+                }
             }
             else
             {
@@ -261,7 +278,7 @@ public class Hotel
                 i--;
             }
         }
-        Reservation reservation = new Reservation(lastName, numberOfGuests, roomsToReserve, duration);
+        Reservation reservation = new Reservation("bob",lastName, numberOfGuests, roomsToReserve, duration);
         addReservation(reservation);
     }
     /**
@@ -291,6 +308,11 @@ public class Hotel
     {
         if(reservations.containsKey(reservationNumber))
         {
+            Map<Integer, Room> reservedRooms = reservations.get(reservationNumber).getRooms();
+            for(Integer key : reservedRooms.keySet())
+            {
+                reservedRooms.get(key).resetReservationNumber();
+            }
             reservations.remove(reservationNumber);
         }
         else
@@ -399,12 +421,12 @@ public class Hotel
         {
             rooms.get(key).clean();
         }
-        System.out.println("All rooms have been cleaned");
+        System.out.println("All rooms have been cleaned \n");
     }
     /**
      * This method prints all the available rooms in the hotel
      */
-    public String printAvailableRooms()
+    public void printAvailableRooms()
     {
         Room currentRoom;
         String availableRooms = "";
@@ -421,7 +443,7 @@ public class Hotel
         {
             availableRooms = "There are no available rooms";
         }
-        return availableRooms;
+        System.out.println(availableRooms);
     }
     /**
      * This method displays the info about a specific room by getting the room number from the user and 
@@ -446,12 +468,19 @@ public class Hotel
         }
         Room roomToSearch;
         roomToSearch = rooms.get(roomNumber);
-        return "Floor: " + (int) roomToSearch.getRoomNumber()/100 + " | Room Number: " + roomToSearch.getRoomNumber() + " | $"+ roomToSearch.getPricePerNight() + " per night | Is it available? " + roomToSearch.isAvailable() + " | Is it clean? " + roomToSearch.isClean();
+        if(roomToSearch.getReservationNumber() == 0)
+        {
+            return "Floor: " + (int) roomToSearch.getRoomNumber()/100 + " | Room Number: " + roomToSearch.getRoomNumber() + " | $"+ roomToSearch.getPricePerNight() + " per night | Is it available? " + roomToSearch.isAvailable() + " | Is it clean? " + roomToSearch.isClean();
+        }
+        else
+        {
+            return "Floor: " + (int) roomToSearch.getRoomNumber()/100 + " | Room Number: " + roomToSearch.getRoomNumber() + " | $"+ roomToSearch.getPricePerNight() + " per night | The room is booked for reservation number: " + roomToSearch.getReservationNumber() + " | Is it clean? " + roomToSearch.isClean();
+        }
     }
     /**
      * This method prints all the occupied rooms in the hotel
      */
-    public String printOccupiedRooms()
+    public void printOccupiedRooms()
     {
         Room currentRoom;
         String occupiedRooms = "";
@@ -468,7 +497,7 @@ public class Hotel
         {
             occupiedRooms = "There are no occupied rooms";
         }
-        return occupiedRooms;
+        System.out.println(occupiedRooms + "\n");
     }
     /**
      * this method checks in a guest by getting the reservation number from the user and calling 
@@ -499,7 +528,8 @@ public class Hotel
             {
                 currentRoom = reservedRooms.get(key);
                 totalRoomPrice += currentRoom.getPricePerNight();
-                currentRoom.setUnavailable();
+                rooms.get(key).setUnavailable();
+                rooms.get(key).setReservationNumber(reservationNumber);
             }
             double grandTotal = totalRoomPrice * reservation.getDuration();
             Payment payment = new Payment(grandTotal, guest.getCreditCardNumber());
@@ -549,6 +579,7 @@ public class Hotel
             {
                 rooms.get(key).setAvailable();
                 rooms.get(key).setDirty();
+                rooms.get(key).resetReservationNumber();
             }
             reservations.remove(reservation.getReservationNumber());
             allGuests.remove(guestID);
@@ -578,17 +609,17 @@ public class Hotel
     {
         Guest guestToEdit = allGuests.get(guestID);
         Scanner in = new Scanner(System.in);
-        System.out.println("Please enter the guest's first name:");
+        System.out.println("Please enter the desired guest's first name:");
         String firstName = in.next();
-        System.out.println("Please enter the guest's last name:");
+        System.out.println("Please enter the desired guest's last name:");
         String lastName = in.next();
-        System.out.println("Please enter the guest's phone number:");
+        System.out.println("Please enter the desired guest's phone number:");
         String phoneNumber = in.next();
-        System.out.println("Please enter the guest's email:");
+        System.out.println("Please enter the desired guest's email:");
         String email = in.next();
-        System.out.println("Please enter the guest's credit card number:");
+        System.out.println("Please enter the desired guest's credit card number:");
         String creditCardNumber = in.next();
-        System.out.println("Please enter the guest's reservation number:");
+        System.out.println("Please enter the desired guest's reservation number:");
         int reservationNumber = in.nextInt();
         editReservation(reservationNumber);
         guestToEdit.setFirstName(firstName);
@@ -628,7 +659,7 @@ public class Hotel
             System.out.println("Please enter the duration of stay:");
             byte duration = in.nextByte();
             Map<Integer, Room> roomsToReserve = new HashMap<>();
-            System.out.println("Please enter the amount of room you want to reserve:");
+            System.out.println("Please enter the amount of rooms you want to reserve:");
             int amountOfRooms = in.nextInt();
             for(int i = 0; i < amountOfRooms; i++)
             {
@@ -636,7 +667,16 @@ public class Hotel
                 int roomNumber = in.nextInt();
                 if(rooms.containsKey(roomNumber))
                 {
-                    roomsToReserve.put(roomNumber, rooms.get(roomNumber));
+                    if(rooms.get(roomNumber).getReservationNumber() == 0 || rooms.get(roomNumber).getReservationNumber() == reservationNumber)
+                    {
+                        rooms.get(roomNumber).setReservationNumber(reservationNumber);
+                        roomsToReserve.put(roomNumber, rooms.get(roomNumber));
+                    }
+                    else
+                    {
+                        System.out.println("This room is already reserved.");
+                        i--;
+                    }
                 }
                 else
                 {
@@ -644,7 +684,7 @@ public class Hotel
                     i--;
                 }
             }
-            reservationToEdit.setGuestName(lastName);
+            reservationToEdit.setLastName(lastName);
             reservationToEdit.setNumberOfGuests(numberOfGuests);
             reservationToEdit.setDuration(duration);
             reservationToEdit.setRooms(roomsToReserve);
@@ -653,6 +693,64 @@ public class Hotel
         else
         {
             System.out.println("Reservation number does not exist.");
+        }
+    }
+    /**
+     * this method edits a room by getting the room number from the user and calling 
+     * the other editRoom method with the input
+     */
+    public void editRoom()
+    {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter the room number of the room you want to edit: ");
+        int roomNumber = in.nextInt();
+        editRoom(roomNumber);
+    }
+    /**
+     * this method edits a room (receiving the roomNumber as parameter)
+     * @param roomNumber
+     */
+    public void editRoom(int roomNumber)
+    {
+        if(rooms.containsKey(roomNumber))
+        {
+            Room roomToEdit = rooms.get(roomNumber);
+            Scanner in = new Scanner(System.in);
+            System.out.println("Please enter the new room number:");
+            int newRoomNumber = in.nextInt();
+            if(rooms.containsKey(roomNumber))
+            {
+                System.out.println("A room with this number already exists, would you like to overwrite it?\n(1) Yes\n(2) No\n");
+                int option = in.nextByte();
+                switch(option)
+                {
+                    case 1: 
+                        System.out.println("Please enter the new price per night:");
+                        double pricePerNight = in.nextDouble();
+                        roomToEdit.setRoomNumber(newRoomNumber);
+                        roomToEdit.setPricePerNight(pricePerNight);
+                        rooms.put(newRoomNumber, roomToEdit);
+                        System.out.println("Room info has been overwritten");
+                        break;
+                    case 2: 
+                        System.out.println("Cancelled.");
+                        break;
+                    default: System.out.println("Please select a valid option");
+                        break;
+                }
+            }
+            else
+            {
+                System.out.println("Please enter the new price per night:");
+                double pricePerNight = in.nextDouble();
+                roomToEdit.setRoomNumber(newRoomNumber);
+                roomToEdit.setPricePerNight(pricePerNight);
+                System.out.println("Room info has been updated");
+            }
+        }
+        else
+        {
+            System.out.println("Room number does not exist.");
         }
     }
     /**
@@ -675,27 +773,28 @@ public class Hotel
         if(reservations.containsKey(reservationNumber))
         {
             Reservation reservation = reservations.get(reservationNumber);
-            System.out.println("Reservation " + reservationNumber + ": " + reservation.getGuestName() + "\nNumber of guests: " + reservation.getNumberOfGuests() + "\nDuration: " + reservation.getDuration() + " days");
+            System.out.println("Reservation " + reservationNumber + ": " + reservation.getGuestLastName() + "\nNumber of guests: " + reservation.getNumberOfGuests() + "\nDuration: " + reservation.getDuration() + " days");
             System.out.println("Rooms booked: ");
             for(Integer key : reservation.getRooms().keySet())
             {
                 System.out.println("# " + key);
             }
+            System.out.println();
         }
         else
         {
-            System.out.println("Reservation number does not exist.");
+            System.out.println("Reservation number does not exist.\n");
         }
     }
     /**
-     * this method prints all reservations
+     * this method calls the lookUpReservation method for every reservation
      */
     public void printAllReservations()
     {
         System.out.println("All current reservations: ");
         for(Integer key : reservations.keySet())
         {
-            System.out.println(reservations.get(key));
+            lookUpReservation(key);
         }
     }
     /**
@@ -718,7 +817,7 @@ public class Hotel
         if(payments.containsKey(paymentID))
         {
             Payment payment = payments.get(paymentID);
-            System.out.println("Payment " + paymentID + " with amount: " + payment.getAmountPaid() + "\nPaid with Credit card: " + payment.getCreditCardNumber());
+            System.out.println("Payment " + paymentID + " with amount: $" + payment.getAmountPaid() + "\nPaid with Credit card: " + payment.getCreditCardNumber() + "\n");
         }
         else
         {
@@ -733,7 +832,7 @@ public class Hotel
         System.out.println("All current payments: ");
         for(Integer key : payments.keySet())
         {
-            System.out.println(payments.get(key));
+            lookUpPayment(key);
         }
     }
     /**
@@ -758,24 +857,21 @@ public class Hotel
         {
             Employee employeeToEdit = employees.get(employeeID);
             Scanner in = new Scanner(System.in);
-            System.out.println("Please enter the employee's first name:");
+            System.out.println("Please enter the desired employee's first name:");
             String firstName = in.next();
-            System.out.println("Please enter the employee's last name:");
+            System.out.println("Please enter the desired employee's last name:");
             String lastName = in.next();
-            System.out.println("Please enter the employee's address:");
-            String address = in.next();
-            System.out.println("Please enter the employee's phone number:");
-            String phoneNumber = in.next();
-            System.out.println("Please enter the employee's pay rate:");
+            System.out.println("Please enter the desired employee's email:");
+            String email = in.next();
+            System.out.println("Please enter the desired employee's pay rate:");
             double payRate = in.nextDouble();
-            System.out.println("Please enter the employee's shift duration:");
+            System.out.println("Please enter the desired employee's shift duration:");
             int shiftDuration = in.nextInt();
-            System.out.println("Please enter the employee's password:");
+            System.out.println("Please enter desired the employee's password:");
             String password = in.next();
             employeeToEdit.setFirstName(firstName);
             employeeToEdit.setLastName(lastName);
-            employeeToEdit.setAddress(address);
-            employeeToEdit.setPhoneNumber(phoneNumber);
+            employeeToEdit.setEmail(email);
             employeeToEdit.setPayRate(payRate);
             employeeToEdit.setShift(shiftDuration);
             employeeToEdit.setPassword(password);
@@ -785,6 +881,27 @@ public class Hotel
         {
             System.out.println("Employee ID does not exist.");
         }
+    }
+    /**
+     * edit employee method, receiving all necessary parameters
+     * @param employeeID
+     * @param firstname
+     * @param lastname
+     * @param email
+     * @param password
+     * @param payrate
+     * @param shiftDuration 
+     */
+    public void editEmployee(int employeeID, String firstname, String lastname, String email, String password, double payrate, double shiftDuration)
+    {
+        Employee employeeToEdit = employees.get(employeeID);
+        
+        employeeToEdit.setFirstName(firstname);
+        employeeToEdit.setLastName(lastname);
+        employeeToEdit.setEmail(email);
+        employeeToEdit.setPassword(password);
+        employeeToEdit.setPayRate(payrate);
+        employeeToEdit.setShift(shiftDuration);
     }
     /**
      * this method looks up an employee by getting the employee ID from the user and 
@@ -806,11 +923,31 @@ public class Hotel
         if(employees.containsKey(employeeID)) // if the employee ID exists
         {
             Employee employee = employees.get(employeeID);
-            System.out.println("Employee " + employeeID + ": " + employee.getFirstName() + " " + employee.getLastName() + "\nAddress: " + employee.getAddress() + "\nPhone number: " + employee.getPhoneNumber() + "\nPay Rate: " + employee.getPayRate() +  "\nShift: " + employee.getShift());
+            System.out.println("Employee " + employeeID + ": " + employee.getFirstName() + " " + employee.getLastName() + "\nEmail: " + employee.getEmail() + "\nPay Rate: " + employee.getPayRate() +  "\nShift: " + employee.getShift() + "\n");
         }
         else
         {
             System.out.println("Employee ID does not exist.");
+        }
+    }
+    /**
+     * this method looks up an employee and returns the information as a string
+     * @param employeeID
+     * @return output string with employee information 
+     */
+    public String lookUpEmployeeWithReturn(int employeeID)
+    {
+        String output = "";
+        if(employees.containsKey(employeeID)) // if the employee ID exists
+        {
+            Employee employee = employees.get(employeeID);
+            output = "Employee: " + employee.getFirstName() + " " + employee.getLastName() + "\nID: " + employeeID + "\nEmail: " + employee.getEmail() + "\nPay Rate: $" + employee.getPayRate() +  "\nShift: " + employee.getShift() + " hrs\n\n";
+            return output;
+        }
+        else
+        {
+            output = "Employee ID does not exist.";
+            return output;
         }
     }
     /**
@@ -820,7 +957,33 @@ public class Hotel
     {
         for(Integer key : employees.keySet())
         {
-            System.out.println(employees.get(key));
+            lookUpEmployee(key);
+        }
+    }
+    /**
+     * this method looks up a guest by getting the guest ID from the user and calling the 
+     * other lookUpGuest method with the Guest corresponding to the ID
+     */
+    public void lookUpGuest()
+    {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter the ID of the guest you want to look up: ");
+        int guestID = in.nextInt();
+        lookUpGuest(allGuests.get(guestID));
+    }
+    /**
+     * this method looks up a guest (receiving the guest as parameter)
+     * @param guest
+     */
+    public void lookUpGuest(Guest guest)
+    {
+        if(allGuests.containsValue(guest))
+        {
+            System.out.println("Guest #" + guest.getGuestID() + "\n" + guest.getFirstName() + " " + guest.getLastName() + "\nPhone number: " + guest.getPhoneNumber() + "\nEmail: " + guest.getEmail() + "\nCredit card number: " + guest.getCreditCardNumber() + "\nReservation number: " + guest.getReservation().getReservationNumber() + "\n");
+        }
+        else
+        {
+            System.out.println("Guest does not exist.");
         }
     }
     /**
@@ -830,13 +993,14 @@ public class Hotel
     {
         for(Integer key : allGuests.keySet())
         {
-            System.out.println(allGuests.get(key));
+            lookUpGuest(allGuests.get(key));
         }
     }
     /**
      * this method calculates and prints the hotel economics 
      * i.e. the total weekly payroll expenses and the total earnings from reservations
      */
+    
     public void printHotelEconomics()
     {
         double grandTotal = 0;
@@ -849,10 +1013,10 @@ public class Hotel
         for(int employeeID : employees.keySet())
         {
             Employee employee = employees.get(employeeID);
-            payForOneShift = employee.getPayRate() * employee.getShift();
+            payForOneShift = employee.getPayRate() * (int) employee.getShift() + employee.getPayRate() * (employee.getShift() - (int) employee.getShift());
         }
         double totalWeeklyPay = payForOneShift * 5;
 
-        System.out.println("Weekly PayRoll Expenses: $" + totalWeeklyPay + " | Total earnings from reservations: " + grandTotal);
+        System.out.println("Weekly PayRoll Expenses: $" + totalWeeklyPay + " | Total earnings from bookings: $" + grandTotal + "\n");
     }
 }
