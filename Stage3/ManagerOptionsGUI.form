@@ -113,6 +113,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Rooms"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="roomsOptionBtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="reservationsOptionBtn">
       <Properties>
@@ -132,6 +135,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Employees"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="employeesOptionBtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="reportsOptionBtn">
       <Properties>
@@ -140,6 +146,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Reports"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reportsOptionBtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="logoutBtn">
       <Properties>

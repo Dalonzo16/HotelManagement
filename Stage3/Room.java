@@ -10,19 +10,24 @@ public class Room
     private boolean isAvailable;
     private boolean isClean;
     private int reservationNumber;
+    private int floorNumber;
     
     /**
      * Constructor for objects of class Room
      * @param roomNumber
      * @param pricePerNight
      */
-    public Room(int roomNumber, double pricePerNight)
+    public Room(int roomNumber, int floorNumber, double pricePerNight)
     {
         this.roomNumber = roomNumber;
         this.pricePerNight = pricePerNight;
         isAvailable = true;
+        this.floorNumber = floorNumber;
         reservationNumber = 0;
         System.out.println("The room " + roomNumber + " was successfully created. Its price per night is: " + pricePerNight);
+    }
+    public int getFloorNumber(){
+        return floorNumber;
     }
     /**
      * gets room number

@@ -61,6 +61,11 @@ public class ManagerOptionsGUI extends javax.swing.JFrame {
 
         roomsOptionBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         roomsOptionBtn.setText("Rooms");
+        roomsOptionBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                roomsOptionBtnActionPerformed(evt);
+            }
+        });
 
         reservationsOptionBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         reservationsOptionBtn.setText("Reservations");
@@ -72,9 +77,19 @@ public class ManagerOptionsGUI extends javax.swing.JFrame {
 
         employeesOptionBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         employeesOptionBtn.setText("Employees");
+        employeesOptionBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                employeesOptionBtnActionPerformed(evt);
+            }
+        });
 
         reportsOptionBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         reportsOptionBtn.setText("Reports");
+        reportsOptionBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reportsOptionBtnActionPerformed(evt);
+            }
+        });
 
         logoutBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         logoutBtn.setText("Logout");
@@ -147,6 +162,19 @@ public class ManagerOptionsGUI extends javax.swing.JFrame {
         ReservationMenuGUI reservationMenu = new ReservationMenuGUI(hotel);
         reservationMenu.setVisible(true);
     }//GEN-LAST:event_reservationsOptionBtnActionPerformed
+
+    private void roomsOptionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roomsOptionBtnActionPerformed
+        RoomsMenuGUI rooms = new RoomsMenuGUI(hotel);
+        rooms.setVisible(true);
+    }//GEN-LAST:event_roomsOptionBtnActionPerformed
+
+    private void employeesOptionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeesOptionBtnActionPerformed
+
+    }//GEN-LAST:event_employeesOptionBtnActionPerformed
+
+    private void reportsOptionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportsOptionBtnActionPerformed
+
+    }//GEN-LAST:event_reportsOptionBtnActionPerformed
 
     /**
      * @param args the command line arguments

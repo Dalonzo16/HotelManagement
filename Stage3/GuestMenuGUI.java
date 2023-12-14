@@ -356,7 +356,7 @@ public class GuestMenuGUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Check in /out", jPanel1);
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setText("Guest ID:");
@@ -502,14 +502,14 @@ public class GuestMenuGUI extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(354, 354, 354)
                         .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(updateBtn)
                 .addGap(34, 34, 34))
         );
@@ -589,7 +589,7 @@ public class GuestMenuGUI extends javax.swing.JFrame {
                 .addComponent(lastNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63)
                 .addComponent(searchBtn)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(207, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -601,7 +601,7 @@ public class GuestMenuGUI extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(lastNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -622,10 +622,7 @@ public class GuestMenuGUI extends javax.swing.JFrame {
                 .addContainerGap(691, Short.MAX_VALUE)
                 .addComponent(backBtn)
                 .addGap(77, 77, 77))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 858, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -633,8 +630,7 @@ public class GuestMenuGUI extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(backBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -727,6 +723,7 @@ public class GuestMenuGUI extends javax.swing.JFrame {
         else{
             JOptionPane.showMessageDialog(this, "This guest is already checked in");
         }
+        guest.setCheckedIn(true);
     }//GEN-LAST:event_checkInBtnActionPerformed
     
     private void subTotalTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subTotalTxtActionPerformed
@@ -848,27 +845,30 @@ public class GuestMenuGUI extends javax.swing.JFrame {
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         String fileName = "Guests.csv";
-        Guest guest = hotel.getAllGuests().get(Integer.valueOf(guestIdTxtEdit.getText()));
+        Map<Integer, Guest> guests = hotel.getAllGuests();
+        Guest guest = guests.get(Integer.valueOf(guestIdTxtEdit.getText()));
         File file = new File(fileName);
         try {
-            BufferedWriter br = new BufferedWriter(new FileWriter(file));
-            Map<Integer, Guest> guests = hotel.getAllGuests();
-            
-                String row = "";
-                String firstName = firstNameEdit.getText();
-                String lastName = lastNameEdit.getText();
-                String phoneNumber = phoneNumEdit.getText();
-                String email = emailEdit.getText();
-                String creditCardNum = creditCardNumEdit.getText();
-                //Setting all these here so the guest list table updates in real time
-                guest.setFirstName(firstName);
-                guest.setLastName(lastName);
-                guest.setPhoneNumber(phoneNumber);
-                guest.setEmail(email);
-                guest.setCreditCardNumber(creditCardNum);
-                row = String.valueOf(guest.getGuestID()) + "," + firstName + "," + lastName +
-                        "," + phoneNumber + "," + email + "," + creditCardNum + "," + String.valueOf(guest.getReservationNumber());
-                br.write(row);
+                guest.setFirstName(firstNameEdit.getText());
+                guest.setLastName(lastNameEdit.getText());
+                guest.setPhoneNumber(phoneNumEdit.getText());
+                guest.setEmail(emailEdit.getText());
+                 guest.setCreditCardNumber(creditCardNumEdit.getText());
+                BufferedWriter br = new BufferedWriter(new FileWriter(file));
+                for(Map.Entry aguest : guests.entrySet()){
+                    
+                    int guestId = (Integer)aguest.getKey();
+                    Guest guest2 = hotel.getAllGuests().get(guestId);
+                    String row = "";
+                    String firstName = guest2.getFirstName();
+                    String lastName = guest2.getLastName();
+                    String phoneNumber = guest2.getPhoneNumber();
+                    String email = guest2.getEmail();
+                    String creditCardNum = guest2.getCreditCardNumber();
+                    row = String.valueOf(guest2.getGuestID()) + "," + firstName + "," + lastName +
+                        "," + phoneNumber + "," + email + "," + creditCardNum + "," + String.valueOf(guest.getReservationNumber() + "\n");
+                    br.write(row);
+                }
             br.close();
             guestIdTxtEdit.setText("");
             firstNameEdit.setText("");
