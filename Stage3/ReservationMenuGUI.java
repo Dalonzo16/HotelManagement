@@ -1,3 +1,15 @@
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -9,17 +21,60 @@
  */
 public class ReservationMenuGUI extends javax.swing.JFrame {
     private Hotel hotel;
+    private String[] data;
+    private static int counter = 0;
 
     /**
      * Creates new form ReservationMenuGUI
      */
     public ReservationMenuGUI() {
         initComponents();
-        
+        populateTable();
+        populateReservationList();
+        createReservationBtn.setEnabled(false);
+        updateBtn.setEnabled(false);
+        cancelReservationBtn.setEnabled(false);
+        addEditBtn.setEnabled(false);
+        removeBtn.setEnabled(false);
     }
     public ReservationMenuGUI(Hotel hotel){
         initComponents();
         this.hotel = hotel;
+        populateTable();
+        populateReservationList();
+        createReservationBtn.setEnabled(false);
+        updateBtn.setEnabled(false);
+        cancelReservationBtn.setEnabled(false);
+        addEditBtn.setEnabled(false);
+        removeBtn.setEnabled(false);
+    }
+    public DefaultTableModel populateTable(){
+        DefaultTableModel model = (DefaultTableModel)roomsTable.getModel();
+        for(int key : hotel.getRooms().keySet()){
+            Room room = hotel.getRooms().get(key);
+            data = new String[] {String.valueOf(room.getRoomNumber()), String.valueOf(room.getFloorNumber()), "$" + String.format("%.2f",room.getPricePerNight())};
+            model.addRow(data);
+            
+        }
+        roomsTable.setModel(model);
+        return model;
+    }
+    public DefaultTableModel populateReservationList(){
+        DefaultTableModel model = (DefaultTableModel)reservationTable.getModel();
+
+        for(int key : hotel.getAllGuests().keySet()){
+            Guest guest = hotel.getAllGuests().get(key);
+            double subtotal = 0;
+            for(int rooms : guest.getReservation().getRooms().keySet()){
+                Room room = guest.getReservation().getRooms().get(rooms);
+                subtotal += room.getPricePerNight();
+            }
+            subtotal = subtotal * guest.getReservation().getDuration();
+            double total = subtotal +(0.0772 + subtotal);
+            model.addRow(new String[]{Integer.toString(guest.getReservationNumber()),guest.getFirstName(), guest.getLastName(), String.valueOf(guest.getReservation().getRooms().keySet()), String.valueOf(guest.getReservation().getDuration()) + " Night's", "$" + String.format("%.2f",total)});
+        }
+        reservationTable.setModel(model);
+        return model;
     }
 
     /**
@@ -33,68 +88,494 @@ public class ReservationMenuGUI extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        firstNameCreateTxt = new javax.swing.JTextField();
+        lastNameCreateTxt = new javax.swing.JTextField();
+        phoneNumCreateTxt = new javax.swing.JTextField();
+        emailCreateTxt = new javax.swing.JTextField();
+        creditCardNumCreateTxt = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        numOfGuestsSpin = new javax.swing.JSpinner();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        roomsTable = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        roomSelectionTxt = new javax.swing.JTextArea();
+        jLabel8 = new javax.swing.JLabel();
+        addRoomBtn = new javax.swing.JButton();
+        createReservationBtn = new javax.swing.JButton();
+        roomNumberSpin = new javax.swing.JSpinner();
+        jLabel9 = new javax.swing.JLabel();
+        durationSpin = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        guestIdEditTxt = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        label = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        firstNameEditTxt = new javax.swing.JTextField();
+        emailEditTxt = new javax.swing.JTextField();
+        creditCardNumEditTxt = new javax.swing.JTextField();
+        phoneNumberEditTxt = new javax.swing.JTextField();
+        numOfGuestsEditSpin = new javax.swing.JSpinner();
+        durationEditSpin = new javax.swing.JSpinner();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        roomsEditTxt = new javax.swing.JTextArea();
+        roomNumbersEditSpin = new javax.swing.JSpinner();
+        addEditBtn = new javax.swing.JButton();
+        removeBtn = new javax.swing.JButton();
+        searchReservationBtn = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        lastNameEditTxt = new javax.swing.JTextField();
+        updateBtn = new javax.swing.JButton();
+        cancelReservationBtn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        reservationTable = new javax.swing.JTable();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        lastNameTable = new javax.swing.JTextField();
+        firstNameTable = new javax.swing.JTextField();
+        searchListBtn = new javax.swing.JButton();
         backBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Guest Id");
+        jLabel2.setText("First Name: ");
 
-        jTextField1.setText("jTextField1");
+        jLabel3.setText("Last Name:");
+
+        jLabel4.setText("Phone Number:");
+
+        jLabel5.setText("Email:");
+
+        jLabel6.setText("Credit Card Number:");
+
+        creditCardNumCreateTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creditCardNumCreateTxtActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Guests on This Stay:");
+
+        numOfGuestsSpin.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+
+        roomsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Room Number", "Floor Number", "Price Per Night"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(roomsTable);
+
+        roomSelectionTxt.setEditable(false);
+        roomSelectionTxt.setColumns(20);
+        roomSelectionTxt.setRows(5);
+        jScrollPane1.setViewportView(roomSelectionTxt);
+
+        jLabel8.setText("Room Number:");
+
+        addRoomBtn.setText("Add Room");
+        addRoomBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addRoomBtnActionPerformed(evt);
+            }
+        });
+
+        createReservationBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        createReservationBtn.setText("Create Reservation");
+        createReservationBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createReservationBtnActionPerformed(evt);
+            }
+        });
+
+        roomNumberSpin.setModel(new javax.swing.SpinnerNumberModel(1, 1, 25, 1));
+
+        jLabel9.setText("Stay Duration:");
+
+        durationSpin.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(253, 253, 253)
-                .addComponent(jLabel1)
-                .addGap(41, 41, 41)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(298, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(firstNameCreateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(lastNameCreateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(phoneNumCreateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(emailCreateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(creditCardNumCreateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(numOfGuestsSpin, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(durationSpin, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(roomNumberSpin, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(addRoomBtn))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(createReservationBtn)
+                .addGap(316, 316, 316))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(295, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
+                    .addComponent(firstNameCreateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel8)
+                                    .addComponent(addRoomBtn)
+                                    .addComponent(roomNumberSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(1, 1, 1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(lastNameCreateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(9, 9, 9)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(phoneNumCreateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(emailCreateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(creditCardNumCreateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(numOfGuestsSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel9)
+                                    .addComponent(durationSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addComponent(createReservationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Create New Reservation", jPanel1);
+
+        jLabel7.setText("Guest ID:");
+
+        jLabel10.setText("First Name:");
+
+        jLabel11.setText("Phone Number:");
+
+        jLabel12.setText("Email:");
+
+        jLabel13.setText("Credit Card On File:");
+
+        label.setText("Guests on this Stay:");
+
+        jLabel16.setText("Duration:");
+
+        jLabel17.setText("Room Numbers:");
+
+        numOfGuestsEditSpin.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+
+        durationEditSpin.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+
+        roomsEditTxt.setColumns(20);
+        roomsEditTxt.setRows(5);
+        jScrollPane3.setViewportView(roomsEditTxt);
+
+        roomNumbersEditSpin.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+
+        addEditBtn.setText("Add");
+        addEditBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addEditBtnActionPerformed(evt);
+            }
+        });
+
+        removeBtn.setText("Remove");
+        removeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeBtnActionPerformed(evt);
+            }
+        });
+
+        searchReservationBtn.setText("Search");
+        searchReservationBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchReservationBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setText("Last Name:");
+
+        updateBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        updateBtn.setText("Update");
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBtnActionPerformed(evt);
+            }
+        });
+
+        cancelReservationBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cancelReservationBtn.setText("Cancel");
+        cancelReservationBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelReservationBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 706, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(289, 289, 289)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(181, 181, 181)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(18, 18, 18)
+                                .addComponent(firstNameEditTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addComponent(guestIdEditTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(48, 48, 48)
+                                .addComponent(searchReservationBtn))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lastNameEditTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(18, 18, 18)
+                                .addComponent(phoneNumberEditTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(emailEditTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addGap(18, 18, 18)
+                                .addComponent(creditCardNumEditTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addGap(18, 18, 18)
+                                .addComponent(durationEditSpin, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(label)
+                                .addGap(18, 18, 18)
+                                .addComponent(numOfGuestsEditSpin, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(58, 58, 58)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jLabel17)
+                        .addGap(18, 18, 18)
+                        .addComponent(roomNumbersEditSpin, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(addEditBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(removeBtn)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 19, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(116, 116, 116))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(74, 74, 74)
+                                .addComponent(cancelReservationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(62, 62, 62))))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 354, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(guestIdEditTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchReservationBtn))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(firstNameEditTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(lastNameEditTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(phoneNumberEditTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(emailEditTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel14)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(creditCardNumEditTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(durationEditSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label)
+                    .addComponent(numOfGuestsEditSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(roomNumbersEditSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addEditBtn)
+                    .addComponent(removeBtn))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelReservationBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Edit Reservation", jPanel2);
+        jTabbedPane1.addTab("Edit/Cancel Reservation", jPanel2);
+
+        reservationTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Reservation Number", "First Name", "Last Name", "Rooms", "Duration", "Total"
+            }
+        ));
+        jScrollPane4.setViewportView(reservationTable);
+
+        jLabel18.setText("First Name:");
+
+        jLabel19.setText("Last Name:");
+
+        searchListBtn.setText("Search");
+        searchListBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchListBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 706, Short.MAX_VALUE)
+            .addComponent(jScrollPane4)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(245, 245, 245)
+                .addComponent(jLabel18)
+                .addGap(18, 18, 18)
+                .addComponent(firstNameTable, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(88, 88, 88)
+                .addComponent(jLabel19)
+                .addGap(18, 18, 18)
+                .addComponent(lastNameTable, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74)
+                .addComponent(searchListBtn)
+                .addContainerGap(198, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 354, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel19)
+                    .addComponent(lastNameTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(firstNameTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchListBtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Reservation List", jPanel3);
 
         backBtn.setText("Back to Menu");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,22 +584,264 @@ public class ReservationMenuGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(backBtn)
-                .addGap(81, 81, 81))
+                .addGap(35, 35, 35))
             .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 8, Short.MAX_VALUE)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(backBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void creditCardNumCreateTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditCardNumCreateTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_creditCardNumCreateTxtActionPerformed
+
+    private void addRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRoomBtnActionPerformed
+        String roomNumber = String.valueOf(roomNumberSpin.getValue());
+        if(hotel.getReservedRooms().containsKey((Integer)roomNumberSpin.getValue())){
+            
+            JOptionPane.showMessageDialog(this,"This room is not Available");
+        }
+        else if(counter == 0){
+            roomSelectionTxt.insert(roomNumber,0);
+            counter = 1;
+        }
+        else{
+            roomSelectionTxt.insert(roomNumber + ",", 0);
+        }
+        createReservationBtn.setEnabled(true);
+    }//GEN-LAST:event_addRoomBtnActionPerformed
+
+    private void createReservationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createReservationBtnActionPerformed
+        String firstName = firstNameCreateTxt.getText();
+        String lastName = lastNameCreateTxt.getText();
+        String phoneNumber = phoneNumCreateTxt.getText();
+        String email = emailCreateTxt.getText();
+        String creditCardNum = creditCardNumCreateTxt.getText();
+        int numberOfGuests = (Integer)numOfGuestsSpin.getValue();
+        int duration = (Integer)durationSpin.getValue();
+        String rooms = roomSelectionTxt.getText();
+        Room room;
+        HashMap<Integer, Room> roomsForRes = new HashMap<>();
+        if(rooms.contains(",")){
+            String[] roomNums = rooms.split(",");
+            String roomNumber = "";
+            for(int i = 0; roomNums.length > i; i++){
+                roomNumber = roomNums[i];
+                room = hotel.getRooms().get(Integer.valueOf(roomNumber));
+                room.setUnavailable();
+                roomsForRes.put(Integer.valueOf(roomNumber),room);
+                hotel.removeRoom(room.getRoomNumber());
+                hotel.addReservedRoom(room.getRoomNumber());
+            }
+        }
+        else{
+            room = hotel.getRooms().get(Integer.valueOf(rooms));
+            roomsForRes.put(Integer.valueOf(rooms),room);
+            hotel.addReservedRoom(room.getRoomNumber());
+            hotel.removeRoom(room.getRoomNumber());
+        }
+        if(firstName.equals("") | lastName.equals("") | phoneNumber.equals("") | email.equals("") | creditCardNum.equals("")){
+            JOptionPane.showMessageDialog(this, "All fields must be completed");
+        }
+        Reservation reservation = new Reservation(firstName,lastName,numberOfGuests,roomsForRes,duration);
+        Guest guest = new Guest(firstName,lastName,phoneNumber,email,creditCardNum,reservation);
+        hotel.addGuest(guest);
+        hotel.addReservation(reservation);
+        updateGuestList();
+        
+        firstNameCreateTxt.setText("");
+        lastNameCreateTxt.setText("");
+        phoneNumCreateTxt.setText("");
+        emailCreateTxt.setText("");
+        creditCardNumCreateTxt.setText("");
+        roomSelectionTxt.setText("");
+        numOfGuestsSpin.setValue(1);
+        durationSpin.setValue(1);
+        roomNumberSpin.setValue(1);
+        createReservationBtn.setEnabled(false);
+        JOptionPane.showMessageDialog(this,"Reservation created");
+    }//GEN-LAST:event_createReservationBtnActionPerformed
+
+    private void cancelReservationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelReservationBtnActionPerformed
+        int guestId = Integer.parseInt(guestIdEditTxt.getText());
+        Guest guest = hotel.getAllGuests().get(guestId);
+        int choice = JOptionPane.showConfirmDialog(this, "Cancel this reservation?");
+        if(!guest.isCheckedIn()){
+            if(choice == 0){
+                for(int roomNumber : guest.getReservation().getRooms().keySet()){
+                    Room room = guest.getReservation().getRooms().get(roomNumber);
+                    room.setAvailable();
+                    hotel.removeReservedRoom(room.getRoomNumber());
+                    hotel.addRoom(room);
+                }
+                hotel.removeReservation(guest.getReservationNumber());
+                hotel.removeGuest(guest.getGuestID());
+            }
+
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "This Guest is checked in cannot cancel Reservation");
+        }
+        guestIdEditTxt.setText("");
+        firstNameEditTxt.setText("");
+        lastNameEditTxt.setText("");
+        phoneNumberEditTxt.setText("");
+        emailEditTxt.setText("");
+        creditCardNumEditTxt.setText("");
+        roomsEditTxt.setText("");
+        numOfGuestsEditSpin.setValue(1);
+        durationEditSpin.setValue(1);
+        updateBtn.setEnabled(false);
+        cancelReservationBtn.setEnabled(false);
+        addEditBtn.setEnabled(false);
+        removeBtn.setEnabled(false);
+    }//GEN-LAST:event_cancelReservationBtnActionPerformed
+
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+        int guestId = Integer.parseInt(guestIdEditTxt.getText());
+        Guest guest = hotel.getAllGuests().get(guestId);
+        guest.setFirstName(firstNameEditTxt.getText());
+        guest.setLastName(lastNameEditTxt.getText());
+        guest.setPhoneNumber(phoneNumberEditTxt.getText());
+        guest.setEmail(emailEditTxt.getText());
+        guest.setCreditCardNumber(creditCardNumEditTxt.getText());
+        guest.getReservation().setNumberOfGuests((Integer)numOfGuestsEditSpin.getValue());
+        guest.getReservation().setDuration((Integer)durationEditSpin.getValue());
+
+        guestIdEditTxt.setText("");
+        firstNameEditTxt.setText("");
+        lastNameEditTxt.setText("");
+        phoneNumberEditTxt.setText("");
+        emailEditTxt.setText("");
+        creditCardNumEditTxt.setText("");
+        roomsEditTxt.setText("");
+        numOfGuestsEditSpin.setValue(1);
+        durationEditSpin.setValue(1);
+        updateBtn.setEnabled(false);
+        cancelReservationBtn.setEnabled(false);
+        addEditBtn.setEnabled(false);
+        removeBtn.setEnabled(false);
+        JOptionPane.showMessageDialog(this,"Reservation Updated");
+    }//GEN-LAST:event_updateBtnActionPerformed
+
+    private void searchReservationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchReservationBtnActionPerformed
+        int guestId = Integer.parseInt(guestIdEditTxt.getText());
+        Guest guest = hotel.getAllGuests().get(guestId);
+        Reservation reservation = guest.getReservation();
+        if(hotel.getAllReservations().containsKey(reservation.getReservationNumber())){
+            firstNameEditTxt.setText(guest.getFirstName());
+            lastNameEditTxt.setText(guest.getLastName());
+            phoneNumberEditTxt.setText(guest.getPhoneNumber());
+            emailEditTxt.setText(guest.getEmail());
+            creditCardNumEditTxt.setText(guest.getCreditCardNumber());
+            numOfGuestsEditSpin.setValue(reservation.getNumberOfGuests());
+            durationEditSpin.setValue(reservation.getDuration());
+            String rooms = String.valueOf(reservation.getRooms().keySet());
+            roomsEditTxt.setText(rooms);
+            updateBtn.setEnabled(true);
+            cancelReservationBtn.setEnabled(true);
+            addEditBtn.setEnabled(true);
+            removeBtn.setEnabled(true);
+
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "This Reservation does not exist");
+        }
+    }//GEN-LAST:event_searchReservationBtnActionPerformed
+
+    private void removeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBtnActionPerformed
+        int guestId = Integer.parseInt(guestIdEditTxt.getText());
+        int rooms = (Integer)roomNumbersEditSpin.getValue();
+        if(hotel.getAllGuests().get(guestId).getReservation().getRooms().containsKey(rooms) && !hotel.getRooms().containsKey(rooms)){
+            int choice = JOptionPane.showConfirmDialog(this, "Remove room " + rooms + "?");
+            if(choice == 0){
+                Guest guest = hotel.getAllGuests().get(guestId);
+                guest.getReservation().getRooms().get(rooms).setAvailable();
+                hotel.addRoom(guest.getReservation().getRooms().get(rooms));
+                guest.getReservation().getRooms().remove(rooms);
+                hotel.removeReservedRoom(rooms);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "This room is not on this reservation");
+        }
+    }//GEN-LAST:event_removeBtnActionPerformed
+
+    private void addEditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEditBtnActionPerformed
+        int guestId = Integer.parseInt(guestIdEditTxt.getText());
+        Guest guest = hotel.getAllGuests().get(guestId);
+        int room = (Integer)roomNumbersEditSpin.getValue();
+        if(!hotel.getAllGuests().get(guestId).getReservation().getRooms().containsKey(room) && hotel.getRooms().containsKey(room)){
+            guest.getReservation().addRoom(hotel.getRooms().get(room));
+            guest.getReservation().getRooms().get(room).setUnavailable();
+            hotel.removeRoom(room);
+            hotel.addReservedRoom(room);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "This room is occupied or on current reservation");
+        }
+        updateBtn.setEnabled(true);
+        cancelReservationBtn.setEnabled(true);
+        addEditBtn.setEnabled(true);
+        removeBtn.setEnabled(true);
+
+    }//GEN-LAST:event_addEditBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
+
+    private void searchListBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchListBtnActionPerformed
+        int flag = 0;
+        int i = 0;
+        
+        for(i = 0; reservationTable.getRowCount() > i; i++){
+            if(reservationTable.getValueAt(i,1).equals(firstNameTable.getText()) && reservationTable.getValueAt(i,2).equals(lastNameTable.getText())){
+                reservationTable.setRowSelectionInterval(i, i);
+                flag++;
+            }
+        }
+        if(i == reservationTable.getRowCount() && flag == 0){
+            JOptionPane.showMessageDialog(this, "The Reservation for this Guest does not exist");
+        }
+    }//GEN-LAST:event_searchListBtnActionPerformed
+
+    public void updateGuestList(){
+        try {
+                Map<Integer, Guest> guests = hotel.getAllGuests();
+                String fileName = "Guests.csv";
+                File file = new File(fileName);
+                BufferedWriter bf = new BufferedWriter(new FileWriter(file));
+                for(Map.Entry aguest : guests.entrySet()){
+                    String row = "";
+                    int guestId = (Integer)aguest.getKey();
+                    Guest guest = guests.get(guestId);
+                    String firstName = guest.getFirstName();
+                    String lastName = guest.getLastName();
+                    String phoneNumber = guest.getPhoneNumber();
+                    String email = guest.getEmail();
+                    String creditCardNum = guest.getCreditCardNumber();
+                    String resId = String.valueOf(guest.getReservation().getReservationNumber());
+                
+
+                    row = String.valueOf(guestId) + "," + firstName + "," + lastName + "," + phoneNumber + "," + email + "," + creditCardNum + ","  + resId  + "\n";
+                    bf.write(row);
+                        
+                }
+                bf.close();
+            } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this,"Error reading this file reservation");
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -155,12 +878,65 @@ public class ReservationMenuGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addEditBtn;
+    private javax.swing.JButton addRoomBtn;
     private javax.swing.JButton backBtn;
+    private javax.swing.JButton cancelReservationBtn;
+    private javax.swing.JButton createReservationBtn;
+    private javax.swing.JTextField creditCardNumCreateTxt;
+    private javax.swing.JTextField creditCardNumEditTxt;
+    private javax.swing.JSpinner durationEditSpin;
+    private javax.swing.JSpinner durationSpin;
+    private javax.swing.JTextField emailCreateTxt;
+    private javax.swing.JTextField emailEditTxt;
+    private javax.swing.JTextField firstNameCreateTxt;
+    private javax.swing.JTextField firstNameEditTxt;
+    private javax.swing.JTextField firstNameTable;
+    private javax.swing.JTextField guestIdEditTxt;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel label;
+    private javax.swing.JTextField lastNameCreateTxt;
+    private javax.swing.JTextField lastNameEditTxt;
+    private javax.swing.JTextField lastNameTable;
+    private javax.swing.JSpinner numOfGuestsEditSpin;
+    private javax.swing.JSpinner numOfGuestsSpin;
+    private javax.swing.JTextField phoneNumCreateTxt;
+    private javax.swing.JTextField phoneNumberEditTxt;
+    private javax.swing.JButton removeBtn;
+    private javax.swing.JTable reservationTable;
+    private javax.swing.JSpinner roomNumberSpin;
+    private javax.swing.JSpinner roomNumbersEditSpin;
+    private javax.swing.JTextArea roomSelectionTxt;
+    private javax.swing.JTextArea roomsEditTxt;
+    private javax.swing.JTable roomsTable;
+    private javax.swing.JButton searchListBtn;
+    private javax.swing.JButton searchReservationBtn;
+    private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }

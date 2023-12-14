@@ -1,13 +1,14 @@
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -21,8 +22,6 @@ import javax.swing.JOptionPane;
  */
 public class Sign_in_GUI extends javax.swing.JFrame {
     private Hotel hotel;
-    private static final String fileName = "Guests.csv";
-    private static final String delimiter = ",";
 
     /**
      * Creates new form Sign_in_GUI
@@ -32,51 +31,15 @@ public class Sign_in_GUI extends javax.swing.JFrame {
         initComponents();
         this.hotel = hotel;
         errorMessage.setVisible(false);
-        readCSV();
     }
 
     public Sign_in_GUI() {
         
         initComponents();
         errorMessage.setVisible(false);
-        readCSV();
     }
     
-    private void readCSV(){
-        try {
-            File file = new File(fileName);
-            FileReader fr = new FileReader(file);
-            BufferedReader br = new BufferedReader(fr);
-            
-            String line = "";
-            String[] temp;
-            
-            while((line = br.readLine()) != null){
-                temp = line.split(delimiter);
-                for(String filed : temp){
-                    
-                }
-                String firstName = temp[1];
-                String lastName = temp[2];
-                String phoneNumber = temp[3];
-                String email = temp[4];
-                String creditCardNum = temp[5];
-                Reservation reservation = new Reservation(firstName,lastName,(byte)2,hotel.getReservedRooms(),(byte)4);
-                Guest guest = new Guest(firstName,lastName,phoneNumber,email, creditCardNum, reservation);
-                hotel.addReservation(reservation);
-                hotel.addGuest(guest);
-                System.out.println(hotel.getAllGuests());
-            }
-            br.close();
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this,"Error reading this file");
-        }
-        
-    }
     
-    //private Reservation writeGuestInfoToRes(Guest guest){
-        
-    //}
     
 
     /**
@@ -191,7 +154,7 @@ public class Sign_in_GUI extends javax.swing.JFrame {
                     
         if(keySet.contains(employeeID)) // if the employee ID exists
         {
-            if(anEmployee instanceof Manager) // if the employee is a receptionist or a manager
+            if(anEmployee instanceof Employee) // if the employee is a receptionist or a manager
             {
 
                 if(password.compareTo(employee.get(employeeID).getPassword()) == 0) // if the password is correct

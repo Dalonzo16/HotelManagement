@@ -58,8 +58,11 @@ public class Hotel
     public Map<Integer, Room> getReservedRooms(){
         return reservedRooms;
     }
-    public void addReservedRoom(Room room){
-        reservedRooms.put(room.getRoomNumber(),room);
+    public void addReservedRoom(int roomNumber){
+        reservedRooms.put(roomNumber,this.getRooms().get(roomNumber));
+    }
+    public Map<Integer, Room> getReservedRoom(){
+        return reservedRooms;
     }
     /**
      * adds room to list of rooms by getting the room info from the user and calling the other addRoom method with the Room object as parameter
@@ -71,7 +74,9 @@ public class Hotel
         int roomNumber = in.nextInt();
         System.out.println("Please enter the price per night:");
         double pricePerNight = in.nextDouble();
-        Room room = new Room(roomNumber, pricePerNight);
+        System.out.println("Enter the floor number");
+        int floorNumber = in.nextInt();
+        Room room = new Room(roomNumber, floorNumber,pricePerNight);
         addRoom(room);
     }
     /**
@@ -81,6 +86,9 @@ public class Hotel
     public void addRoom(Room room)
     {
         rooms.put(room.getRoomNumber(), room);
+    }
+    public void removeReservedRoom(int room){
+        reservedRooms.remove(room);
     }
     /**
      * adds guest to allGuests by getting the guest info from the user and calling the other addGuest method with the Guest object as parameter

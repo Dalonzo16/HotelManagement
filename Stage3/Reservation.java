@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Map;
 /**
  * @author Ludwig Scherer
@@ -10,8 +11,8 @@ public class Reservation
     private String guestFirstName;
     private String guestLastName;
     private Map<Integer, Room> rooms;
-    private byte durationInNights;
-    private byte numberOfGuests;
+    private int durationInNights;
+    private int numberOfGuests;
     private static int counter = 1;
 
     /**
@@ -22,12 +23,23 @@ public class Reservation
      * @param rooms
      * @param duration
      */
-    public Reservation(String firstName, String lastName, byte numberOfGuests, Map<Integer, Room> rooms, byte duration)
+    public Reservation(String firstName, String lastName, int numberOfGuests, Map<Integer, Room> rooms, int duration)
     {
         this.reservationNumber = counter;
         this.guestFirstName = firstName;
         this.guestLastName = lastName;
         this.rooms = rooms;
+        this.durationInNights = duration;
+        this.numberOfGuests = numberOfGuests;
+        System.out.println("The new reservation for " + guestFirstName + " was created with reservation number: " + reservationNumber + " and duration: " + duration + " nights.");
+        counter++;
+    }
+    public Reservation(String firstName, String lastName, int numberOfGuests, int duration)
+    {
+        this.reservationNumber = counter;
+        this.guestFirstName = firstName;
+        this.guestLastName = lastName;
+        rooms = new HashMap<>();
         this.durationInNights = duration;
         this.numberOfGuests = numberOfGuests;
         System.out.println("The new reservation for " + guestFirstName + " was created with reservation number: " + reservationNumber + " and duration: " + duration + " nights.");
@@ -88,7 +100,7 @@ public class Reservation
      * changes duration
      * @param duration
      */
-    public void setDuration(byte durationInNights)
+    public void setDuration(int durationInNights)
     {
         this.durationInNights = durationInNights;
     }
@@ -107,7 +119,7 @@ public class Reservation
      * sets number of guests
      * @param numberOfGuests
      */
-    public void setNumberOfGuests(byte numberOfGuests)
+    public void setNumberOfGuests(int numberOfGuests)
     {
         this.numberOfGuests = numberOfGuests;
     }
@@ -115,7 +127,7 @@ public class Reservation
      * gets number of guests
      * @return
      */
-    public byte getNumberOfGuests()
+    public int getNumberOfGuests()
     {
         return numberOfGuests;
     }

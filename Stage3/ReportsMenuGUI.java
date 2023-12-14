@@ -5,9 +5,16 @@
 
 /**
  *
+
+ * @author Devon
+ */
+public class ReportsMenuGUI extends javax.swing.JFrame {
+    private Hotel hotel;
+
  * @author scher
  */
 public class ReportsMenuGUI extends javax.swing.JFrame {
+
 
     /**
      * Creates new form ReportsMenuGUI
@@ -15,6 +22,12 @@ public class ReportsMenuGUI extends javax.swing.JFrame {
     public ReportsMenuGUI() {
         initComponents();
     }
+
+    public ReportsMenuGUI(Hotel hotel){
+        initComponents();
+        this.hotel = hotel;
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -24,6 +37,9 @@ public class ReportsMenuGUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -57,10 +73,18 @@ public class ReportsMenuGUI extends javax.swing.JFrame {
 
         jTabbedPane3.addTab("Show All Payments", jPanel3);
 
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+
+            .addGap(0, 477, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 351, Short.MAX_VALUE)
+
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTabbedPane3)
@@ -72,6 +96,7 @@ public class ReportsMenuGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jTabbedPane3)
                 .addContainerGap())
+
         );
 
         pack();
@@ -89,7 +114,11 @@ public class ReportsMenuGUI extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+
+                if ("Windows".equals(info.getName())) {
+
                 if ("Nimbus".equals(info.getName())) {
+
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -114,8 +143,11 @@ public class ReportsMenuGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+
+
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane3;
+
     // End of variables declaration//GEN-END:variables
 }
